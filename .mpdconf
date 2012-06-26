@@ -1,0 +1,13 @@
+port           "6600"
+music_directory         "~/Music"
+playlist_directory      "~/.mpd/playlists"
+db_file                 "~/.mpd/mpd.db"
+log_file                "~/.mpd/mpd.log"
+pid_file                "~/.mpd/pid"
+audio_output {
+        type            "osx"
+        name            "Sebbe"
+        mixer_type      "software"
+        format          "44100:24:2"
+}
+

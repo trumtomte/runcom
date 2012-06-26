@@ -1,0 +1,65 @@
+auto_view text/html
+
+set imap_user = "sebbebook@gmail.com"
+set smtp_url = "smtp://sebbebook@smtp.gmail.com:587/"
+# Hide set passwords
+# set imap_pass = "PASSWORD"
+# set smtp_pass = "PASSWORD"
+set from = "Sebastian Book <sebbebook@gmail.com>"
+set realname = "Sebastian Book"
+
+# Editor
+set editor = "vim"
+
+
+# Basic config, you can leave this as is
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set imap_check_subscribed
+set hostname = gmail.com
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+set postponed = "+[GMail]/Drafts"
+set record = "+[GMail]/Sent Mail"
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set move = no
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop
+bind index "R" imap-fetch-mail
+
+
+
+## Color definitions (black background)
+color hdrdefault red default
+color quoted brightblue default
+color signature red default
+color indicator brightyellow red
+color error brightred default
+color status yellow blue
+color tree magenta default     # the thread tree in the index menu
+color tilde magenta default
+color message brightcyan default
+color markers brightcyan default
+color attachment brightmagenta default
+color search default green     # how to hilite search patterns in the pager
+
+color header brightred default ^(From|Subject):
+color body magenta default "(ftp|http)://[^ ]+"        # point out URLs
+color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+   # e-mail addresses
+color underline brightgreen default
+
+# attributes when using a mono terminal
+mono quoted bold
