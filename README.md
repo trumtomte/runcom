@@ -1,4 +1,3 @@
-runcom
-======
+## Run commands
 
-repository of runcom files
+Repo for runcom (.rc) files
