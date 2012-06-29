@@ -59,6 +59,14 @@ hi Normal guibg=#2b2b2b
 hi Comment guifg=#777777 gui=italic
 hi cursorline guibg=#333333
 
+" Made darker, looks better on some screens
+"hi LineNr guibg=#222222 guifg=#5d5d5d
+"hi Normal guibg=#111111
+"hi Comment guifg=#777777 gui=italic
+"hi cursorline guibg=#222222
+"hi NonText guibg=#151515
+
+
 " Function for relative line numbers
 function! g:ToggleNuMode()
     if(&rnu == 1)
