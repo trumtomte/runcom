@@ -6,12 +6,10 @@ Config { font = "-xos4-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
 , commands =
     [ Run Cpu ["-L", "3", "-H", "50", "--low", "#51a351", "--normal", "#51a351", "--high", "#bd362f"] 10
     , Run Memory ["-t", "Mem: <usedratio>%"] 10
-    , Run Swap [] 10
     , Run Date "%s %b %_d %H:%M:%S" "date" 10
-    , Run Com "uname" ["-s", "-r"] "" 36000
     , Run Network "eth0" ["-L", "0", "-H", "32", "--low", "#51a351", "--normal", "#51a351", "--high", "#bd362f"] 10
+    , Run StdinReader
     ]
 , sepChar = "%"
 , alignSep = "}{"
-, template = "%cpu% <fc=#5bc0de>|</fc> %memory% * %swap% <fc=#5bc0de>|</fc> %eth0% }{ <fc=#0088cc>%date%</fc> | <fc=#ee9a00>%uname%"</fc>
-}
+, template = "%StdinReader% }{%cpu% <fc=#555555>|</fc> %memory% <fc=#555555>|</fc> %eth0% <fc=#555555>|</fc> <fc=#5bc0de>%date%</fc>"

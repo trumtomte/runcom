@@ -16,6 +16,34 @@ myFocusedBorderColor = "#333333"
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
  
 
+main = do
+    xmproc <- spawnPipe "xmobar"
+    xmonad $ defaultConfig
+        { manageHook = manageDocks <+> manageHook defaultConfig
+        , layoutHook = avoidStruts $ layoutHook defaultConfig
+        , modMask = myModMask
+        , terminal = myTerminal
+        , focusFollowsMouse = True
+        , borderWidth = myBorderWidth
+        , workspaces = myWorkspaces
+        , normalBorderColor = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
+        , keys = myKeys
+        , mouseBindings = myMouseBindings
+        , startupHook = myStartupHook
+        , logHook = dynamicLogWithPP xmobarPP
+            { ppOutput = hPutStrLn xmproc
+            , ppTitle = xmobarColor "#5bc0de" "" . shorten 80
+            , ppCurrent = xmobarColor "#ee9a00" "" . wrap "[" "]"
+            , ppSep = xmobarColor "#555555" "" " : "
+            , ppLayout = \x -> case x of
+                            "Tall" -> "T"
+                            "Mirror Tall" -> "M"
+                            "Full" -> "F"
+                            _ -> "?"
+            }
+        }
+
 myLayout = tiled ||| Mirror tiled ||| Full
   where
      tiled   = Tall nmaster delta ratio
@@ -23,7 +51,6 @@ myLayout = tiled ||| Mirror tiled ||| Full
      ratio   = 1/2
      delta   = 3/100
 
-myLogHook = return ()
 myStartupHook = return ()
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -52,21 +79,3 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
  
-
-main = do
-    xmproc <- spawnPipe "xmobar"
-    xmonad $ defaultConfig
-        { manageHook = manageDocks <+> manageHook defaultConfig
-        , layoutHook = avoidStruts $ layoutHook defaultConfig
-        , modMask = myModMask
-        , terminal = myTerminal
-        , focusFollowsMouse = True
-        , borderWidth = myBorderWidth
-        , workspaces = myWorkspaces
-        , normalBorderColor = myNormalBorderColor
-        , focusedBorderColor = myFocusedBorderColor
-        , keys = myKeys
-        , mouseBindings = myMouseBindings
-        , logHook = myLogHook
-        , startupHook = myStartupHook
-        }
