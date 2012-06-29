@@ -1,7 +1,7 @@
 URxvt.foreground: grey90
 URxvt.background: [50]:#000000
 URxvt.scrollBar: False
-URxvt.font: -xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-15
+URxvt.font: -xos4-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-1
 URxvt.depth: 32
 URxvt.shading: 50
 URxvt.fade: 80
