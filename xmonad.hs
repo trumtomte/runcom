@@ -36,6 +36,7 @@ main = do
             , ppTitle = xmobarColor "#5bc0de" "" . shorten 80
             , ppCurrent = xmobarColor "#ee9a00" "" . wrap "[" "]"
             , ppSep = xmobarColor "#555555" "" " : "
+            , ppHiddenNoWindows = xmobarColor "#555555" ""
             , ppLayout = \x -> case x of
                             "Tall" -> "T"
                             "Mirror Tall" -> "M"
