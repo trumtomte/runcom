@@ -60,11 +60,12 @@ hi Comment guifg=#777777 gui=italic
 hi cursorline guibg=#333333
 
 " Made darker, looks better on some screens
-"hi LineNr guibg=#222222 guifg=#5d5d5d
-"hi Normal guibg=#111111
+"hi LineNr guibg=#080808 guifg=#5d5d5d
+"hi Normal guibg=#000000
 "hi Comment guifg=#777777 gui=italic
-"hi cursorline guibg=#222222
-"hi NonText guibg=#151515
+"hi cursorline guibg=#111111
+"hi NonText guibg=#000000 guifg=#222222
+"set guifont=Terminus
 
 
 " Function for relative line numbers
