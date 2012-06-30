@@ -1,4 +1,4 @@
-Config { font = "-xos4-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
+Config { font = "-xos4-terminus-medium-r-*-*-13-*-*-*-*-*-*-*"
 , lowerOnStart = True
 , bgColor = "black"
 , fgColor = "grey"
