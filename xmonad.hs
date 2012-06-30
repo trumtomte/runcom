@@ -2,6 +2,8 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
 import System.IO
 import System.Exit
  
@@ -20,7 +22,10 @@ main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
-        , layoutHook = avoidStruts $ layoutHook defaultConfig
+        , layoutHook = avoidStruts(
+            Tall 1 (3/100) (1/2) |||
+            Mirror (Tall 1 (3/100) (1/2))) |||
+            noBorders (fullscreenFull Full)
         , modMask = myModMask
         , terminal = myTerminal
         , focusFollowsMouse = True
@@ -44,13 +49,6 @@ main = do
                             _ -> "?"
             }
         }
-
-myLayout = tiled ||| Mirror tiled ||| Full
-  where
-     tiled   = Tall nmaster delta ratio
-     nmaster = 1
-     ratio   = 1/2
-     delta   = 3/100
 
 myStartupHook = return ()
 
