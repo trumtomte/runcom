@@ -29,6 +29,8 @@ set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
 set wildmode=longest:full       " Configure wildmenu to behave more like bash
 set wildignore=*.py[co]         " Avoid to open python bytecode
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip  " MacOSX/Linux
+set wildignore+=tmp\*,*.swp,*.zip,*.exe   " Windows
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cul                         " Enable cursorline
@@ -45,19 +47,33 @@ if has('gui_running')
     set guioptions-=L
     set lines=50        " Window size
     set columns=160
+
+    " Basic apperance
+    hi LineNr guibg=#323232 guifg=#5d5d5d
+    hi Normal guibg=#2b2b2b
+    hi Comment guifg=#777777 gui=italic
+    hi cursorline guibg=#333333
+
+    " Made darker, looks better on some screens
+    "hi LineNr guibg=#080808 guifg=#5d5d5d
+    "hi Normal guibg=#000000
+    "hi Comment guifg=#777777 gui=italic
+    "hi cursorline guibg=#111111
+    "hi NonText guibg=#000000 guifg=#222222
+    "set guifont=Terminus
 else
     set t_Co=256
+    let g:solarized_termcolors=256
     colorscheme solarized
     let g:solarized_termtrans=1
-    let g:solarized_termcolors=256
     set background=dark
 endif
 
-" Basic apperance
-hi LineNr guibg=#323232 guifg=#5d5d5d
-hi Normal guibg=#2b2b2b
-hi Comment guifg=#777777 gui=italic
-hi cursorline guibg=#333333
+let g:ctrlp_working_path_mode = 1
+nnoremap f :CtrlP<CR>
+nnoremap <S-f> :CtrlPLine<CR>
+nnoremap <C-f> :CtrlPMRUFiles<CR>
+nnoremap , :CtrlPBuffer<CR>
 
 " Function for relative line numbers
 function! g:ToggleNuMode()
@@ -128,3 +144,4 @@ nmap § <C-W>v<C-W><Right>
 
 " Tab through windows
 nmap <Tab> <C-W>w
+
