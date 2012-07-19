@@ -16,6 +16,7 @@ myModMask       = mod1Mask
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#333333"
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+myDmenu = "exe=`dmenu_path | dmenu -fn 'terminus-13' -nb '#111111' -nf '#ffffff' -sb '#2b2b2b' -sf '#ee9a00'` && exec $exe"
  
 
 main = do
@@ -59,7 +60,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modm,               xK_p     ), spawn myDmenu)
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
     , ((modm .|. shiftMask, xK_c     ), kill)
     , ((modm,               xK_space ), sendMessage NextLayout)
