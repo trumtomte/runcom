@@ -62,6 +62,7 @@ else
     hi Normal ctermbg=234
     hi Comment ctermfg=243 term=none
     hi cursorline ctermbg=236
+    hi NonText ctermfg=242
 endif
 
 let g:ctrlp_working_path_mode = 1
