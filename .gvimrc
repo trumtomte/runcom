@@ -53,20 +53,15 @@ if has('gui_running')
     hi Normal guibg=#2b2b2b
     hi Comment guifg=#777777 gui=italic
     hi cursorline guibg=#333333
-
-    " Made darker, looks better on some screens
-    "hi LineNr guibg=#080808 guifg=#5d5d5d
-    "hi Normal guibg=#000000
-    "hi Comment guifg=#777777 gui=italic
-    "hi cursorline guibg=#111111
-    "hi NonText guibg=#000000 guifg=#222222
-    "set guifont=Terminus
 else
     set t_Co=256
-    let g:solarized_termcolors=256
-    colorscheme solarized
-    let g:solarized_termtrans=1
     set background=dark
+
+    " Basic apperance
+    hi LineNr ctermbg=235 ctermfg=240
+    hi Normal ctermbg=234
+    hi Comment ctermfg=243 term=none
+    hi cursorline ctermbg=236
 endif
 
 let g:ctrlp_working_path_mode = 1
@@ -144,4 +139,3 @@ nmap § <C-W>v<C-W><Right>
 
 " Tab through windows
 nmap <Tab> <C-W>w
-

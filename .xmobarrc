@@ -6,7 +6,7 @@ Config { font = "-xos4-terminus-medium-r-*-*-13-*-*-*-*-*-*-*"
 , commands =
     [ Run Cpu ["-L", "3", "-H", "50", "--low", "#51a351", "--normal", "#51a351", "--high", "#bd362f"] 10
     , Run Memory ["-t", "Mem: <usedratio>%"] 10
-    , Run Date "%s %b %_d %H:%M:%S" "date" 10
+    , Run Date "%a %d %b %H:%M:%S" "date" 10
     , Run Network "eth0" ["-L", "0", "-H", "32", "--low", "#51a351", "--normal", "#51a351", "--high", "#bd362f"] 10
     , Run StdinReader
     ]
