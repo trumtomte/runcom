@@ -3,9 +3,6 @@ call pathogen#infect('~/.vim/bundle')
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-" Directory for virtualenv
-let g:virtualenv_directory = '/Users/sebbe/Python'
-
 syntax on                       " Enable syntax highlightning
 filetype plugin indent on       " Enable filetype specific features
 set encoding=utf-8              " Set fileencoding for files to UTF-8
@@ -65,11 +62,22 @@ else
     hi NonText ctermfg=242
 endif
 
+" ctrlP plugin
 let g:ctrlp_working_path_mode = 1
 nnoremap f :CtrlP<CR>
 nnoremap <S-f> :CtrlPLine<CR>
 nnoremap <C-f> :CtrlPMRUFiles<CR>
 nnoremap , :CtrlPBuffer<CR>
+
+" Directory for virtualenv
+let g:virtualenv_directory = '/Users/sebbe/Python'
+
+let g:netrw_liststyle = 3       " Use tree-mode as default view
+let g:netrw_browse_split = 4    " Open file in previous buffer
+let g:netrw_preview = 1         " preview window shown in a vertically split
+let g:netrw_winsize = 20        " netrw window size (20%)
+
+nmap <F3> :Vex <cr>
 
 " Function for relative line numbers
 function! g:ToggleNuMode()
@@ -80,12 +88,13 @@ function! g:ToggleNuMode()
     endif
 endfunc
 
+" Toggle relative line numbers
+nnoremap <C-n> :call g:ToggleNuMode()<cr>
+
 " Previous and Next tab
 nmap <F1> gT
 nmap <F2> gt
 
-" activate nerdtree
-nmap <F3> :NERDTree <cr>
 " run python script
 nmap <F6> :!python % <cr>
 
@@ -124,9 +133,6 @@ nmap <silent> <F4> :SyntasticCheck<cr><bar>:Errors<cr>
 
 " Remove trailing spaces
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-
-" Toggle relative line numbers
-nnoremap <C-n> :call g:ToggleNuMode()<cr>
 
 " Maps Alt-[up, down, left, right] to resizing a window split
 nmap <silent> <A-Up> <C-W>+
