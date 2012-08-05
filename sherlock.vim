@@ -1,7 +1,7 @@
-" Vim color file
+" Colorscheme:  Sherlock
 " Maintainer:   Sebastian Book <youremail@something.com>
 " Last Change:  05-08-2012
-" URL:	github.com/trumtomte
+" URL:	        github.com/trumtomte
 "
 " --- COLORS ---
 " - White
