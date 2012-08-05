@@ -3,6 +3,8 @@ call pathogen#infect('~/.vim/bundle')
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+colorscheme sherlock
+
 syntax on                       " Enable syntax highlightning
 filetype plugin indent on       " Enable filetype specific features
 set encoding=utf-8              " Set fileencoding for files to UTF-8
@@ -32,37 +34,22 @@ set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cul                         " Enable cursorline
 
-" Change tab width to 2 for HTML files
+" Change tab width to 2 for html/jinja files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType jinja setlocal shiftwidth=2 tabstop=2
 
 if has('gui_running')
-    colorscheme desert  " Default colorscheme
     set guioptions-=T   " Remove GUI features
     set guioptions-=m
     set guioptions-=r
     set guioptions-=L
     set lines=50        " Window size
     set columns=160
-
-    " Basic apperance
-    hi LineNr guibg=#323232 guifg=#5d5d5d
-    hi Normal guibg=#2b2b2b
-    hi Comment guifg=#777777 gui=italic
-    hi cursorline guibg=#333333
 else
     set t_Co=256
-    set background=dark
-
-    " Basic apperance
-    hi LineNr ctermbg=235 ctermfg=240
-    hi Normal ctermbg=234
-    hi Comment ctermfg=243 term=none
-    hi cursorline ctermbg=236
-    hi NonText ctermfg=242
 endif
 
-" ctrlP plugin
+" Binds for ctrlP plugin
 let g:ctrlp_working_path_mode = 1
 nnoremap f :CtrlP<CR>
 nnoremap <S-f> :CtrlPLine<CR>
@@ -77,6 +64,7 @@ let g:netrw_browse_split = 4    " Open file in previous buffer
 let g:netrw_preview = 1         " preview window shown in a vertically split
 let g:netrw_winsize = 20        " netrw window size (20%)
 
+" Open netrw (vertical)
 nmap <F3> :Vex <cr>
 
 " Function for relative line numbers
@@ -87,7 +75,6 @@ function! g:ToggleNuMode()
         set rnu
     endif
 endfunc
-
 " Toggle relative line numbers
 nnoremap <C-n> :call g:ToggleNuMode()<cr>
 
@@ -95,7 +82,7 @@ nnoremap <C-n> :call g:ToggleNuMode()<cr>
 nmap <F1> gT
 nmap <F2> gt
 
-" run python script
+" Call python from the current file
 nmap <F6> :!python % <cr>
 
 " Disable arrow-keys in insert-mode
@@ -104,7 +91,7 @@ inoremap <Right> <NOP>
 inoremap <Up>    <NOP>
 inoremap <Down>  <NOP>
 
-" Jump between windows with arrow-keys ( + § for left window)
+" Jump between windows with the arrow-keys
 nmap  <Up>    <C-w>k
 nmap  <Down>  <C-w>j
 nmap  <Left>  <C-w>h
@@ -121,11 +108,11 @@ nmap J }
 nmap <C-j> 3<C-e>
 nmap <C-k> 3<C-y>
 
-" Go to start/end of the currnet line
+" Go to start/end of the current line
 nmap <C-h> _
 nmap <C-l> <END>
 
-" Make 'U' work as redo
+" Make U work as redo
 nmap <S-u> <C-r>
 
 " Run Syntastic for errors
@@ -146,3 +133,14 @@ nmap § <C-W>v<C-W><Right>
 
 " Tab through windows
 nmap <Tab> <C-W>w
+
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
