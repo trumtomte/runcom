@@ -1,5 +1,5 @@
 " Colorscheme:  Sherlock
-" Maintainer:   Sebastian Book <youremail@something.com>
+" Maintainer:   Sebastian Book <sebbebook@gmail.com>
 " Last Change:  05-08-2012
 " URL:	        github.com/trumtomte
 "
