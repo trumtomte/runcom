@@ -10,7 +10,7 @@ set realname = "Example name"
 
 # Editor
 set editor = "vim"
-
+#
 # Basic config, you can leave this as is
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
@@ -29,36 +29,54 @@ set include
 set sort = 'threads'
 set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
+
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
 ignore "DKIM-Signature:"
 hdr_order Date From To Cc
 alternative_order text/plain text/html *
-bind editor <Tab> complete-query
-bind editor ^T complete
-bind editor <space> noop
+
 bind index "R" imap-fetch-mail
+bind pager <Down>   next-line
+bind pager <Up>     previous-line
+bind pager j        next-line
+bind pager k        previous-line
 
+color normal color144 color235
+color tree color197 color235
+color indicator color7 color238
+color markers color111 color235
 
+color header color7 color233 ^(Date)
+color header color111 color233 ^(From)
+color header color179 color233 ^(To)
+color header color197 color233 ^(Cc)
+color header color111 color233 ^(Subject)
 
-## Color definitions (black background)
-color hdrdefault red default
-color quoted brightblue default
-color signature red default
-color indicator brightyellow red
-color error brightred default
-color status yellow blue
-color tree magenta default     # the thread tree in the index menu
-color tilde magenta default
-color message brightcyan default
-color markers brightcyan default
-color attachment brightmagenta default
-color search default green     # how to hilite search patterns in the pager
+color body color111 color235 "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body color111 color235 "<URL:[^ ]*>"
+color body color111 color235 "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body color111 color235 "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body color111 color235 "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
-color header brightred default ^(From|Subject):
-color body magenta default "(ftp|http)://[^ ]+"        # point out URLs
-color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+   # e-mail addresses
-color underline brightgreen default
+color attachment color179 color235
 
-# attributes when using a mono terminal
-mono quoted bold
+color quoted color144 color235
+color quoted2 color7 color235
+color quoted3 color144 color235
+color quoted4 color7 color235
+color quoted5 color144 color235
+color quoted6 color7 color235
+
+color signature color179 color235
+color status color179 color234
+color hdrdefault color197 color235
+
+color index color111 color235 "~N"  # New
+color index color144 color235 "~O"  # Old
+color index color111 color235 "~U"  # Unread
+color index color144 color235 "~R"  # Read
+color index color7 color235 "~P"    # Sent
+
+color error color7 color197
+color tilde color7 color235
