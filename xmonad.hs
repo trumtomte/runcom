@@ -55,7 +55,8 @@ myStartupHook = return ()
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
-    , ((modMask, button2), (\w -> focus w >> mouseResizeWindow w))
+    , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
+    , ((modMask, button2), windows . (W.shiftMaster .) . W.focusWindow)
     ]
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
