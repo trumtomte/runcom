@@ -91,6 +91,9 @@ inoremap <Right> <NOP>
 inoremap <Up>    <NOP>
 inoremap <Down>  <NOP>
 
+" Unbind history
+nnoremap q: <NOP>
+
 " Jump between windows with the arrow-keys
 nmap  <Up>    <C-w>k
 nmap  <Down>  <C-w>j
