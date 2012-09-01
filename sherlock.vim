@@ -1,7 +1,7 @@
 " Colorscheme:  Sherlock
 " Maintainer:   Sebastian Book <sebbebook@gmail.com>
 " Last Change:  05-08-2012
-" URL:	        github.com/trumtomte
+" URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
 "
 " --- COLORS ---
 " - White

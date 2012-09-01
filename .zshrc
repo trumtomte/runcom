@@ -19,6 +19,9 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/mysql/bin:/usr/local/git/bin
 export EDITOR="vim"
 
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
+
 bindkey -v 
 
 # vi style incremental search
@@ -59,7 +62,7 @@ cmpsr() {
                 echo "Creating .htaccess..."
                 echo "<IfModule mod_rewrite.c>
                     RewriteEngine On
-                    
+                                    
                     RewriteCond %{REQUEST_FILENAME} !-d
                     RewriteCond %{REQUEST_FILENAME} !-f
 
