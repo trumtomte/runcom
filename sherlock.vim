@@ -30,6 +30,7 @@ hi Comment guifg=#777777 gui=italic ctermbg=235 ctermfg=243 cterm=none
 hi CursorLine guibg=#333333 gui=none ctermbg=236 cterm=none
 hi CursorLineNr guifg=yellow guibg=#2b2b2b ctermfg=11 ctermbg=235
 hi NonText guifg=#777777 ctermfg=243
+" hi VertSplit, vertical bar that splits windows
 
 hi Function guifg=#c1ae6e gui=none ctermfg=179 cterm=none
 hi Conditional guifg=#c1ae6e gui=none ctermfg=179 cterm=none
@@ -147,6 +148,18 @@ hi link javaScriptGlobal Operator
 hi link javaScriptMember Operator
 
 hi link javaScript Identifier
+
+" Improved JavaScript syntax
+hi link javaScriptBrowserObjects Function
+hi link javaScriptOperator Function
+hi link javaScriptHtmlElemProperties Identifier
+hi link javascriptDOMProperties Identifier
+hi link javaScriptBraces Operator
+hi link javaScriptFuncArg PreProc
+hi link javaScriptEventListenerKeywords Identifier
+hi link javaScriptOpSymbols Function
+hi link javaScriptEndColons PreProc
+
 
 " Jinja
 hi link jinjaVariable Identifier

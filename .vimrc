@@ -28,7 +28,7 @@ set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
 set wildmode=longest:full       " Configure wildmenu to behave more like bash
 set wildignore=*.py[co]         " Avoid to open python bytecode
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip  " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.DS_Store  " MacOSX/Linux
 set wildignore+=tmp\*,*.swp,*.zip,*.exe   " Windows
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
@@ -50,11 +50,13 @@ else
 endif
 
 " Binds for ctrlP plugin
-let g:ctrlp_working_path_mode = 1
+let g:ctrlp_working_path_mode = 'a'
 nnoremap f :CtrlP<CR>
 nnoremap <S-f> :CtrlPLine<CR>
 nnoremap <C-f> :CtrlPMRUFiles<CR>
 nnoremap , :CtrlPBuffer<CR>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|DS_Store)$'
+let g:ctrlp_user_command = 'find %s -type fd'
 
 " Directory for virtualenv
 let g:virtualenv_directory = '/Users/sebbe/Python'
@@ -119,7 +121,7 @@ nmap <C-l> <END>
 nmap <S-u> <C-r>
 
 " Run Syntastic for errors
-nmap <silent> <F4> :SyntasticCheck<cr><bar>:Errors<cr>
+" nmap <silent> <F4> :SyntasticCheck<cr><bar>:Errors<cr>
 
 " Remove trailing spaces
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
@@ -137,7 +139,6 @@ nmap § <C-W>v<C-W><Right>
 " Tab through windows
 nmap <Tab> <C-W>w
 
-
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
 
@@ -147,3 +148,39 @@ function! <SID>SynStack()
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" FocusMode
+function! ToggleFocusMode()
+    if (&foldcolumn != 1)
+        " FocusMode colors
+        hi Normal guibg=#2b2b2b
+        hi FoldColumn guibg=#2b2b2b
+        hi LineNr guibg=#2b2b2b guifg=#2b2b2b
+        hi VertSplit guifg=#2b2b2b guibg=#000000
+        hi NonText guifg=#2b2b2b
+        hi CursorLineNr guifg=#000000 guibg=#333333
+        " UI
+        set columns=170
+        set lines=75
+        set fuoptions=background:#002b2b2b
+        set foldcolumn=1
+        set laststatus=0
+        set noruler
+        set wrap
+        set linebreak
+        set fullscreen
+    else
+        set laststatus=2
+        set numberwidth=1
+        set foldcolumn=0
+        set ruler
+        set nowrap
+        set nolinebreak
+        set lines=50
+        set columns=160
+        set nofullscreen
+        execute 'colorscheme ' . g:colors_name
+    endif
+endfunc
+" FocusMode on F4
+nnoremap <F4> :call ToggleFocusMode()<cr>
