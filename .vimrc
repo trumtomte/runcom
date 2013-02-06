@@ -33,6 +33,7 @@ set wildignore+=tmp\*,*.swp,*.zip,*.exe   " Windows
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cul                         " Enable cursorline
+set nofoldenable
 
 " Change tab width to 2 for html/jinja files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
@@ -150,29 +151,27 @@ function! <SID>SynStack()
 endfunc
 
 " FocusMode
+let g:curmode = ''
 function! ToggleFocusMode()
-    if (&foldcolumn != 1)
-        " FocusMode colors
+    if (empty(g:curmode))
+        let g:curmode = 'focusmode'
         hi Normal guibg=#2b2b2b
         hi FoldColumn guibg=#2b2b2b
         hi LineNr guibg=#2b2b2b guifg=#2b2b2b
         hi VertSplit guifg=#2b2b2b guibg=#000000
         hi NonText guifg=#2b2b2b
         hi CursorLineNr guifg=#000000 guibg=#333333
-        " UI
-        set columns=170
+        set columns=165
         set lines=75
-        set fuoptions=background:#002b2b2b
-        set foldcolumn=1
         set laststatus=0
         set noruler
         set wrap
         set linebreak
+        set fuoptions=background:#002b2b2b
         set fullscreen
     else
+        let g:curmode = ''
         set laststatus=2
-        set numberwidth=1
-        set foldcolumn=0
         set ruler
         set nowrap
         set nolinebreak
