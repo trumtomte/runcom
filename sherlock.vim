@@ -57,9 +57,9 @@ hi Folded guifg=#c1ae6e guibg=#555555 gui=none ctermfg=179 ctermbg=240 cterm=non
 hi Directory guifg=#c1ae6e ctermfg=179
 hi MatchParen guifg=#c1ae6e guibg=#cc2f47 ctermfg=179 ctermbg=197
 
-hi TabLine ctermbg=0 ctermfg=179 cterm=none
+hi TabLine ctermbg=236 ctermfg=179 cterm=none
 hi TabLineSel ctermbg=239 ctermfg=179 cterm=none
-hi TabLineFill ctermbg=0 ctermfg=0 cterm=none
+hi TabLineFill ctermbg=236 ctermfg=0 cterm=none
 
 hi Visual guibg=#444444 ctermbg=238
 
@@ -157,9 +157,15 @@ hi link javascriptDOMProperties Identifier
 hi link javaScriptBraces Operator
 hi link javaScriptFuncArg PreProc
 hi link javaScriptEventListenerKeywords Identifier
-hi link javaScriptOpSymbols Function
-hi link javaScriptEndColons PreProc
+hi link javaScriptDOMObjects Identifier
 
+hi link javaScriptOpSymbols Operator
+hi link javaScriptLogicSymbols Operator
+hi link javaScriptSemiColon Operator
+hi link javaScriptComma Operator
+hi link javaScriptColon Operator
+hi link javaScriptDot Operator
+hi link javaScriptPlus Operator
 
 " Jinja
 hi link jinjaVariable Identifier

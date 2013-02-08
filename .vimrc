@@ -10,10 +10,11 @@ filetype plugin indent on       " Enable filetype specific features
 set encoding=utf-8              " Set fileencoding for files to UTF-8
 setglobal fileencoding=utf-8
 set nocompatible                " Disable Vi - compability
-set tabstop=4
+"set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+set smartindent
 set hlsearch                    " Enable search highlighting
 set incsearch                   " Enable incremental search
 set noignorecase                " Case-sensitive search
@@ -34,6 +35,8 @@ set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cul                         " Enable cursorline
 set nofoldenable
+set splitright
+set splitbelow
 
 " Change tab width to 2 for html/jinja files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
@@ -134,8 +137,10 @@ nmap <silent> <A-Left> <C-w><
 nmap <silent> <A-Right> <C-w>>
 
 " Maps -, § to horizontal and vertical split respectively
-nmap - <C-W>s<C-W><Down>
-nmap § <C-W>v<C-W><Right>
+"nmap - <C-W>s<C-W><Down>
+"nmap § <C-W>v<C-W><Right>
+nmap - :sp 
+nmap § :vsp 
 
 " Tab through windows
 nmap <Tab> <C-W>w
@@ -155,26 +160,27 @@ let g:curmode = ''
 function! ToggleFocusMode()
     if (empty(g:curmode))
         let g:curmode = 'focusmode'
-        hi Normal guibg=#2b2b2b
-        hi FoldColumn guibg=#2b2b2b
-        hi LineNr guibg=#2b2b2b guifg=#2b2b2b
-        hi VertSplit guifg=#2b2b2b guibg=#000000
-        hi NonText guifg=#2b2b2b
+        hi Normal guibg=#1b1b1b
+        hi FoldColumn guibg=#1b1b1b
+        hi LineNr guibg=#1b1b1b guifg=#1b1b1b
+        hi VertSplit guifg=#1b1b1b guibg=#000000
+        hi NonText guifg=#1b1b1b
         hi CursorLineNr guifg=#000000 guibg=#333333
+        hi foldBraces guifg=#cc2f47
         set columns=165
-        set lines=75
+        if (&guifont == 'Menlo:h11')
+            set lines=65
+        else
+            set lines=75
+        endif
         set laststatus=0
         set noruler
-        set wrap
-        set linebreak
-        set fuoptions=background:#002b2b2b
+        set fuoptions=background:#001b1b1b
         set fullscreen
     else
         let g:curmode = ''
         set laststatus=2
         set ruler
-        set nowrap
-        set nolinebreak
         set lines=50
         set columns=160
         set nofullscreen
@@ -183,3 +189,12 @@ function! ToggleFocusMode()
 endfunc
 " FocusMode on F4
 nnoremap <F4> :call ToggleFocusMode()<cr>
+
+" Change fontsize
+if has("gui_running") 
+    set guifont=Menlo:h11
+    "nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR> 
+    "nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR> 
+    nnoremap <C-Up> :silent set guifont=Menlo:h13 lines=65<CR>
+    nnoremap <C-Down> :silent set guifont=Menlo:h11 lines=75<CR>
+endif 
