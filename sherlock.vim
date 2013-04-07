@@ -166,6 +166,9 @@ hi link javaScriptComma Operator
 hi link javaScriptColon Operator
 hi link javaScriptDot Operator
 hi link javaScriptPlus Operator
+hi link javaScriptFuncArg Function
+hi link javaScriptFuncKeyword PreProc
+hi link javaScriptLogger PreProc
 
 " Jinja
 hi link jinjaVariable Identifier
@@ -192,3 +195,8 @@ hi link sqlSpecial String
 
 " Haskell
 hi link hsDelimiter Operator
+
+" Haml
+hi link hamlId Function
+hi link hamlClass Function
+

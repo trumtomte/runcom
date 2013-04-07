@@ -16,11 +16,13 @@ alias addsite='sh $HOME/add_site_localhost.sh'
 alias minifyjs='minify_js'
 alias today='today_func'
 alias path='paths'
+alias hamlwatch='ruby /Users/sebbe/hamlwatcher.rb'
+alias cext='changeExts'
 
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/texbin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/texbin
 export EDITOR="vim"
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
@@ -95,8 +97,6 @@ add_site() {
    DocumentRoot \"/Users/sebbe/www/$1\"
    ServerName $1.localhost
 </VirtualHost>\n" >> /Applications/MAMP/conf/apache/httpd.conf
-
-    echo "127.0.0.1 $1.localhost" >> /etc/hosts
 }
 
 minify_js() {
@@ -117,4 +117,8 @@ today_func() {
 
 paths() {
     echo $PATH | tr ':' '\n';
+}
+
+changeExts() {
+    for f in *.$1; do base=`basename $f .$1`; mv $f $base.$2; done
 }

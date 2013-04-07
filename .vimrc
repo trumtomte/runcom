@@ -23,7 +23,7 @@ set number                      " Show line numbers
 set ruler                       " Show line number in statusbar
 set backupdir=~/.vim/swp//      " Directories for swap files
 set dir^=~/.vim/swp//
-set scrolloff=2                 " Show two extra lines when scrolling
+set scrolloff=3                 " Show two extra lines when scrolling
 set mouse=a                     " Enable mouse by default
 set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
@@ -37,10 +37,11 @@ set cul                         " Enable cursorline
 set nofoldenable
 set splitright
 set splitbelow
+let mapleader="´"
 
-" Change tab width to 2 for html/jinja files
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType jinja setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=4 softtabstop=4
+autocmd FileType haml setlocal shiftwidth=4 softtabstop=4
+autocmd FileType jinja setlocal shiftwidth=4 softtabstop=4
 
 if has('gui_running')
     set guioptions-=T   " Remove GUI features
@@ -144,6 +145,12 @@ nmap § :vsp
 
 " Tab through windows
 nmap <Tab> <C-W>w
+nmap <S-Tab> <C-W>h
+
+" Sudo write
+noremap <leader>W :w !sudo tee %<CR>
+
+noremap <leader>¨ :noh <CR>
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
@@ -167,11 +174,12 @@ function! ToggleFocusMode()
         hi NonText guifg=#1b1b1b
         hi CursorLineNr guifg=#000000 guibg=#333333
         hi foldBraces guifg=#cc2f47
-        set columns=165
+        set columns=240
+        " set columns=165
         if (&guifont == 'Menlo:h11')
-            set lines=65
-        else
             set lines=75
+        else
+            set lines=65
         endif
         set laststatus=0
         set noruler
@@ -198,3 +206,7 @@ if has("gui_running")
     nnoremap <C-Up> :silent set guifont=Menlo:h13 lines=65<CR>
     nnoremap <C-Down> :silent set guifont=Menlo:h11 lines=75<CR>
 endif 
+
+" Indenting multilines in visual mode keeps the selection afterwards
+vnoremap < <gv
+vnoremap > >gv
