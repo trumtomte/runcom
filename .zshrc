@@ -1,18 +1,14 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="sebbe"
+ZSH_THEME='sebbe'
 
 alias music='ncmpcpp'
 alias localip='ifconfig en1 | grep inet'
 alias externalip='curl ifconfig.me/ip'
 alias lsa='ls -ahl'
-alias lp='ls++'
-alias lpa='ls++ -a'
-alias tmux="TERM=screen-256color-bce tmux"
-alias mc="mc --colors base_color=lightgray,default:normal=lightgray,default:selected=black,green:marked=yellow,default:markselect=white,green:errors=white,red:menu=lightgray,default:reverse=black,lightgray:dnormal=white,default:dfocus=black,green:dhotnormal=brightgreen,default:dhotfocus=brightgreen,green:viewunderline=brightred,default:menuhot=yellow,default:menusel=white,black:menuhotsel=yellow,black:helpnormal=black,lightgray:helpitalic=red,lightgray:helpbold=blue,lightgray:helplink=black,cyan:helpslink=yellow,default:gauge=white,black:input=black,green:directory=white,default:executable=brightgreen,default:link=brightcyan,default:stalelink=brightred,default:device=brightmagenta,default:core=red,default:special=black,default:editnormal=lightgray,default:editbold=yellow,default:editmarked=black,cyan:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray"
+alias tmux='TERM=screen-256color-bce tmux'
 alias composer='cmpsr'
 alias htaccess='htaccessfile'
-alias addsite='sh $HOME/add_site_localhost.sh'
 alias minifyjs='minify_js'
 alias today='today_func'
 alias path='paths'
@@ -23,7 +19,7 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/texbin
-export EDITOR="vim"
+export EDITOR='vim'
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 
