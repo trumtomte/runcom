@@ -37,12 +37,15 @@ set cul                         " Enable cursorline
 set nofoldenable
 set splitright
 set splitbelow
-let mapleader="´"
 
-autocmd FileType html setlocal shiftwidth=4 softtabstop=4
-autocmd FileType haml setlocal shiftwidth=4 softtabstop=4
-autocmd FileType jinja setlocal shiftwidth=4 softtabstop=4
+" <leader> key
+let mapleader=","
 
+" autocommands for filetypes
+" autocmd FileType html setlocal shiftwidth=4 softtabstop=4
+" autocmd FileType haml setlocal shiftwidth=4 softtabstop=4
+" autocmd FileType jinja setlocal shiftwidth=4 softtabstop=4
+ 
 if has('gui_running')
     set guioptions-=T   " Remove GUI features
     set guioptions-=m
@@ -55,17 +58,18 @@ else
 endif
 
 " Binds for ctrlP plugin
+nnoremap <leader>f :CtrlP<CR>
+nnoremap <leader><S-f> :CtrlPLine<CR>
+nnoremap <leader><C-f> :CtrlPMRUFiles<CR>
+nnoremap <leader>, :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'a'
-nnoremap f :CtrlP<CR>
-nnoremap <S-f> :CtrlPLine<CR>
-nnoremap <C-f> :CtrlPMRUFiles<CR>
-nnoremap , :CtrlPBuffer<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|DS_Store)$'
 let g:ctrlp_user_command = 'find %s -type fd'
 
 " Directory for virtualenv
 let g:virtualenv_directory = '/Users/sebbe/Python'
 
+" netrw settings
 let g:netrw_liststyle = 3       " Use tree-mode as default view
 let g:netrw_browse_split = 4    " Open file in previous buffer
 let g:netrw_preview = 1         " preview window shown in a vertically split
@@ -73,6 +77,7 @@ let g:netrw_winsize = 20        " netrw window size (20%)
 
 " Open netrw (vertical)
 nmap <F3> :Vex <cr>
+nmap <leader>t :Vex <cr>
 
 " Function for relative line numbers
 function! g:ToggleNuMode()
@@ -88,6 +93,8 @@ nnoremap <C-n> :call g:ToggleNuMode()<cr>
 " Previous and Next tab
 nmap <F1> gT
 nmap <F2> gt
+nmap <leader>1 gT
+nmap <leader>2 gt
 
 " Call python from the current file
 nmap <F6> :!python % <cr>
@@ -119,10 +126,12 @@ nmap <C-j> 3<C-e>
 nmap <C-k> 3<C-y>
 
 " Go to start/end of the current line
-nmap <C-h> _
+nmap <C-h> ^
 nmap <C-l> <END>
+vmap <C-h> ^
+vmap <C-l> <END>
 
-" Make U work as redo
+" Make 'U' work as redo
 nmap <S-u> <C-r>
 
 " Run Syntastic for errors
@@ -141,7 +150,10 @@ nmap <silent> <A-Right> <C-w>>
 "nmap - <C-W>s<C-W><Down>
 "nmap § <C-W>v<C-W><Right>
 nmap - :sp 
-nmap § :vsp 
+nmap _ :vsp 
+
+" Easy hotkey to repeat commands
+nmap § .
 
 " Tab through windows
 nmap <Tab> <C-W>w
@@ -150,6 +162,7 @@ nmap <S-Tab> <C-W>h
 " Sudo write
 noremap <leader>W :w !sudo tee %<CR>
 
+" Remove highlight of found matches
 noremap <leader>¨ :noh <CR>
 
 " Show syntax highlighting groups for word under cursor
