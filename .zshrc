@@ -38,7 +38,7 @@ setopt AUTO_CD
 cmpsr() {
     # Get composer
     echo "Fetching composer..."
-    curl -s http://getcomposer.org/installer | php
+    curl -sS http://getcomposer.org/installer | php -d detect_unicode=off
     # Store error code
     err=$?
     # Did an error occur?
