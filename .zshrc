@@ -1,7 +1,23 @@
+# Current Git branch
+function current_branch() {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+    echo ${ref#refs/heads/}
+}
+
 autoload -U colors compinit promptinit zmv
 colors && compinit && promptinit
 
+setopt correct
+setopt prompt_subst
+
 zstyle ':completion:*' menu select
+# Cache
+zstyle ':completion::complete:*' use-cache 1
+# Case Insensitive
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Color
+zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
 
 PROMPT="%{$fg[yellow]%}➜ "
 RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}"
@@ -17,7 +33,6 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 
-setopt AUTO_CD
 
 alias ls='ls -G'
 alias ll='ls -ahlG'
@@ -35,7 +50,7 @@ alias addvhost='add_vhost_func'
 alias hamlwatch='ruby /Users/sebbe/hamlwatcher.rb'
 
 # Install and run Composer (generate .htaccess file if none exists)
-composer_func() {
+function composer_func() {
     # Get composer
     echo "Fetching composer..."
     curl -sS http://getcomposer.org/installer | php -d detect_unicode=off
@@ -77,7 +92,7 @@ composer_func() {
     fi
 }
 # Creates an htaccess file 
-htaccess_func() {
+function htaccess_func() {
     echo "Creating .htaccess..."
     echo "<IfModule mod_rewrite.c>
         RewriteEngine On
@@ -87,7 +102,7 @@ htaccess_func() {
     </IfModule>" > .htaccess
 }
 # Add a virtualhost to MAMP apache conf
-add_vhost_func() {
+function add_vhost_func() {
     echo "# VHost for $1
 <VirtualHost *>
    DocumentRoot \"/Users/sebbe/www/$1\"
@@ -95,7 +110,7 @@ add_vhost_func() {
 </VirtualHost>\n" >> /Applications/MAMP/conf/apache/httpd.conf
 }
 # Echo calendar - highlights today
-today_func() {
+function today_func() {
     cal_head=`cal | head -1`;
     cal_tail=`cal | tail -7`;
     today=`date "+%e"`;
@@ -104,6 +119,6 @@ today_func() {
     echo "${cal_tail/${today}/\033[1;34m${today}\033[0m}";
 }
 # Changes the extension of all files
-change_extensions_func() {
+function change_extensions_func() {
     for f in *.$1; do base=`basename $f .$1`; mv $f $base.$2; done
 }
