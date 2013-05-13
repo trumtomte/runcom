@@ -1,16 +1,27 @@
 # Current Git branch
-function current_branch() {
+function git_prompt_info() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-    echo ${ref#refs/heads/}
+    echo "%{$fg[black]%}| %{$fg[yellow]%}${ref#refs/heads/}%{$reset_color%}"
 }
-
-autoload -U colors compinit promptinit zmv
-colors && compinit && promptinit
 
 setopt correct
 setopt prompt_subst
 
+autoload -U colors compinit promptinit
+colors && compinit && promptinit
+
+function precmd() {
+    # Update prompt
+    RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
+    # Update window title
+    echo -n -e "\033]0;${USER}@${HOST}\007"
+}
+
+PROMPT="%{$fg[red]%}• %{$fg[yellow]%}➜ "
+RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
+
+# Menu select
 zstyle ':completion:*' menu select
 # Cache
 zstyle ':completion::complete:*' use-cache 1
@@ -18,9 +29,6 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # Color
 zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
-
-PROMPT="%{$fg[yellow]%}➜ "
-RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}"
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/texbin
 export EDITOR='vim'
@@ -33,20 +41,17 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 
-
 alias ls='ls -G'
 alias ll='ls -ahlG'
 alias music='ncmpcpp'
 alias localip='ifconfig en1 | grep inet'
 alias externalip='curl ifconfig.me/ip'
 alias tmux='TERM=screen-256color-bce tmux'
-
 alias composer='composer_func'
 alias htaccess='htaccess_func'
 alias today='today_func'
 alias cext='change_extensions_func'
 alias addvhost='add_vhost_func'
-
 alias hamlwatch='ruby /Users/sebbe/hamlwatcher.rb'
 
 # Install and run Composer (generate .htaccess file if none exists)
