@@ -57,6 +57,21 @@ if has('gui_running')
 else
     set t_Co=256
 endif
+" Statusline
+set statusline=
+set statusline +=%1*\ %<%F\     " File + Path
+set statusline +=%2*\ %r\ %m\   " Read-only + Modified?
+set statusline +=%=             " Separator
+set statusline +=%3*\ %y\       " Filetype
+set statusline +=%4*\ col\ %c,  " Column
+set statusline +=%4*\ line\ %l  " Line
+set statusline +=%4*\ of\ %L    " Lines
+set statusline +=%4*\ (%p%%)\   " %-Lines
+" Statusline Colors
+hi User1 guifg=#c1ae6e ctermfg=179 guibg=#222222 ctermbg=234
+hi User2 guifg=#cc2f47 ctermfg=197 guibg=#222222 ctermbg=234
+hi User3 guifg=#7c96bf ctermfg=11 guibg=#222222 ctermbg=234
+hi User4 guifg=#777777 ctermfg=243 guibg=#222222 ctermbg=234
 " Binds for ctrlP plugin
 nnoremap <leader>f :CtrlP<CR>
 nnoremap <leader><S-f> :CtrlPLine<CR>
