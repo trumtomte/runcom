@@ -45,9 +45,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " <leader> key
 let mapleader=","
 " autocommands for filetypes
-autocmd FileType html setlocal shiftwidth=4 softtabstop=4
-autocmd FileType haml setlocal shiftwidth=4 softtabstop=4
-autocmd FileType jinja setlocal shiftwidth=4 softtabstop=4
+autocmd FileType html,haml,jinja,jade setlocal shiftwidth=4 softtabstop=4
  
 if has('gui_running')
     set guioptions-=T   " Remove GUI features
@@ -145,7 +143,7 @@ nmap <C-S-P> :call <SID>SynStack()<CR>
 " Indenting multilines in visual mode keeps the selection afterwards
 vnoremap < <gv
 vnoremap > >gv
-" 
+" Print highlight group
 function! <SID>SynStack()
     if !exists("*synstack")
         return
