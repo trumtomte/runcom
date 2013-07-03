@@ -170,6 +170,13 @@ hi link javaScriptFuncArg Function
 hi link javaScriptFuncKeyword PreProc
 hi link javaScriptLogger PreProc
 
+" Coffeescript
+hi link coffeeConditional PreProc
+hi link coffeeRepeat PreProc
+hi link coffeeObject Identifier
+hi link coffeeSpecialIdent PreProc
+hi link coffeeParens Statement
+
 " Jinja
 hi link jinjaVariable Identifier
 hi link jinjaString String

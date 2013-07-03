@@ -1,26 +1,28 @@
-auto_view text/html
+auto_view text/html application/octet-stream
 
-set imap_user = "example@gmail.com"
-set smtp_url = "smtp://example@smtp.gmail.com:587/"
+set charset="utf-8"
+
+set imap_user = "mailaddress@gmail.com"
+set smtp_url = "smtp://mailaddress@smtp.gmail.com:587/"
 # Hide set passwords
-# set imap_pass = "PASSWORD"
-# set smtp_pass = "PASSWORD"
-set from = "Example name <example@gmail.com>"
-set realname = "Example name"
+set imap_pass = "pass"
+#set smtp_pass = "PASSWORD"
+set from = "Name <mail>"
+set realname = "Name"
 
 # Editor
 set editor = "vim"
-#
+
 # Basic config, you can leave this as is
 set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
+set spoolfile = "imaps://imap.gmail.com:993/INBOX"
 set imap_check_subscribed
 set hostname = gmail.com
 set mail_check = 120
 set timeout = 300
 set imap_keepalive = 300
-set postponed = "+[GMail]/Drafts"
-set record = "+[GMail]/Sent Mail"
+set postponed = "imaps://imap.gmail.com:993/Drafts"
+set record = "imaps://imap.gmail.com:993/Sent"
 set header_cache=~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
@@ -30,17 +32,54 @@ set sort = 'threads'
 set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
 
+
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+#ignore *                                # ignore all headers
+#unignore from: to: cc: date: subject:   # show only these
+#unignore From To Cc Date Subject   # show only these
+#hdr_order from: to: cc: date: subject:  # and in this order
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
 ignore "DKIM-Signature:"
-hdr_order Date From To Cc
+hdr_order From To Cc Date Subject  # and in this order
 alternative_order text/plain text/html *
+
+set date_format = "%d/%m/%y"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set sort = threads                         # like gmail
+set sort_aux = reverse-last-date-received  # like gmail
+set uncollapse_jump                        # don't collapse on an unread message
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+#ignore "Authentication-Results:"
+#ignore "DomainKey-Signature:"
+#ignore "DKIM-Signature:"
+#hdr_order Date From To Cc
+#alternative_order text/plain text/html *
 
 bind index "R" imap-fetch-mail
 bind pager <Down>   next-line
 bind pager <Up>     previous-line
-bind pager j        next-line
-bind pager k        previous-line
+
+bind index J            next-unread
+bind index K            previous-unread
+bind index gg           first-entry
+bind index G            last-entry
+
+bind pager j            next-line
+bind pager k            previous-line
+bind pager J            next-undeleted
+bind pager K            previous-undeleted
+bind pager gg           top
+bind pager G            bottom
+
+bind index <space>  collapse-thread
+
+bind index,pager gr     group-reply
+bind index,pager \Cu    half-up
+bind index,pager \Cd    half-down
 
 color normal color144 color235
 color tree color197 color235

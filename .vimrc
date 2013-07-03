@@ -184,13 +184,11 @@ function! ToggleFocusMode()
         else
             set lines=65
         endif
-        set laststatus=0
         set noruler
         set fuoptions=background:#001b1b1b
         set fullscreen
     else
         let g:curmode = ''
-        set laststatus=2
         set ruler
         set lines=50
         set columns=160
