@@ -16,6 +16,21 @@ SAVEHIST=3000
 autoload -U colors compinit promptinit
 colors && compinit && promptinit
 
+# set VIMODE according to the current mode (default “[i]”)
+function zle-keymap-select zle-line-init zle-line-finish {
+    setleftprompt
+    zle reset-prompt
+    zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
+
+function vi_mode_prompt_info() {
+    echo "${${KEYMAP/vicmd/green}/(main|viins)/red}"
+}
+
 function precmd() {
     # Update prompt
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
@@ -23,8 +38,18 @@ function precmd() {
     echo -n -e "\033]0;${USER}@${HOST}\007"
 }
 
-PROMPT="%{$fg[red]%}• %{$fg[yellow]%}➜ "
-RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
+function setleftprompt() {
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}• %{$fg[yellow]%}➜ "
+}
+function setrightprompt() {
+    RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
+}
+
+function setprompt() {
+    setleftprompt
+    setrightprompt
+}
+setprompt
 
 # Menu select
 zstyle ':completion:*' menu select
@@ -40,7 +65,9 @@ export EDITOR='vim'
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 
+# Vi mode
 bindkey -v 
+
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
