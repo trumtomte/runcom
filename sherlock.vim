@@ -72,39 +72,37 @@ hi link PhpStatement PreProc
 hi link phpStorageClass PreProc
 hi link phpStructure Structure
 
-" CSS / SASS(SCSS)
-hi link sassAmpersand Function
+" SCSS
+hi link scssDefinition Identifier
+hi link scssClass PreProc
+hi link scssId PreProc
+hi link scssColor String
+hi link scssVariable Function
+hi link scssImportStr String
 
-hi link cssColor String
-
-hi link cssBraces Operator
-hi link cssFunctionName Operator
-hi link sassIdChar Operator
-hi link sassClassChar Operator
-
-hi link sassMixin Identifier
-hi link sassExtend Identifier
-hi link sassInclude Identifier
-hi link StorageClass Identifier
-
-hi link sassVariable PreProc
-hi link sassFunction PreProc
-hi link sassId PreProc
-hi link sassClass PreProc
-hi link cssFunction PreProc
-hi link cssTagName PreProc
-hi link cssFontAttr PreProc
-hi link cssCommonAttr PreProc
-hi link cssFontDescriptorAttr PreProc
-hi link cssColorAttr PreProc
-hi link cssTextAttr PreProc
+" CSS
+hi link cssTextProp scssDefinition
+hi link cssUIProp scssDefinition
+hi link cssTagName scssClass
+hi link cssColor scssColor
+hi link cssColorProp scssDefinition
+hi link cssBoxProp scssDefinition
+hi link cssRenderProp scssDefinition
+hi link cssUIAttr PreProc
+hi link cssFontProp scssDefinition
+hi link cssGeneratedContentProp scssDefinition
+hi link cssFunction scssDefinition
+hi link cssFontAttr scssDefinition
+hi link cssCommonAttr String
+hi link cssFontDescriptorAttr scssDefinition
+hi link cssColorAttr scssDefinition
+hi link cssTextAttr String
 hi link cssBoxAttr PreProc
 hi link cssGeneratedContentAttr PreProc
 hi link cssAuralAttr PreProc
 hi link cssPagingAttr PreProc
-hi link cssUIAttr PreProc
 hi link cssRenderAttr PreProc
-hi link cssTableAttr PreProc
+hi link cssTableAttr scssDefinition
 
 " HTML
 hi link htmlEndTag Identifier
