@@ -86,6 +86,7 @@ alias cext='change_extensions_func'
 alias addvhost='add_vhost_func'
 alias hamlwatch='ruby /Users/sebbe/hamlwatcher.rb'
 alias mampphp='/Applications/MAMP/bin/php/php5.4.4/bin/php'
+alias apacheconf='/Applications/MAMP/conf/apache/httpd.conf'
 
 # Install and run Composer (generate .htaccess file if none exists)
 function composer_func() {

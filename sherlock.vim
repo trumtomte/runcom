@@ -79,6 +79,7 @@ hi link scssId PreProc
 hi link scssColor String
 hi link scssVariable Function
 hi link scssImportStr String
+hi link scssExtend Function
 
 " CSS
 hi link cssTextProp scssDefinition
