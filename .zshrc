@@ -10,8 +10,8 @@ setopt prompt_subst
 setopt INC_APPEND_HISTORY
 
 HISTFILE=$HOME/.zhistory
-HISTSIZE=3000
-SAVEHIST=3000
+HISTSIZE=99999
+SAVEHIST=99999
 
 autoload -U colors compinit promptinit
 colors && compinit && promptinit
@@ -78,7 +78,7 @@ alias ll='ls -ahlG'
 alias music='ncmpcpp'
 alias localip='ifconfig en1 | grep inet'
 alias externalip='curl ifconfig.me/ip'
-alias tmux='TERM=screen-256color-bce tmux'
+# alias tmux='TERM=screen-256color-bce tmux'
 alias composer='composer_func'
 alias htaccess='htaccess_func'
 alias today='today_func'
@@ -86,7 +86,7 @@ alias cext='change_extensions_func'
 alias addvhost='add_vhost_func'
 alias hamlwatch='ruby /Users/sebbe/hamlwatcher.rb'
 alias mampphp='/Applications/MAMP/bin/php/php5.4.4/bin/php'
-alias apacheconf='/Applications/MAMP/conf/apache/httpd.conf'
+alias apacheconf='vim /Applications/MAMP/conf/apache/httpd.conf'
 
 # Install and run Composer (generate .htaccess file if none exists)
 function composer_func() {

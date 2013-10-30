@@ -3,7 +3,7 @@ call pathogen#infect('~/.vim/bundle')
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 " colorscheme
-colorscheme sherlock
+colorscheme watson
 
 syntax on                       " Enable syntax highlightning
 filetype plugin indent on       " Enable filetype specific features
@@ -27,9 +27,9 @@ set directory=~/.vim/swp//
 set scrolloff=3                 " Show two extra lines when scrolling
 set mouse=a                     " Enable mouse by default
 set mousehide                   " Hide mouse when moving/writing
+set wildmode=longest:list
 set wildmenu                    " Enable wildmenu for tab-completion
-set wildmode=longest,list
-set wildignore=*.py[co],*/tmp/*,*.so,*.swp,*.zip,.DS_Store
+set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*DS_Store*,*.png,*.jpg,*.gif
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cul                         " Enable cursorline
@@ -46,7 +46,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 let mapleader=","
 " autocommands for filetypes
 autocmd FileType html,haml,jinja,jade setlocal shiftwidth=4 softtabstop=4
- 
+
 if has('gui_running')
     set guioptions-=T   " Remove GUI features
     set guioptions-=m
@@ -77,9 +77,13 @@ nnoremap <leader>f :CtrlP<CR>
 nnoremap <leader><S-f> :CtrlPLine<CR>
 nnoremap <leader><C-f> :CtrlPMRUFiles<CR>
 nnoremap <leader>, :CtrlPBuffer<CR>
+
 let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|DS_Store)$'
-let g:ctrlp_user_command = 'find %s -type fd'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.sass-cache$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.DS_Store$'
+  \ }
+
 " Directory for virtualenv
 let g:virtualenv_directory = '/Users/sebbe/Python'
 " netrw settings
@@ -87,6 +91,7 @@ let g:netrw_liststyle = 3       " Use tree-mode as default view
 let g:netrw_browse_split = 4    " Open file in previous buffer
 let g:netrw_preview = 1         " preview window shown in a vertically split
 let g:netrw_winsize = 20        " netrw window size (20%)
+let g:netrw_list_hide = '\.sass-cache\|\.DS_Store'
 " Open netrw (vertical)
 nmap <F3> :Vex <cr>
 nmap <leader>t :Vex <cr>
@@ -135,15 +140,24 @@ vmap <C-l> <END>
 " Make 'U' work as redo
 nmap <S-u> <C-r>
 " Remove trailing spaces
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+function! StripTrailingWhitespace()
+    let l:previousPosition = getpos('.')
+    let l:previousSearch = @/
+    %s/\s\+$//e
+    let @/ = l:previousSearch
+    call setpos('.', l:previousPosition)
+endfunction
+
+nnoremap <silent> <F5> :call StripTrailingWhitespace()<CR>
+
 " Maps Alt-[up, down, left, right] to resizing a window split
 nmap <silent> <A-Up> <C-W>+
 nmap <silent> <A-Down> <C-W>-
 nmap <silent> <A-Left> <C-w><
 nmap <silent> <A-Right> <C-w>>
 " Maps -, § to horizontal and vertical split respectively
-nmap - :sp 
-nmap _ :vsp 
+nmap - :sp
+nmap _ :vsp
 " Easy hotkey to repeat commands
 nmap § .
 " Tab through windows
@@ -199,10 +213,10 @@ endfunc
 " FocusMode on F4
 nnoremap <F4> :call ToggleFocusMode()<cr>
 " Change fontsize
-if has("gui_running") 
+if has("gui_running")
     set guifont=Menlo:h11
-    "nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR> 
-    "nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR> 
+    "nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
+    "nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
     nnoremap <C-Up> :silent set guifont=Menlo:h13 lines=65<CR>
     nnoremap <C-Down> :silent set guifont=Menlo:h11 lines=75<CR>
-endif 
+endif
