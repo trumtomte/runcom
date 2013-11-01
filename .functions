@@ -1,0 +1,39 @@
+# Creates an htaccess file 
+function add_htaccess() {
+    echo "Creating .htaccess..."
+    echo "<IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^(.*)$ index.php/\$1 [L]
+    </IfModule>" > .htaccess
+}
+
+# Add a virtualhost to MAMP apache conf
+function add_vhost() {
+    echo "# VHost for $1
+<VirtualHost *>
+   DocumentRoot \"/Users/sebbe/www/$1\"
+   ServerName $1.localhost
+</VirtualHost>\n" >> /Applications/MAMP/conf/apache/httpd.conf
+}
+
+# Echo calendar - highlights today
+function today() {
+    cal_head=`cal | head -1`;
+    cal_tail=`cal | tail -7`;
+    today=`date "+%e"`;
+    date "+%A %b %d, Week %V"
+    echo "$cal_head";
+    echo "${cal_tail/${today}/\033[1;34m${today}\033[0m}";
+}
+
+# Changes the extension of all files
+function change_extensions() {
+    for f in *.$1; do base=`basename $f .$1`; mv $f $base.$2; done
+}
+
+# Create a new directory and enter it
+function mkd() {
+    mkdir -p "$@" && cd "$@"
+}

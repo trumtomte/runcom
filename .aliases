@@ -1,0 +1,25 @@
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+alias ls='ls -G'
+alias ll='ls -ahlG'
+
+alias cext='change_extensions'
+
+alias today='today'
+alias week='date +%V'
+
+alias music='ncmpcpp'
+
+alias localip='ifconfig en1 | grep inet'
+alias externalip='curl ifconfig.me/ip'
+
+alias addhtaccess='add_htaccess'
+alias addvhost='add_vhost'
+
+alias apacheconf='vim /Applications/MAMP/conf/apache/httpd.conf'
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
