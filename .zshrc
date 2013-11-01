@@ -9,6 +9,10 @@ setopt EXTENDED_HISTORY
 autoload -U colors compinit promptinit
 colors && compinit && promptinit
 
+. ~/.exports
+. ~/.functions
+. ~/.aliases
+
 # set VIMODE according to the current mode (default “[i]”)
 function zle-keymap-select zle-line-init zle-line-finish {
     setleftprompt
