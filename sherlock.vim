@@ -1,24 +1,18 @@
 " Colorscheme:  Sherlock
-" Maintainer:   Sebastian Book <sebbebook@gmail.com>
-" Last Change:  05-08-2012
+" Maintainer:   Sebastian Bengtegård <sebbebook@gmail.com>
+" Last Change:  01-11-2013
 " URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
-"
-" --- COLORS ---
-" - White
-" gui: #fbf8ff  cterm: 7
-" - BrownGold (light) - normal text
-" gui: #cfcaaa  cterm: 144
-" - BrownGold (dark) 
-" gui: #c1ae6e  cterm: 179
-" - Red
-" gui: #cc2f47  cterm: 197
-" - Blue
-" gui: #7c96bf  cterm: 11
-"
-" New Colors
-" light blue: 93c2cc
-" yellow: fad46b
-" light red: f2836b
+
+" =========================
+" Colors
+" =========================
+" gui: #fbf8ff  cterm: 7        :white
+" gui: #fff6d9  cterm: 144      :gold
+" gui: #fad46b  cterm: 179      :yellow
+" gui: #eb3652  cterm: 197      :red
+" gui: #90aede  cterm: 11       :blue
+
+" TODO - file needs major refactoring
 
 set background=dark
 
@@ -30,16 +24,16 @@ endif
 let g:colors_name="sherlock"
 
 hi LineNr guibg=#323232 guifg=#5d5d5d ctermbg=236 ctermfg=240
-hi Normal guibg=#2b2b2b guifg=#cfcaaa ctermbg=235 ctermfg=144
+hi Normal guibg=#2b2b2b guifg=#fff6d9 ctermbg=235 ctermfg=144
 hi Comment guifg=#777777 gui=italic ctermbg=235 ctermfg=243 cterm=none
 hi CursorLine guibg=#333333 gui=none ctermbg=236 cterm=none
 hi CursorLineNr guifg=yellow guibg=#2b2b2b ctermfg=11 ctermbg=235
 hi NonText guifg=#777777 ctermfg=243
 " hi VertSplit, vertical bar that splits windows
 hi Todo guifg=#000000 guibg=yellow gui=none ctermfg=0 ctermbg=11 cterm=none
-hi Folded guifg=#c1ae6e guibg=#555555 gui=none ctermfg=179 ctermbg=240 cterm=none
-hi Directory guifg=#c1ae6e ctermfg=179
-hi MatchParen guifg=#c1ae6e guibg=#cc2f47 ctermfg=179 ctermbg=197
+hi Folded guifg=#fad46b guibg=#555555 gui=none ctermfg=179 ctermbg=240 cterm=none
+hi Directory guifg=#fad46b ctermfg=179
+hi MatchParen guifg=#fad46b guibg=#eb3652 ctermfg=179 ctermbg=197
 " Tabs
 hi TabLine ctermbg=236 ctermfg=179 cterm=none
 hi TabLineSel ctermbg=239 ctermfg=179 cterm=none
@@ -47,29 +41,30 @@ hi TabLineFill ctermbg=236 ctermfg=0 cterm=none
 " Visual
 hi Visual guibg=#444444 ctermbg=238
 
-hi Function guifg=#c1ae6e gui=none ctermfg=179 cterm=none
-hi Conditional guifg=#c1ae6e gui=none ctermfg=179 cterm=none
-hi Repeat guifg=#c1ae6e gui=none ctermfg=179 cterm=none
-hi Label guifg=#c1ae6e gui=none ctermfg=179 cterm=none
-hi Statement guifg=#c1ae6e gui=none ctermfg=179 cterm=none
+hi Function guifg=#fad46b gui=none ctermfg=179 cterm=none
+hi Conditional guifg=#fad46b gui=none ctermfg=179 cterm=none
+hi Repeat guifg=#fad46b gui=none ctermfg=179 cterm=none
+hi Label guifg=#fad46b gui=none ctermfg=179 cterm=none
+hi Statement guifg=#fad46b gui=none ctermfg=179 cterm=none
 
-hi String guifg=#cc2f47 gui=none ctermfg=197 cterm=none
-hi Number guifg=#cc2f47 gui=none ctermfg=197 cterm=none
-hi Boolean guifg=#cc2f47 gui=none ctermfg=197 cterm=none
-hi Constant guifg=#cc2f47 gui=none ctermfg=197 cterm=none
+hi String guifg=#eb3652 gui=none ctermfg=197 cterm=none
+hi Number guifg=#eb3652 gui=none ctermfg=197 cterm=none
+hi Boolean guifg=#eb3652 gui=none ctermfg=197 cterm=none
+hi Constant guifg=#eb3652 gui=none ctermfg=197 cterm=none
 
-hi Identifier guifg=#cfcaaa gui=none ctermfg=144 cterm=none
+hi Identifier guifg=#fff6d9 gui=none ctermfg=144 cterm=none
 
 hi Operator guifg=#fbf8ff gui=none ctermfg=7 cterm=none
 hi Special guifg=#fbf8ff gui=none ctermfg=7 cterm=none
 hi Structure guifg=#fbf8ff gui=none ctermfg=7 cterm=none
 
-hi PreProc guifg=#7c96bf gui=none ctermfg=111 cterm=none
-hi Type guifg=#7c96bf ctermfg=111 cterm=none
+hi PreProc guifg=#90aede gui=none ctermfg=111 cterm=none
+hi Type guifg=#90aede ctermfg=111 cterm=none
 
 
-
-" --- FILETYPE SPECIFIC --- "
+" =========================
+" Filetype
+" =========================
 
 " PHP
 hi link PhpVarSelector Identifier
@@ -211,3 +206,6 @@ hi link hsDelimiter Operator
 hi link hamlId Function
 hi link hamlClass Function
 
+" Jade
+hi link jadeId Function
+hi link jadeClass Function

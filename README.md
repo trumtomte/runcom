@@ -1,3 +1,8 @@
-## Run commands
+## Run commands (dotfiles)
 
-Repo for runcom (.rc) files and other config files
+Repo for dotfiles, configuration files, colorscheme, etc.
+
+### Todo
+
+* Add bootstrap.sh
+* Refactor colorscheme to be more consistent between terminal.app/vim/xmonad

@@ -35,10 +35,12 @@ set auto_tag = yes
 
 set status_chars  = " *%A"
 set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
-#ignore *                                # ignore all headers
-#unignore from: to: cc: date: subject:   # show only these
-#unignore From To Cc Date Subject   # show only these
-#hdr_order from: to: cc: date: subject:  # and in this order
+
+# ignore *                                # ignore all headers
+# unignore from: to: cc: date: subject:   # show only these
+# unignore From To Cc Date Subject   # show only these
+# hdr_order from: to: cc: date: subject:  # and in this order
+
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
 ignore "DKIM-Signature:"
@@ -53,11 +55,11 @@ set uncollapse_jump                        # don't collapse on an unread message
 set sort_re                                # thread based on regex
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
-#ignore "Authentication-Results:"
-#ignore "DomainKey-Signature:"
-#ignore "DKIM-Signature:"
-#hdr_order Date From To Cc
-#alternative_order text/plain text/html *
+# ignore "Authentication-Results:"
+# ignore "DomainKey-Signature:"
+# ignore "DKIM-Signature:"
+# hdr_order Date From To Cc
+# alternative_order text/plain text/html *
 
 bind index "R" imap-fetch-mail
 bind pager <Down>   next-line
