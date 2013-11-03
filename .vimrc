@@ -31,7 +31,6 @@ set backspace=indent,eol,start  " Allow backspace in insertmode
 set showcmd                     " Show the (partial) command as it’s being typed
 set expandtab                   " Tabs/Indent
 set autoindent                  " --
-set smartindent                 " --
 set shiftwidth=4                " --
 set softtabstop=4               " --
 set hlsearch                    " Enable search highlighting
@@ -79,11 +78,12 @@ hi User4 guifg=#777777 ctermfg=243 guibg=#222222 ctermbg=234
 " =========================
 " ctrlP
 " =========================
-nnoremap <leader>f :CtrlP<CR>
-nnoremap <leader><S-f> :CtrlPLine<CR>
-nnoremap <leader><C-f> :CtrlPMRUFiles<CR>
-nnoremap <leader>, :CtrlPBuffer<CR>
-let g:ctrlp_working_path_mode = 'a'
+nmap <leader>f :CtrlP<CR>
+nmap <leader><S-f> :CtrlPLine<CR>
+nmap <leader><C-f> :CtrlPMRUFiles<CR>
+nmap <leader>, :CtrlPBuffer<CR>
+nmap <leader><tab> :CtrlPBuffer<CR><CR>
+let g:ctrlp_working_path_mode = 'c'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.sass-cache$',
   \ 'file': '\.exe$\|\.so$\|\.dat$\|\.DS_Store$'
@@ -134,12 +134,14 @@ nmap § .
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W>h
 " Indenting multilines in visual mode keeps the selection afterwards
-vnoremap < <gv
-vnoremap > >gv
-" Sudo write
+vmap < <gv
+vmap > >gv
+" Sudo write + regular write
 noremap <leader>W :w !sudo tee %<CR>
+nmap <leader>s :w<CR>
+nmap <leader>w :w<CR>
 " Remove highlight of found matches
-noremap <leader>n :noh <CR>
+nmap <leader>n :noh <CR>
 " Disable arrow-keys in insert-mode
 inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
@@ -147,6 +149,10 @@ inoremap <Up>    <NOP>
 inoremap <Down>  <NOP>
 " Unbind command history
 nnoremap q: <NOP>
+" Find ...
+nmap <leader>r /
+" Search and replace %
+nmap <leader>R :%s/
 " Fullscreen
 if has('gui_running')
     set nofullscreen
@@ -165,6 +171,11 @@ function! StripTrailingWhitespace()
     call setpos('.', l:previousPosition)
 endfunction
 nnoremap <silent> <leader>5 :call StripTrailingWhitespace()<CR>
+
+" Show higlight group
+nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Change fontsize
 " :silent set guifont=Menlo:h13 lines=65<CR>
