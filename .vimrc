@@ -140,6 +140,8 @@ vmap > >gv
 noremap <leader>W :w !sudo tee %<CR>
 nmap <leader>s :w<CR>
 nmap <leader>w :w<CR>
+" Close file
+nmap <leader>q :q<CR>
 " Remove highlight of found matches
 nmap <leader>n :noh <CR>
 " Disable arrow-keys in insert-mode
