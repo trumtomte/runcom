@@ -19,15 +19,14 @@ set postponed               = "imaps://imap.gmail.com:993/Drafts"
 set record                  = "imaps://imap.gmail.com:993/Sent"
 
 set imap_check_subscribed   = yes
-set imap_idle               = yes
 set imap_list_subscribed    = yes
-set imap_keepalive          = 300
 
 set hostname                = gmail.com
-set mail_check              = 120
-set timeout                 = 300
+set mail_check              = 30
+set timeout                 = 10 
 set quit                    = ask-yes
 unset beep
+set pager_stop              = yes
 
 set header_cache            = ~/.mutt/cache/headers
 set message_cachedir        = ~/.mutt/cache/bodies
