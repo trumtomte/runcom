@@ -1,69 +1,71 @@
 auto_view text/html application/octet-stream
 
-set charset="utf-8"
+set charset = "utf-8"
 
-set imap_user = "mailaddress@gmail.com"
-set smtp_url = "smtp://mailaddress@smtp.gmail.com:587/"
-# Hide set passwords
-set imap_pass = "pass"
-#set smtp_pass = "PASSWORD"
-set from = "Name <mail>"
-set realname = "Name"
+# Identity
+# set imap_user               = "email"
+# set smtp_url                = "smtp://email@smtp.gmail.com:587/"
+# set imap_pass               = "password"
+# set from                    = "name <email>"
+# set realname                = "name"
+source ~/identity
 
-# Editor
-set editor = "vim"
+set editor                  = "vim"
+bind editor <Tab> complete-query
 
-# Basic config, you can leave this as is
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "imaps://imap.gmail.com:993/INBOX"
-set imap_check_subscribed
-set hostname = gmail.com
-set mail_check = 120
-set timeout = 300
-set imap_keepalive = 300
-set postponed = "imaps://imap.gmail.com:993/Drafts"
-set record = "imaps://imap.gmail.com:993/Sent"
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
-set certificate_file=~/.mutt/certificates
-set move = no
-set include
-set sort = 'threads'
-set sort_aux = 'reverse-last-date-received'
-set auto_tag = yes
+set folder                  = "imaps://imap.gmail.com:993"
+set spoolfile               = "imaps://imap.gmail.com:993/INBOX"
+set postponed               = "imaps://imap.gmail.com:993/Drafts"
+set record                  = "imaps://imap.gmail.com:993/Sent"
 
+set imap_check_subscribed   = yes
+set imap_idle               = yes
+set imap_list_subscribed    = yes
+set imap_keepalive          = 300
 
-set status_chars  = " *%A"
-set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+set hostname                = gmail.com
+set mail_check              = 120
+set timeout                 = 300
+set quit                    = ask-yes
+unset beep
 
-# ignore *                                # ignore all headers
-# unignore from: to: cc: date: subject:   # show only these
-# unignore From To Cc Date Subject   # show only these
-# hdr_order from: to: cc: date: subject:  # and in this order
+set header_cache            = ~/.mutt/cache/headers
+set message_cachedir        = ~/.mutt/cache/bodies
+set certificate_file        = ~/.mutt/certificates
 
-ignore "Authentication-Results:"
-ignore "DomainKey-Signature:"
-ignore "DKIM-Signature:"
-hdr_order From To Cc Date Subject  # and in this order
+unset copy
+set fast_reply              = yes
+set include                 = yes
+set forward_format          = "Fwd: %s"
+set forward_quote           = yes
+
+set sort                    = threads
+set sort_aux                = reverse-last-date-received
+set uncollapse_jump         = yes
+
+set status_chars            = " *%A"
+set status_format           = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+set date_format             = "%d/%m/%y"
+set index_format            = "[%Z]  %D  %-20.20F  %s"
+
+# Headers
+ignore *
+unignore from: to: cc: date: subject:
+unignore x-mailing-list: posted-to:
+unignore x-mailer:
+unhdr_order *
+hdr_order from: to: cc: date: subject:
+
 alternative_order text/plain text/html *
 
-set date_format = "%d/%m/%y"
-set index_format = "[%Z]  %D  %-20.20F  %s"
-set sort = threads                         # like gmail
-set sort_aux = reverse-last-date-received  # like gmail
-set uncollapse_jump                        # don't collapse on an unread message
-set sort_re                                # thread based on regex
-set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+# =========================
+# Bindings
+# =========================
 
-# ignore "Authentication-Results:"
-# ignore "DomainKey-Signature:"
-# ignore "DKIM-Signature:"
-# hdr_order Date From To Cc
-# alternative_order text/plain text/html *
-
-bind index "R" imap-fetch-mail
-bind pager <Down>   next-line
-bind pager <Up>     previous-line
+bind index "R"          imap-fetch-mail
+bind pager <Down>       next-line
+bind pager <Up>         previous-line
 
 bind index J            next-unread
 bind index K            previous-unread
@@ -83,41 +85,45 @@ bind index,pager gr     group-reply
 bind index,pager \Cu    half-up
 bind index,pager \Cd    half-down
 
-color normal color144 color235
-color tree color197 color235
-color indicator color7 color238
-color markers color111 color235
+# =========================
+# Colors
+# =========================
 
-color header color7 color233 ^(Date)
-color header color111 color233 ^(From)
-color header color179 color233 ^(To)
-color header color197 color233 ^(Cc)
-color header color111 color233 ^(Subject)
+color normal        color144    color235
+color tree          color197    color235
+color indicator     color7      color238
+color markers       color111    color235
 
-color body color111 color235 "(finger|ftp|http|https|news|telnet)://[^ >]*"
-color body color111 color235 "<URL:[^ ]*>"
-color body color111 color235 "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
-color body color111 color235 "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
-color body color111 color235 "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+color index         color111    color235    "~N"    # New
+color index         color144    color235    "~O"    # Old
+color index         color111    color235    "~U"    # Unread
+color index         color144    color235    "~R"    # Read
+color index         color7      color235    "~P"    # Sent
 
-color attachment color179 color235
+color header        color111    color233    ^(Date)
+color header        color111    color233    ^(From)
+color header        color179    color233    ^(To)
+color header        color197    color233    ^(Cc)
+color header        color7      color233    ^(Subject)
 
-color quoted color144 color235
-color quoted2 color7 color235
-color quoted3 color144 color235
-color quoted4 color7 color235
-color quoted5 color144 color235
-color quoted6 color7 color235
+color body          color111    color235    "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body          color111    color235    "<URL:[^ ]*>"
+color body          color111    color235    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body          color111    color235    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body          color111    color235    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
-color signature color179 color235
-color status color179 color234
-color hdrdefault color197 color235
+color attachment    color179    color235
 
-color index color111 color235 "~N"  # New
-color index color144 color235 "~O"  # Old
-color index color111 color235 "~U"  # Unread
-color index color144 color235 "~R"  # Read
-color index color7 color235 "~P"    # Sent
+color quoted        color144    color235
+color quoted2       color7      color235
+color quoted3       color144    color235
+color quoted4       color7      color235
+color quoted5       color144    color235
+color quoted6       color7      color235
 
-color error color7 color197
-color tilde color7 color235
+color signature     color179    color235
+color status        color179    color234
+color hdrdefault    color197    color235
+
+color error         color7      color197
+color tilde         color7      color235
