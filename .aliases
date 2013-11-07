@@ -21,5 +21,8 @@ alias addvhost='add_vhost'
 alias apacheconf='vim /Applications/MAMP/conf/apache/httpd.conf'
 
 # Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+
+# Pandoc, Latex -> PDF
+alias md2pdf='markdown_to_pdf'
