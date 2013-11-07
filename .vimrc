@@ -90,6 +90,11 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " =========================
+" Markdown
+" =========================
+let g:vim_markdown_folding_disabled=1
+
+" =========================
 " Netrw
 " =========================
 let g:netrw_liststyle = 3       " Use tree-mode as default view
