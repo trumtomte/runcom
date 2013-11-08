@@ -186,3 +186,27 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
 
 " Change fontsize
 " :silent set guifont=Menlo:h13 lines=65<CR>
+
+" More subtle environment when writing markdown
+function! MarkdownMode()
+    if (&foldcolumn != 12)
+        set laststatus=0
+        set numberwidth=10
+        set foldcolumn=12
+        set nocursorline
+        set cc=80
+        hi FoldColumn guibg=#222222
+        hi LineNr guibg=#222222 guifg=#222222
+        hi Normal guibg=#222222
+    else
+        " Reset
+        set laststatus=2
+        set numberwidth=4
+        set foldcolumn=0
+        set cursorline
+        set cc=0
+        hi LineNr guibg=#323232 guifg=#5d5d5d
+        hi Normal guibg=#2b2b2b
+    endif
+endfunc
+nnoremap <leader>6 :call MarkdownMode()<CR>
