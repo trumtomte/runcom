@@ -2,8 +2,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias ls='ls -G'
-alias ll='ls -ahlG'
+alias ls='ls -G --color=auto'
+alias ll='ls -ahlG --color=auto'
 
 alias cext='change_extensions'
 

@@ -16,7 +16,7 @@ myModMask       = mod1Mask
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#333333"
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myDmenu = "exe=`dmenu_path | dmenu -fn 'terminus-13' -nb '#111111' -nf '#ffffff' -sb '#2b2b2b' -sf '#ee9a00'` && exec $exe"
+myDmenu = "exe=`dmenu_path | dmenu -fn 'terminus-15' -nb '#2b2b2b' -nf '#fff6d9' -sb '#333333' -sf '#90aede'` && exec $exe"
  
 
 main = do
@@ -39,9 +39,10 @@ main = do
         , startupHook = myStartupHook
         , logHook = dynamicLogWithPP xmobarPP
             { ppOutput = hPutStrLn xmproc
-            , ppTitle = xmobarColor "#5bc0de" "" . shorten 80
-            , ppCurrent = xmobarColor "#ee9a00" "" . wrap "[" "]"
+            , ppTitle = xmobarColor "#90aede" "" . shorten 80
+            , ppCurrent = xmobarColor "#eb3652" "" . wrap "[" "]"
             , ppSep = xmobarColor "#555555" "" " : "
+            , ppHidden = xmobarColor "#fad46b" ""
             , ppHiddenNoWindows = xmobarColor "#555555" ""
             , ppLayout = \x -> case x of
                             "Tall" -> "T"

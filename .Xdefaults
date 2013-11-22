@@ -1,5 +1,3 @@
-URxvt.foreground: grey90
-URxvt.background: #000000
 URxvt.scrollBar: False
 URxvt.font: -xos4-terminus-medium-r-*-*-13-*-*-*-*-*-iso8859-1
 URxvt.depth: 32
@@ -7,3 +5,31 @@ URxvt.shading: 50
 URxvt.fade: 80
 URxvt.fadeColor: #e9b96e
 URxvt.tintColor: #5c5c5c
+
+URxvt.foreground: #fff6d9
+URxvt.background: #2b2b2b
+
+# Black
+URxvt*color0:   #000000
+URxvt*color8:   #fad46b
+# Red
+URxvt*color1:   #eb3652
+URxvt*color9:   #eb3652
+# Green
+URxvt*color2:   #90aede
+URxvt*color10:  #90aede
+# Yellow
+URxvt*color3:   #fad46b
+URxvt*color11:  #fad46b
+# Blue
+URxvt*color4:   #90aede
+URxvt*color12:  #90aede
+# Magenta
+URxvt*color5:   #fff6d9
+URxvt*color13:  #fff6d9
+# Cyan
+URxvt*color6:   #fad46b
+URxvt*color14:  #fad46b
+# White
+URxvt*color7:   #fbf8ff
+URxvt*color15:  #fbf8ff
