@@ -1,11 +1,8 @@
 URxvt.scrollBar: False
 URxvt.font: -xos4-terminus-medium-r-*-*-13-*-*-*-*-*-iso8859-1
-URxvt.depth: 32
-URxvt.shading: 50
-URxvt.fade: 80
-URxvt.fadeColor: #e9b96e
-URxvt.tintColor: #5c5c5c
 
+# URxvt.transparent: true
+# URxvt.shading: 20
 URxvt.foreground: #fff6d9
 URxvt.background: #2b2b2b
 
