@@ -11,7 +11,7 @@ set charset = "utf-8"
 source ~/identity
 
 set editor                  = "vim"
-bind editor <Tab> complete-query
+bind editor <Tab>           complete-query
 
 set folder                  = "imaps://imap.gmail.com:993"
 set spoolfile               = "imaps://imap.gmail.com:993/INBOX"
@@ -23,7 +23,7 @@ set imap_list_subscribed    = yes
 
 set hostname                = gmail.com
 set mail_check              = 30
-set timeout                 = 10 
+set timeout                 = 10
 set quit                    = ask-yes
 unset beep
 set pager_stop              = yes
@@ -48,13 +48,20 @@ set status_format           = "───[ Folder: %f ]───[%r%m messages%?n
 set date_format             = "%d/%m/%y"
 set index_format            = "[%Z]  %D  %-20.20F  %s"
 
+# Inbox lines to show
+set pager_index_lines       = 8 
+set pager_context           = 3
+set menu_scroll
+set tilde
+unset markers
+
 # Headers
 ignore *
 unignore from: to: cc: date: subject:
 unignore x-mailing-list: posted-to:
 unignore x-mailer:
 unhdr_order *
-hdr_order from: to: cc: date: subject:
+hdr_order date: from: to: cc: subject:
 
 alternative_order text/plain text/html *
 
@@ -62,14 +69,12 @@ alternative_order text/plain text/html *
 # Bindings
 # =========================
 
-bind index "R"          imap-fetch-mail
-bind pager <Down>       next-line
-bind pager <Up>         previous-line
 
 bind index J            next-unread
 bind index K            previous-unread
 bind index gg           first-entry
 bind index G            last-entry
+bind index R            imap-fetch-mail
 
 bind pager j            next-line
 bind pager k            previous-line
@@ -77,12 +82,11 @@ bind pager J            next-undeleted
 bind pager K            previous-undeleted
 bind pager gg           top
 bind pager G            bottom
+bind pager R            group-reply
 
-bind index <space>  collapse-thread
+bind index <space>      collapse-thread
 
-bind index,pager gr     group-reply
-bind index,pager \Cu    half-up
-bind index,pager \Cd    half-down
+macro attach S <save-entry><kill-line>/Users/sebbe/Downloads/<enter>
 
 # =========================
 # Colors
@@ -99,19 +103,19 @@ color index         color111    color235    "~U"    # Unread
 color index         color144    color235    "~R"    # Read
 color index         color7      color235    "~P"    # Sent
 
-color header        color111    color233    ^(Date)
-color header        color111    color233    ^(From)
-color header        color179    color233    ^(To)
-color header        color197    color233    ^(Cc)
-color header        color7      color233    ^(Subject)
+color header        color241    color235    ^(Date)
+color header        color241    color235    ^(From)
+color header        color241    color235    ^(To)
+color header        color241    color235    ^(Cc)
+color header        color111    color235    ^(Subject)
 
-color body          color111    color235    "(finger|ftp|http|https|news|telnet)://[^ >]*"
-color body          color111    color235    "<URL:[^ ]*>"
-color body          color111    color235    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
-color body          color111    color235    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
-color body          color111    color235    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+color body          color179    color235    "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body          color179    color235    "<URL:[^ ]*>"
+color body          color179    color235    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body          color179    color235    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body          color179    color235    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
-color attachment    color179    color235
+color attachment    color242    color235
 
 color quoted        color144    color235
 color quoted2       color7      color235
@@ -120,9 +124,9 @@ color quoted4       color7      color235
 color quoted5       color144    color235
 color quoted6       color7      color235
 
-color signature     color179    color235
+color signature     color242    color235
 color status        color179    color234
 color hdrdefault    color197    color235
 
 color error         color7      color197
-color tilde         color7      color235
+color tilde         color238    color235
