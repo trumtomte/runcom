@@ -1,0 +1,9 @@
+# Mailcap
+
+# Images
+image/jpg; ~/view_attachment.sh %s jpg
+image/jpeg; ~/view_attachment.sh %s jpg
+image/png; ~/view_attachment.sh %s png
+image/gif; ~/view_attachment.sh %s gif
+# PDF
+application/pdf; ~/view_attachment.sh %s pdf
