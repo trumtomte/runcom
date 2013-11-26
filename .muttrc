@@ -8,39 +8,39 @@ set charset = "utf-8"
 # set imap_pass               = "password"
 # set from                    = "name <email>"
 # set realname                = "name"
-source ~/identity
+source ~/.mutt/identity
+set mailcap_path            = ~/.mutt/.mailcap
 
 set editor                  = "vim"
-bind editor <Tab>           complete-query
+bind editor \t complete-query
 
 set folder                  = "imaps://imap.gmail.com:993"
-set spoolfile               = "imaps://imap.gmail.com:993/INBOX"
-set postponed               = "imaps://imap.gmail.com:993/Drafts"
-set record                  = "imaps://imap.gmail.com:993/Sent"
+set spoolfile               = "+INBOX"
+set postponed               = "+[Gmail]/Drafts"
+set record                  = /dev/null
 
 set imap_check_subscribed   = yes
 set imap_list_subscribed    = yes
 
-set hostname                = gmail.com
-set mail_check              = 30
-set timeout                 = 10
-set quit                    = ask-yes
-unset beep
-set pager_stop              = yes
-
 set header_cache            = ~/.mutt/cache/headers
 set message_cachedir        = ~/.mutt/cache/bodies
 set certificate_file        = ~/.mutt/certificates
+
+set mail_check              = 60
+set timeout                 = 120
+set quit                    = ask-yes
+unset beep                  # No beep thank you
+set pager_stop              = yes   # Dont move to next message automatically
 
 unset copy
 set fast_reply              = yes
 set include                 = yes
 set forward_format          = "Fwd: %s"
 set forward_quote           = yes
+set move                    = no
 
 set sort                    = threads
 set sort_aux                = reverse-last-date-received
-set uncollapse_jump         = yes
 
 set status_chars            = " *%A"
 set status_format           = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
@@ -48,11 +48,9 @@ set status_format           = "───[ Folder: %f ]───[%r%m messages%?n
 set date_format             = "%d/%m/%y"
 set index_format            = "[%Z]  %D  %-20.20F  %s"
 
-# Inbox lines to show
-set pager_index_lines       = 8 
+set pager_index_lines       = 8
 set pager_context           = 3
 set menu_scroll
-set tilde
 unset markers
 
 # Headers
@@ -69,7 +67,6 @@ alternative_order text/plain text/html *
 # Bindings
 # =========================
 
-
 bind index J            next-unread
 bind index K            previous-unread
 bind index gg           first-entry
@@ -84,9 +81,13 @@ bind pager gg           top
 bind pager G            bottom
 bind pager R            group-reply
 
-bind index <space>      collapse-thread
-
 macro attach S <save-entry><kill-line>/Users/sebbe/Downloads/<enter>
+
+bind editor <space> noop
+macro index,pager gi "<change-folder>+INBOX" "Go to Inbox"
+macro index,pager ga "<change-folder>+[Gmail]/All Mail" "Go to All Mail"
+macro index,pager gs "<change-folder>+[Gmail]/Sent Mail" "Go to Sent Mail"
+macro index,pager gd "<change-folder>+[Gmail]/Drafts" "Go to Drafts"
 
 # =========================
 # Colors
