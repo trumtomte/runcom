@@ -210,3 +210,7 @@ function! MarkdownMode()
     endif
 endfunc
 nnoremap <leader>6 :call MarkdownMode()<CR>
+
+
+" Temporary fix?
+autocmd BufNewFile,BufRead *.go setfiletype go
