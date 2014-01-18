@@ -28,7 +28,6 @@ filetype plugin on
 filetype indent on
 
 set backspace=indent,eol,start  " Allow backspace in insertmode
-set showcmd                     " Show the (partial) command as it’s being typed
 set expandtab                   " Tabs/Indent
 set autoindent                  " --
 set shiftwidth=4                " --
@@ -59,14 +58,14 @@ let mapleader = "\<Space>"      " Leader key
 " Statusline
 " =========================
 set statusline=
-set statusline +=%1*\ %<%F\     " File + Path
 set statusline +=%2*\ %r\ %m\   " Read-only + Modified?
+set statusline +=%1*\ %f\     " File + Path
 set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
-set statusline +=%4*\ col\ %c,  " Column
-set statusline +=%4*\ line\ %l  " Line
-set statusline +=%4*\ of\ %L    " Lines
-set statusline +=%4*\ (%p%%)\   " %-Lines
+" set statusline +=%4*\ col\ %c,  " Column
+" set statusline +=%4*\ line\ %l  " Line
+" set statusline +=%4*\ of\ %L    " Lines
+" set statusline +=%4*\ (%p%%)\   " %-Lines
 " =========================
 " Statusline Colors
 " =========================
@@ -83,7 +82,7 @@ nmap <leader><S-f> :CtrlPLine<CR>
 nmap <leader><C-f> :CtrlPMRUFiles<CR>
 nmap <leader>, :CtrlPBuffer<CR>
 nmap <leader><tab> :CtrlPBuffer<CR><CR>
-let g:ctrlp_working_path_mode = 'c'
+" let g:ctrlp_working_path_mode = 'c'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.sass-cache$',
   \ 'file': '\.exe$\|\.so$\|\.dat$\|\.DS_Store$'
@@ -189,24 +188,24 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
 
 " More subtle environment when writing markdown
 function! MarkdownMode()
-    if (&foldcolumn != 12)
-        set laststatus=0
-        set numberwidth=10
-        set foldcolumn=12
+    if (&foldcolumn != 2)
+        " set laststatus=0
+        " set numberwidth=10
+        set foldcolumn=2
         set nocursorline
-        set cc=80
         hi FoldColumn guibg=#222222
         hi LineNr guibg=#222222 guifg=#222222
         hi Normal guibg=#222222
+        hi NonText guifg=#222222
     else
         " Reset
-        set laststatus=2
-        set numberwidth=4
+        " set laststatus=2
+        " set numberwidth=4
         set foldcolumn=0
         set cursorline
-        set cc=0
         hi LineNr guibg=#323232 guifg=#5d5d5d
         hi Normal guibg=#2b2b2b
+        hi NonText guifg=#777777
     endif
 endfunc
 nnoremap <leader>6 :call MarkdownMode()<CR>
@@ -214,3 +213,6 @@ nnoremap <leader>6 :call MarkdownMode()<CR>
 
 " Temporary fix?
 autocmd BufNewFile,BufRead *.go setfiletype go
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
