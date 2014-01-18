@@ -12,7 +12,7 @@ source ~/.mutt/identity
 set mailcap_path            = ~/.mutt/.mailcap
 
 set editor                  = "vim"
-bind editor \t complete-query
+bind editor <Tab> complete-query
 
 set folder                  = "imaps://imap.gmail.com:993"
 set spoolfile               = "+INBOX"
