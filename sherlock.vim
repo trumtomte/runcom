@@ -105,6 +105,12 @@ hi link cssFontProp             SherlockGold
 hi link cssTransitionProp       SherlockGold
 hi link cssColorProp            SherlockGold
 hi link cssBackgroundProp       SherlockGold
+hi link cssTableProp            SherlockGold
+hi link cssBoxProp              SherlockGold
+hi link cssTransformProp        SherlockGold
+hi link cssAnimationProp        SherlockGold
+hi link cssFlexibleBoxProp      SherlockGold
+hi link cssGeneratedContentProp SherlockGold
 
 hi link cssValueLength  SherlockRed
 hi link cssValueNumber  SherlockRed

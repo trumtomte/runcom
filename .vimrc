@@ -59,7 +59,7 @@ let mapleader = "\<Space>"      " Leader key
 " =========================
 set statusline=
 set statusline +=%2*\ %r\ %m\   " Read-only + Modified?
-set statusline +=%1*\ %f\     " File + Path
+set statusline +=%1*\ %f\       " File + Path
 set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
 " set statusline +=%4*\ col\ %c,  " Column
