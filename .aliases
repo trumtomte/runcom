@@ -26,3 +26,7 @@ alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 
 # Pandoc, Latex -> PDF
 alias md2pdf='markdown_to_pdf'
+
+# Go
+alias gows='go_create_workspace'
+alias goinit='go_initialize_workspace'
