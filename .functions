@@ -42,23 +42,13 @@ function markdown_to_pdf() {
     pandoc --template=template.tex --toc --number-sections -s $1 -o $2 --variable sansfont=Arial --variable monofont="Consolas" --variable fontsize=12pt --latex-engine=xelatex
 }
 
-# Create a new Go workspace and initialize GOPATH
+# Create a new Go workspace
 function go_create_workspace() {
-    echo 'Creating workspace directory...' 
-    mkdir $HOME/Go/$1
-    echo 'Exporting GOPATH env...'
-    export GOPATH=$HOME/Go/$1
-    echo 'Adding GOPATH to PATH...'
-    export PATH=$PATH:$GOPATH/bin
-    echo 'Creating package path...'
-    mkdir -p $GOPATH/src/github.com/trumtomte
-    cd $GOPATH/src/github.com/trumtomte
+    echo 'Creating new Go workspace'
+    mkdir -p $GOPATH/src/github.com/trumtomte/$1
+    cd $GOPATH/src/github.com/trumtomte/$1
 }
-# Re-initialize the GOPATH
+# Re-initialize a Go workspace
 function go_initialize_workspace() {
-    echo 'Initializing workspace...'
-    export GOPATH=$HOME/Go/$1
-    echo 'Adding GOPATH to PATH...'
-    export PATH=$PATH:$GOPATH/bin
-    cd $GOPATH/src/github.com/trumtomte
+    cd $GOPATH/src/github.com/trumtomte/$1
 }
