@@ -52,7 +52,8 @@ set splitright                  " Vsp to Right
 set splitbelow                  " Sp to bottom
 set autoread                    " Auto update file if it changes outside of vim
 
-let mapleader = "\<Space>"      " Leader key
+" Leader key
+let mapleader = "\<Space>"
 
 " =========================
 " Statusline
@@ -62,17 +63,14 @@ set statusline +=%2*\ %r\ %m\   " Read-only + Modified?
 set statusline +=%1*\ %f\       " File + Path
 set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
-" set statusline +=%4*\ col\ %c,  " Column
-" set statusline +=%4*\ line\ %l  " Line
-" set statusline +=%4*\ of\ %L    " Lines
-" set statusline +=%4*\ (%p%%)\   " %-Lines
+
 " =========================
 " Statusline Colors
 " =========================
-hi User1 guifg=#c1ae6e ctermfg=179 guibg=#222222 ctermbg=234
-hi User2 guifg=#cc2f47 ctermfg=197 guibg=#222222 ctermbg=234
-hi User3 guifg=#7c96bf ctermfg=11 guibg=#222222 ctermbg=234
-hi User4 guifg=#777777 ctermfg=243 guibg=#222222 ctermbg=234
+hi User1 guifg=#c1ae6e ctermfg=179 guibg=#181818 ctermbg=234
+hi User2 guifg=#cc2f47 ctermfg=197 guibg=#181818 ctermbg=234
+hi User3 guifg=#7c96bf ctermfg=11 guibg=#181818 ctermbg=234
+hi User4 guifg=#777777 ctermfg=243 guibg=#181818 ctermbg=234
 
 " =========================
 " ctrlP
@@ -189,8 +187,6 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
 " More subtle environment when writing markdown
 function! MarkdownMode()
     if (&foldcolumn != 2)
-        " set laststatus=0
-        " set numberwidth=10
         set foldcolumn=2
         set nocursorline
         hi FoldColumn guibg=#222222
@@ -199,20 +195,14 @@ function! MarkdownMode()
         hi NonText guifg=#222222
     else
         " Reset
-        " set laststatus=2
-        " set numberwidth=4
         set foldcolumn=0
         set cursorline
-        hi LineNr guibg=#323232 guifg=#5d5d5d
-        hi Normal guibg=#2b2b2b
+        hi LineNr guibg=#222222 guifg=#3a3a3a
+        hi Normal guibg=#222222
         hi NonText guifg=#777777
     endif
 endfunc
 nnoremap <leader>6 :call MarkdownMode()<CR>
 
-
 " Temporary fix?
 autocmd BufNewFile,BufRead *.go setfiletype go
-
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
