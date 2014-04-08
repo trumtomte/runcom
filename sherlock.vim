@@ -28,8 +28,8 @@ hi SherlockYellow   guifg=#fad46b gui=none cterm=none ctermfg=179
 hi SherlockRed      guifg=#eb3652 gui=none cterm=none ctermfg=197
 hi SherlockBlue     guifg=#90aede gui=none cterm=none ctermfg=110
 
-hi LineNr       guibg=#323232 guifg=#5d5d5d ctermbg=236 ctermfg=240
-hi Normal       guibg=#2b2b2b guifg=#fff6d9 ctermbg=235 ctermfg=144
+hi LineNr       guibg=#222222 guifg=#3a3a3a ctermbg=235 ctermfg=240
+hi Normal       guibg=#222222 guifg=#fff6d9 ctermbg=235 ctermfg=144
 hi Comment      guifg=#777777 gui=none ctermbg=235 ctermfg=243 cterm=none
 hi CursorLine   guibg=#333333 gui=none ctermbg=236 cterm=none
 hi CursorLineNr guifg=#fad46b guibg=#2b2b2b ctermfg=179 ctermbg=235
@@ -230,3 +230,7 @@ hi link hamlClass   SherlockYellow
 " Jade
 hi link jadeId      SherlockYellow
 hi link jadeClass   SherlockYellow
+
+" Go
+hi link goStructDef SherlockGold
+hi link goDeclaration SherlockBlue
