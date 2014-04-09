@@ -61,9 +61,9 @@
 					<key>COMMAND_STRING</key>
 					<string>export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/texbin
 
-cd ${1##*/}
+cd ${1%*/}
 
-pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:margin=1.3in -V fontsize=11pt</string>
+pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -173,8 +173,6 @@ pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:ma
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
