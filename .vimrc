@@ -3,11 +3,25 @@ set nocompatible
 " =========================
 " Pathogen
 " =========================
-call pathogen#infect('~/.vim/bundle/{}')
-call pathogen#incubate()
-call pathogen#helptags()
+" call pathogen#infect('~/.vim/bundle/{}')
+" call pathogen#helptags()
+
+" =========================
+" Vim-Plug
+" =========================
+call plug#begin('~/.vim/plugged')
+
+Plug 'whatyouhide/vim-gotham'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'othree/yajs.vim'
+Plug 'tpope/vim-surround'
+
+call plug#end()
+
 
 colorscheme sherlock            " Colorscheme
+" colorscheme gotham
+set guifont=Menlo:h13           " Font
 
 if has('gui_running')           " Remove GUI features and set window size
     set guioptions-=T
@@ -44,13 +58,14 @@ set scrolloff=3                 " Show two extra lines when scrolling
 set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
 set wildmode=longest:list
-set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*DS_Store*,*.png,*.jpg,*.gif
+set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*/*node_modules/*,*DS_Store*,*/*_site/*,*.png,*.jpg,*.gif
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cursorline                  " Enable cursorline
 set splitright                  " Vsp to Right
 set splitbelow                  " Sp to bottom
 set autoread                    " Auto update file if it changes outside of vim
+set autochdir
 
 " Leader key
 let mapleader = "\<Space>"
@@ -65,7 +80,7 @@ set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
 
 " =========================
-" Statusline Colors
+" Statusline Colors (Sherlock)
 " =========================
 hi User1 guifg=#c1ae6e ctermfg=179 guibg=#181818 ctermbg=234
 hi User2 guifg=#cc2f47 ctermfg=197 guibg=#181818 ctermbg=234
@@ -80,16 +95,8 @@ nmap <leader><S-f> :CtrlPLine<CR>
 nmap <leader><C-f> :CtrlPMRUFiles<CR>
 nmap <leader>, :CtrlPBuffer<CR>
 nmap <leader><tab> :CtrlPBuffer<CR><CR>
-" let g:ctrlp_working_path_mode = 'c'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.sass-cache$',
-  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.DS_Store$'
-  \ }
-
-" =========================
-" Markdown
-" =========================
-let g:vim_markdown_folding_disabled=1
+let g:ctrlp_max_height = 25
+let g:ctrlp_custom_ignore = "node_modules\|DS_store\|git\|sass-cache\|_site"
 
 " =========================
 " Netrw
@@ -97,9 +104,20 @@ let g:vim_markdown_folding_disabled=1
 let g:netrw_liststyle = 3       " Use tree-mode as default view
 let g:netrw_browse_split = 4    " Open file in previous buffer
 let g:netrw_preview = 1         " preview window shown in a vertically split
-let g:netrw_winsize = 20        " netrw window size (20%)
+let g:netrw_winsize = 10        " netrw window size (10%)
 let g:netrw_list_hide = '\.sass-cache\|\.DS_Store'
 nmap <leader>3 :Vex <cr>
+
+" =========================
+" Markdown
+" =========================
+let g:vim_markdown_folding_disabled = 1
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.md set wrap
+
+" Jekyll
+autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
+autocmd BufNewFile,BufRead *.md syntax match Operator /^{%\shighlight.*%}\_.\{-}{%\sendhighlight\s%}$/
 
 " =========================
 " Bindings
@@ -157,15 +175,17 @@ nnoremap q: <NOP>
 nmap <leader>r /
 " Search and replace %
 nmap <leader>R :%s/
+
+" =========================
+" Misc
+" =========================
+
 " Fullscreen
 if has('gui_running')
     set nofullscreen
     nnoremap <leader>4 :set fullscreen!<CR>
 endif
 
-" =========================
-" Other
-" =========================
 " Remove trailing spaces
 function! StripTrailingWhitespace()
     let l:previousPosition = getpos('.')
@@ -181,28 +201,5 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Change fontsize
-" :silent set guifont=Menlo:h13 lines=65<CR>
-
-" More subtle environment when writing markdown
-function! MarkdownMode()
-    if (&foldcolumn != 2)
-        set foldcolumn=2
-        set nocursorline
-        hi FoldColumn guibg=#222222
-        hi LineNr guibg=#222222 guifg=#222222
-        hi Normal guibg=#222222
-        hi NonText guifg=#222222
-    else
-        " Reset
-        set foldcolumn=0
-        set cursorline
-        hi LineNr guibg=#222222 guifg=#3a3a3a
-        hi Normal guibg=#222222
-        hi NonText guifg=#777777
-    endif
-endfunc
-nnoremap <leader>6 :call MarkdownMode()<CR>
-
-" Temporary fix?
+" autocommands
 autocmd BufNewFile,BufRead *.go setfiletype go

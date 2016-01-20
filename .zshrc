@@ -43,7 +43,8 @@ function precmd() {
 }
 
 function setleftprompt() {
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}• %{$fg[yellow]%}➜ "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}• %{$fg[yellow]%}➜ "
 }
 function setrightprompt() {
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
@@ -60,8 +61,10 @@ zstyle ':completion::complete:*' use-cache 1                    # Cache
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'             # Case insensitive
 zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"     # Color
 
-# Vi mode + bindings
-bindkey -v 
+# Vi mode
+# bindkey -v 
+# Emacs mode
+bindkey -e
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward

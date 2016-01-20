@@ -14,10 +14,12 @@ set mailcap_path            = ~/.mutt/.mailcap
 set editor                  = "vim"
 bind editor <Tab> complete-query
 
-set folder                  = "imaps://imap.gmail.com:993"
-set spoolfile               = "+INBOX"
-set postponed               = "+[Gmail]/Drafts"
-set record                  = /dev/null
+# set mbox_type               = Maildir
+set folder                  = "imaps://outlook.office365.com:993"
+set spoolfile               = "+Inbox"
+set record                  = "+Sent"
+# set mbox                    = "+Mbox"
+set postponed               = "+Drafts"
 
 set imap_check_subscribed   = yes
 set imap_list_subscribed    = yes
@@ -39,19 +41,22 @@ set forward_format          = "Fwd: %s"
 set forward_quote           = yes
 set move                    = no
 
-set sort                    = threads
-set sort_aux                = reverse-last-date-received
+set sort                    = reverse-threads
+set sort_aux                = last-date-received
 
 set status_chars            = " *%A"
 set status_format           = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
-set date_format             = "%d/%m/%y"
-set index_format            = "[%Z]  %D  %-20.20F  %s"
+set date_format             = "%d-%m-%y %H:%M"
+set index_format            = "%Z  %D  %-20.20F  %s"
 
 set pager_index_lines       = 8
 set pager_context           = 3
 set menu_scroll
 unset markers
+
+# Use abook for contacts
+set query_command           = "abook --mutt-query '%s'"
 
 # Headers
 ignore *
@@ -81,18 +86,20 @@ bind pager gg           top
 bind pager G            bottom
 bind pager R            group-reply
 
-macro attach S <save-entry><kill-line>/Users/sebbe/Downloads/<enter>
+macro attach S <save-entry><kill-line>/Users/sebbe/Downloads/<enter>\y<enter>
 
 bind editor <space> noop
-macro index,pager gi "<change-folder>+INBOX" "Go to Inbox"
-macro index,pager ga "<change-folder>+[Gmail]/All Mail" "Go to All Mail"
-macro index,pager gs "<change-folder>+[Gmail]/Sent Mail" "Go to Sent Mail"
-macro index,pager gd "<change-folder>+[Gmail]/Drafts" "Go to Drafts"
+macro index,pager gi <change-folder>+Inbox<enter>
+macro index,pager gs <change-folder>+Sent<enter>
+# macro index,pager ga "<change-folder>+[Gmail]/All Mail" "Go to All Mail"
+# macro index,pager gd "<change-folder>+[Gmail]/Drafts" "Go to Drafts"
+
+macro index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
+
 
 # =========================
-# Colors
+# Colors (Sherlock)
 # =========================
-
 color normal        color144    color235
 color tree          color197    color235
 color indicator     color7      color238
@@ -118,12 +125,15 @@ color body          color179    color235    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z
 
 color attachment    color242    color235
 
-color quoted        color144    color235
-color quoted2       color7      color235
-color quoted3       color144    color235
-color quoted4       color7      color235
-color quoted5       color144    color235
-color quoted6       color7      color235
+color quoted        color59     color235
+color quoted1       color59     color235
+color quoted2       color59     color235
+color quoted3       color59     color235
+color quoted4       color59     color235
+color quoted5       color59     color235
+color quoted6       color59     color235
+color quoted7       color59     color235
+color quoted8       color59     color235
 
 color signature     color242    color235
 color status        color179    color234
@@ -131,3 +141,46 @@ color hdrdefault    color197    color235
 
 color error         color7      color197
 color tilde         color238    color235
+
+# Gotham
+# color normal        color67     color000
+# color tree          color167    color000
+# color indicator     color116    color010
+# color markers       color111    color000
+# 
+# color index         color116    color000    "~N"    # New
+# color index         color73     color000    "~O"    # Old
+# color index         color215    color000    "~U"    # Unread
+# color index         color73     color000    "~R"    # Read
+# color index         color194    color000    "~P"    # Sent
+# 
+# color header        color59     color000    ^(Date)
+# color header        color59     color000    ^(From)
+# color header        color59     color000    ^(To)
+# color header        color59     color000    ^(Cc)
+# color header        color73     color000    ^(Subject)
+# 
+# color body          color130    color000    "(finger|ftp|http|https|news|telnet)://[^ >]*"
+# color body          color130    color000    "<URL:[^ ]*>"
+# color body          color130    color000    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+# color body          color130    color000    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+# color body          color130    color000    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+# 
+# color attachment    color59    color000
+# 
+# color quoted        color237    color000
+# color quoted1       color237    color000
+# color quoted2       color237    color000
+# color quoted3       color237    color000
+# color quoted4       color237    color000
+# color quoted5       color237    color000
+# color quoted6       color237    color000
+# color quoted7       color237    color000
+# color quoted8       color237    color000
+# 
+# color signature     color59     color000
+# color status        color23     color000
+# color hdrdefault    color167    color000
+# 
+# color error         color167    color000
+# color tilde         color59     color000

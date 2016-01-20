@@ -52,3 +52,8 @@ function go_create_workspace() {
 function go_initialize_workspace() {
     cd $GOPATH/src/github.com/trumtomte/$1
 }
+
+# Automator workflow
+# export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/texbin
+# cd ${1%*/}
+# pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt

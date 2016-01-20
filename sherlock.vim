@@ -130,6 +130,7 @@ hi link htmlArg SherlockYellow
 hi link htmlTag SherlockGold
 
 hi link htmlTagName         SherlockBlue
+hi link htmlTagN            SherlockBlue
 hi link htmlSpecialTagName  SherlockBlue
 
 hi link htmlString  SherlockRed
@@ -165,6 +166,7 @@ hi link javaScriptMember    SherlockWhite
 
 hi link javaScript SherlockGold
 
+" JavaScript ES6
 " Improved JavaScript syntax
 hi link javaScriptBrowserObjects    SherlockYellow
 hi link javaScriptOperator          SherlockYellow
@@ -187,6 +189,24 @@ hi link javaScriptComma         SherlockWhite
 hi link javaScriptColon         SherlockWhite
 hi link javaScriptDot           SherlockWhite
 hi link javaScriptPlus          SherlockWhite
+
+hi link javascriptImport        SherlockBlue
+hi link javascriptImportBlock   SherlockYellow
+hi link javascriptExport        SherlockYellow
+hi link javascriptVariable      SherlockBlue
+hi link javascriptBOM           SherlockGold
+hi link javascriptBOMWindowProp SherlockGold
+hi link javascriptDOMDocProp    SherlockGold
+hi link javascriptDOMElemProp   SherlockGold
+hi link javascriptURLUtilsProp  SherlockGold
+hi link javascriptDOMEventProp  SherlockGold
+hi link javascriptGlobal        SherlockGold
+hi link javascriptGlobalMethod  SherlockGold
+hi link javascriptDOMNodeProp   SherlockGold
+hi link javascriptEndColons     SherlockWhite
+hi link javascriptLogicSymbol   SherlockWhite
+hi link javascriptOpSymbol      SherlockWhite
+hi link javascriptConditionalElse   SherlockBlue
 
 " Coffeescript
 hi link coffeeConditional   SherlockBlue
@@ -234,3 +254,18 @@ hi link jadeClass   SherlockYellow
 " Go
 hi link goStructDef SherlockGold
 hi link goDeclaration SherlockBlue
+
+" Markdown
+hi link markdownCode SherlockBlue
+
+" XML
+hi link xmlEndTag SherlockYellow
+
+" Markdown
+hi link markdownItalic              SherlockYellow
+hi link markdownBold                SherlockYellow
+hi link markdownLinkText            SherlockBlue
+hi link markdownCodeDelimiter       SherlockRed
+hi link markdownCode                SherlockRed
+hi link markdownLinkTextDelimiter   SherlockYellow
+hi link markdownLinkDelimiter       SherlockYellow

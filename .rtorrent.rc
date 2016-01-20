@@ -1,5 +1,5 @@
 # Global upload and download rate in KiB. "0" for unlimited.
-download_rate = 1000
+download_rate = 0
 upload_rate = 10
 
 min_peers = 50 ; look for more peers if limit doesn't reach 50
@@ -10,7 +10,7 @@ min_peers_seed = 10
 max_peers_seed = 100
 
 # Maximum number of simultanious uploads per torrent.
-max_uploads = 25
+max_uploads = 10
 
 port_range = 6881-6999 ; ports to use for listening
 
