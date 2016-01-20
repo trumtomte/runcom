@@ -14,12 +14,14 @@ set mailcap_path            = ~/.mutt/.mailcap
 set editor                  = "vim"
 bind editor <Tab> complete-query
 
-# set mbox_type               = Maildir
-set folder                  = "imaps://outlook.office365.com:993"
-set spoolfile               = "+Inbox"
-set record                  = "+Sent"
-# set mbox                    = "+Mbox"
-set postponed               = "+Drafts"
+set mbox_type               = Maildir
+set folder                  = "~/Maildir/work"
+set mbox                    = "~/Maildir/work/Archive"
+set spoolfile               = "~/Maildir/work/INBOX"
+set record                  = "~/Maildir/work/Sent"
+set postponed               = "~/Maildir/work/Drafts"
+
+mailboxes +INBOX
 
 set imap_check_subscribed   = yes
 set imap_list_subscribed    = yes
@@ -43,6 +45,11 @@ set move                    = no
 
 set sort                    = reverse-threads
 set sort_aux                = last-date-received
+
+# set sidebar_delim = "  |"
+# set sidebar_visible = yes
+# set sidebar_width = 24
+# color sidebar_new color221 color233
 
 set status_chars            = " *%A"
 set status_format           = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"

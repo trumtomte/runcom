@@ -1,0 +1,18 @@
+[general]
+accounts = Work
+
+[Account Work]
+localrepository = Local
+remoterepository = Remote
+status_backend = sqlite
+
+[Repository Local]
+type = Maildir
+localfolders = ~/Maildir/work
+
+[Repository Remote]
+type = IMAP
+remotehost = outlook.office365.com
+remoteuser = sebastian.bengtegard@mah.se
+remotepass = Pusp49de
+maxconnections = 2
