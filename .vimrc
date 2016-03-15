@@ -11,17 +11,17 @@ set nocompatible
 " =========================
 call plug#begin('~/.vim/plugged')
 
-Plug 'whatyouhide/vim-gotham'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'othree/yajs.vim'
 Plug 'tpope/vim-surround'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
 
 colorscheme sherlock            " Colorscheme
-" colorscheme gotham
-set guifont=Menlo:h13           " Font
+
+set guifont=Menlo:h14           " Font
 
 if has('gui_running')           " Remove GUI features and set window size
     set guioptions-=T
@@ -32,6 +32,9 @@ if has('gui_running')           " Remove GUI features and set window size
     set columns=160
 else
     set t_Co=256
+    " number width + relative
+    set nuw=5
+    set rnu
 endif
 
 " =========================
@@ -80,14 +83,6 @@ set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
 
 " =========================
-" Statusline Colors (Sherlock)
-" =========================
-hi User1 guifg=#c1ae6e ctermfg=179 guibg=#181818 ctermbg=234
-hi User2 guifg=#cc2f47 ctermfg=197 guibg=#181818 ctermbg=234
-hi User3 guifg=#7c96bf ctermfg=11 guibg=#181818 ctermbg=234
-hi User4 guifg=#777777 ctermfg=243 guibg=#181818 ctermbg=234
-
-" =========================
 " ctrlP
 " =========================
 nmap <leader>f :CtrlP<CR>
@@ -107,6 +102,11 @@ let g:netrw_preview = 1         " preview window shown in a vertically split
 let g:netrw_winsize = 10        " netrw window size (10%)
 let g:netrw_list_hide = '\.sass-cache\|\.DS_Store'
 nmap <leader>3 :Vex <cr>
+
+" =========================
+" JSX
+" =========================
+let g:jsx_ext_required = 0
 
 " =========================
 " Markdown
@@ -203,3 +203,6 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
 
 " autocommands
 autocmd BufNewFile,BufRead *.go setfiletype go
+" ugly hack for js
+autocmd BufNewFile,BufRead *.js call matchadd('SherlockWhite', '[')
+autocmd BufNewFile,BufRead *.js call matchadd('SherlockWhite', ']')

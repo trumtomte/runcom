@@ -28,6 +28,12 @@ hi SherlockYellow   guifg=#fad46b gui=none cterm=none ctermfg=179
 hi SherlockRed      guifg=#eb3652 gui=none cterm=none ctermfg=197
 hi SherlockBlue     guifg=#90aede gui=none cterm=none ctermfg=110
 
+" Statusline Colors
+hi User1 guifg=#c1ae6e ctermfg=179 guibg=#181818 ctermbg=234
+hi User2 guifg=#cc2f47 ctermfg=197 guibg=#181818 ctermbg=234
+hi User3 guifg=#7c96bf ctermfg=11 guibg=#181818 ctermbg=234
+hi User4 guifg=#777777 ctermfg=243 guibg=#181818 ctermbg=234
+
 hi LineNr       guibg=#222222 guifg=#3a3a3a ctermbg=235 ctermfg=240
 hi Normal       guibg=#222222 guifg=#fff6d9 ctermbg=235 ctermfg=144
 hi Comment      guifg=#777777 gui=none ctermbg=235 ctermfg=243 cterm=none
@@ -66,6 +72,8 @@ hi! link Structure   SherlockWhite
 hi! link PreProc     SherlockBlue
 hi! link Type        SherlockBlue
 
+hi! link Keyword    SherlockGold
+
 " =========================
 " Filetype specific
 " =========================
@@ -76,53 +84,26 @@ hi link PhpStatement    SherlockBlue
 hi link phpStorageClass SherlockBlue
 hi link phpStructure    SherlockWhite
 
-" CSS/SASS
-hi link sassDefinition  SherlockGold
-
-hi link sassClass       SherlockBlue
-hi link sassId          SherlockBlue
-
-hi link sassColor       SherlockRed
-hi link sassImportStr   SherlockRed
-hi link sassAmpersand   SherlockRed
-
-hi link sassVariable        SherlockYellow
-hi link sassExtend          SherlockYellow
-hi link sassCssAttribute    SherlockYellow
-hi link sassFunction        SherlockYellow
-
-hi link cssTagName SherlockBlue
-
-hi link cssTextProp             SherlockGold
-hi link cssPositioningProp      SherlockGold
-hi link cssUIProp               SherlockGold
-hi link cssBorderOutlineProp    SherlockGold
-hi link cssDimensionProp        SherlockGold
-hi link cssPaddingProp          SherlockGold
-hi link cssListProp             SherlockGold
-hi link cssMarginProp           SherlockGold
-hi link cssFontProp             SherlockGold
-hi link cssTransitionProp       SherlockGold
-hi link cssColorProp            SherlockGold
-hi link cssBackgroundProp       SherlockGold
-hi link cssTableProp            SherlockGold
-hi link cssBoxProp              SherlockGold
-hi link cssTransformProp        SherlockGold
-hi link cssAnimationProp        SherlockGold
-hi link cssFlexibleBoxProp      SherlockGold
-hi link cssGeneratedContentProp SherlockGold
-
+" CSS
+hi link cssProp         SherlockGold
+hi link cssAttr         SherlockBlue
+hi link cssTagName      SherlockBlue
 hi link cssValueLength  SherlockRed
 hi link cssValueNumber  SherlockRed
 hi link cssColor        SherlockRed
 hi link cssStringQ      SherlockRed
 
-hi link cssFontAttr         SherlockBlue
-hi link cssCommonAttr       SherlockBlue
-hi link cssTextAttr         SherlockBlue
-hi link cssPositionAttr     SherlockBlue
-hi link cssBoxAttr          SherlockBlue
-hi link cssPseudoClassId    SherlockBlue
+" SASS
+hi link sassDefinition      SherlockGold
+hi link sassClass           SherlockBlue
+hi link sassId              SherlockBlue
+hi link sassColor           SherlockRed
+hi link sassImportStr       SherlockRed
+hi link sassAmpersand       SherlockRed
+hi link sassVariable        SherlockYellow
+hi link sassExtend          SherlockYellow
+hi link sassCssAttribute    SherlockYellow
+hi link sassFunction        SherlockYellow
 
 " HTML
 hi link htmlArg SherlockYellow
@@ -170,14 +151,13 @@ hi link javaScript SherlockGold
 " Improved JavaScript syntax
 hi link javaScriptBrowserObjects    SherlockYellow
 hi link javaScriptOperator          SherlockYellow
-hi link javaScriptFuncArg           SherlockYellow
 
 hi link javaScriptHtmlElemProperties    SherlockGold
 hi link javascriptDOMProperties         SherlockGold
 hi link javaScriptEventListenerKeywords SherlockGold
 hi link javaScriptDOMObjects            SherlockGold
 
-hi link javaScriptFuncArg       SherlockBlue
+hi link javaScriptFuncArg       SherlockGold
 hi link javaScriptFuncKeyword   SherlockBlue
 hi link javaScriptLogger        SherlockBlue
 
@@ -206,16 +186,12 @@ hi link javascriptDOMNodeProp   SherlockGold
 hi link javascriptEndColons     SherlockWhite
 hi link javascriptLogicSymbol   SherlockWhite
 hi link javascriptOpSymbol      SherlockWhite
+
+hi link javascriptArrowFunc         SherlockWhite
+hi link javascriptArrowFuncArg      SherlockGold
+hi link javascriptArrowFuncDef      SherlockGold
+
 hi link javascriptConditionalElse   SherlockBlue
-
-" Coffeescript
-hi link coffeeConditional   SherlockBlue
-hi link coffeeRepeat        SherlockBlue
-hi link coffeeSpecialIdent  SherlockBlue
-
-hi link coffeeObject        SherlockGold
-
-hi link coffeeParens SherlockYellow
 
 " Jinja
 hi link jinjaVariable   SherlockGold

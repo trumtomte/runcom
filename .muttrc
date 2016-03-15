@@ -97,7 +97,7 @@ macro attach S <save-entry><kill-line>/Users/sebbe/Downloads/<enter>\y<enter>
 
 bind editor <space> noop
 macro index,pager gi <change-folder>+Inbox<enter>
-macro index,pager gs <change-folder>+Sent<enter>
+macro index,pager gs <change-folder>+Sent\ Items<enter>
 # macro index,pager ga "<change-folder>+[Gmail]/All Mail" "Go to All Mail"
 # macro index,pager gd "<change-folder>+[Gmail]/Drafts" "Go to Drafts"
 
