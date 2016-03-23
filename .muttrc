@@ -107,22 +107,22 @@ macro index,pager A "<pipe-message>abook --add-email<return>" "add the sender ad
 # =========================
 # Colors (Sherlock)
 # =========================
-color normal        color144    color235
-color tree          color197    color235
+color normal        color223    color235
+color tree          color167    color235
 color indicator     color7      color238
-color markers       color111    color235
+color markers       color109    color235
 
-color index         color111    color235    "~N"    # New
-color index         color144    color235    "~O"    # Old
-color index         color111    color235    "~U"    # Unread
-color index         color144    color235    "~R"    # Read
+color index         color109    color235    "~N"    # New
+color index         color223    color235    "~O"    # Old
+color index         color109    color235    "~U"    # Unread
+color index         color223    color235    "~R"    # Read
 color index         color7      color235    "~P"    # Sent
 
 color header        color241    color235    ^(Date)
 color header        color241    color235    ^(From)
 color header        color241    color235    ^(To)
 color header        color241    color235    ^(Cc)
-color header        color111    color235    ^(Subject)
+color header        color109    color235    ^(Subject)
 
 color body          color179    color235    "(finger|ftp|http|https|news|telnet)://[^ >]*"
 color body          color179    color235    "<URL:[^ ]*>"
@@ -144,16 +144,16 @@ color quoted8       color59     color235
 
 color signature     color242    color235
 color status        color179    color234
-color hdrdefault    color197    color235
+color hdrdefault    color167    color235
 
-color error         color7      color197
+color error         color7      color167
 color tilde         color238    color235
 
 # Gotham
 # color normal        color67     color000
 # color tree          color167    color000
 # color indicator     color116    color010
-# color markers       color111    color000
+# color markers       color109    color000
 # 
 # color index         color116    color000    "~N"    # New
 # color index         color73     color000    "~O"    # Old

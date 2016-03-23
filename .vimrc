@@ -15,11 +15,17 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'othree/yajs.vim'
 Plug 'tpope/vim-surround'
 Plug 'mxw/vim-jsx'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
 
 colorscheme sherlock            " Colorscheme
+
+" let g:gruvbox_italic=1
+" set background=dark
+" colorscheme gruvbox
+
 
 set guifont=Menlo:h14           " Font
 
