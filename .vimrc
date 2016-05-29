@@ -16,9 +16,10 @@ Plug 'othree/yajs.vim'
 Plug 'tpope/vim-surround'
 Plug 'mxw/vim-jsx'
 Plug 'morhetz/gruvbox'
+Plug 'pangloss/vim-javascript'
+" Plug 'nelstrom/vim-markdown-folding'
 
 call plug#end()
-
 
 colorscheme sherlock            " Colorscheme
 
@@ -67,7 +68,7 @@ set scrolloff=3                 " Show two extra lines when scrolling
 set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
 set wildmode=longest:list
-set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*/*node_modules/*,*DS_Store*,*/*_site/*,*.png,*.jpg,*.gif
+set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*/*node_modules/*,*DS_Store*,*pyc*,*/*_site/*,*.png,*.jpg,*.gif
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
 set cursorline                  " Enable cursorline
@@ -75,6 +76,8 @@ set splitright                  " Vsp to Right
 set splitbelow                  " Sp to bottom
 set autoread                    " Auto update file if it changes outside of vim
 set autochdir
+
+set foldmethod=marker           " automatic folds with {{{ }}}
 
 " Leader key
 let mapleader = "\<Space>"
@@ -97,7 +100,7 @@ nmap <leader><C-f> :CtrlPMRUFiles<CR>
 nmap <leader>, :CtrlPBuffer<CR>
 nmap <leader><tab> :CtrlPBuffer<CR><CR>
 let g:ctrlp_max_height = 25
-let g:ctrlp_custom_ignore = "node_modules\|DS_store\|git\|sass-cache\|_site"
+let g:ctrlp_custom_ignore = "node_modules\|DS_store\|git\|sass-cache\|_site\|pyc"
 
 " =========================
 " Netrw
@@ -210,5 +213,7 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
 " autocommands
 autocmd BufNewFile,BufRead *.go setfiletype go
 " ugly hack for js
-autocmd BufNewFile,BufRead *.js call matchadd('SherlockWhite', '[')
-autocmd BufNewFile,BufRead *.js call matchadd('SherlockWhite', ']')
+autocmd BufNewFile,BufRead *.js call matchadd('Operator', '[')
+autocmd BufNewFile,BufRead *.js call matchadd('Operator', ']')
+
+autocmd BufNewFile,BufRead *.py set cc=80

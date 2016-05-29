@@ -33,17 +33,20 @@ hi SherlockRed      guifg=#fb4934 gui=none cterm=none ctermfg=167
 hi SherlockBlue     guifg=#83a589 gui=none cterm=none ctermfg=109
 hi Normal           guibg=#222222 guifg=#ebdbb2 ctermbg=235 ctermfg=223
 
+
 " Statusline Colors
-hi User1 guifg=#c1ae6e ctermfg=179 guibg=#181818 ctermbg=234
-hi User2 guifg=#cc2f47 ctermfg=167 guibg=#181818 ctermbg=234
-hi User3 guifg=#7c96bf ctermfg=11 guibg=#181818 ctermbg=234
-hi User4 guifg=#777777 ctermfg=243 guibg=#181818 ctermbg=234
+hi User1 guifg=#c1ae6e guibg=#181818 ctermfg=179 ctermbg=234
+hi User2 guifg=#cc2f47 guibg=#181818 ctermfg=167 ctermbg=234
+hi User3 guifg=#7c96bf guibg=#181818 ctermfg=109 ctermbg=234
+hi User4 guifg=#777777 guibg=#181818 ctermfg=109 ctermbg=234
 
 hi LineNr       guibg=#222222 guifg=#3a3a3a ctermbg=235 ctermfg=240
 hi Comment      guifg=#777777 gui=none ctermbg=235 ctermfg=243 cterm=none
 hi CursorLine   guibg=#333333 gui=none ctermbg=236 cterm=none
 hi CursorLineNr guifg=#fad46b guibg=#2b2b2b ctermfg=179 ctermbg=235
 hi NonText      guifg=#777777 ctermfg=243
+
+hi ColorColumn  guibg=#333333 ctermbg=236
 
 hi VertSplit    guibg=#2b2b2b guifg=#fad46b gui=none ctermfg=179 ctermbg=235 cterm=none
 hi Todo         guifg=#000000 guibg=#fad46b gui=none ctermfg=0 ctermbg=109 cterm=none
@@ -196,6 +199,13 @@ hi link javascriptStringMethod          SherlockBeige
 hi link javascriptJSONStaticMethod      SherlockBeige
 hi link javascriptMathStaticMethod      SherlockBeige
 hi link javascriptRegExpMethod          SherlockBeige
+hi link javascriptBrackets              SherlockWhite
+
+hi link javascriptClassKeyword          SherlockBlue
+hi link javascriptClassExtends          SherlockBlue
+hi link javascriptClassName             SherlockBeige
+hi link javascriptClassSuperName        SherlockBeige
+hi link javascriptConsoleMethod         SherlockBeige
 
 " Jinja
 hi link jinjaVariable   SherlockBeige

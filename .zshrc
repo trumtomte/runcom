@@ -36,20 +36,31 @@ function git_prompt_info() {
     echo "%{$fg[black]%}| %{$fg[yellow]%}${ref#refs/heads/}%{$reset_color%}"
 }
 
+function set_virtualenv_prompt() {
+    if test -z "$VIRTUAL_ENV" ; then
+        PYTHON_VIRTUALENV=""
+    else
+        PYTHON_VIRTUALENV="(`basename \"$VIRTUAL_ENV\"`) "
+    fi
+}
+
 # Before commands, update promt and window title
 function precmd() {
+    set_virtualenv_prompt
+    PROMPT="${PYTHON_VIRTUALENV}%{$fg[$(vi_mode_prompt_info)]%}🐕  "
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
     echo -n -e "\033]0;${USER}@${HOST}\007"
 }
 
 function setleftprompt() {
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    PROMPT="${PYTHON_VIRTUALENV}%{$fg[$(vi_mode_prompt_info)]%}🐕  "
     # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}• %{$fg[yellow]%}➜ "
 }
 function setrightprompt() {
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
 }
 function setprompt() {
+    set_virtualenv_prompt
     setleftprompt
     setrightprompt
 }
@@ -70,3 +81,6 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 
+
+export NVM_DIR="/Users/sebbe/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
