@@ -23,4 +23,4 @@ unset PYTHONPATH
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 
 # Needed on el capitan?
-export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+# export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin

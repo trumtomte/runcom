@@ -10,15 +10,12 @@ set nocompatible
 " Vim-Plug
 " =========================
 call plug#begin('~/.vim/plugged')
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'othree/yajs.vim'
 Plug 'tpope/vim-surround'
 Plug 'mxw/vim-jsx'
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
-" Plug 'nelstrom/vim-markdown-folding'
-
 call plug#end()
 
 colorscheme sherlock            " Colorscheme
@@ -26,7 +23,6 @@ colorscheme sherlock            " Colorscheme
 " let g:gruvbox_italic=1
 " set background=dark
 " colorscheme gruvbox
-
 
 set guifont=Menlo:h14           " Font
 
@@ -67,7 +63,7 @@ set undodir=~/.vim/undo//       " where to save undo histories
 set scrolloff=3                 " Show two extra lines when scrolling
 set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
-set wildmode=longest:list
+set wildmode=longest:list       " --
 set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*/*node_modules/*,*DS_Store*,*pyc*,*/*_site/*,*.png,*.jpg,*.gif
 set laststatus=2                " Always have a status line at the last window
 set nowrap                      " Don't wrap lines
@@ -75,8 +71,7 @@ set cursorline                  " Enable cursorline
 set splitright                  " Vsp to Right
 set splitbelow                  " Sp to bottom
 set autoread                    " Auto update file if it changes outside of vim
-set autochdir
-
+set autochdir                   " --
 set foldmethod=marker           " automatic folds with {{{ }}}
 
 " Leader key
@@ -126,6 +121,7 @@ autocmd BufNewFile,BufRead *.md set wrap
 
 " Jekyll
 autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
+" syntax for old highlight via pygments
 autocmd BufNewFile,BufRead *.md syntax match Operator /^{%\shighlight.*%}\_.\{-}{%\sendhighlight\s%}$/
 
 " =========================
@@ -210,10 +206,13 @@ nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" autocommands
+" ====================
+" Auto commands
+" ====================
+
 autocmd BufNewFile,BufRead *.go setfiletype go
 " ugly hack for js
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', '[')
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', ']')
-
+" For pep8
 autocmd BufNewFile,BufRead *.py set cc=80

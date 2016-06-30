@@ -37,3 +37,5 @@ alias gc='git commit'
 alias gp='git push'
 
 alias m2t='~/Torrents/magnet2torrent.sh'
+
+alias v='vim'
