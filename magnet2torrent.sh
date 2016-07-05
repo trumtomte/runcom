@@ -1,8 +1,8 @@
 #!/bin/bash
-
 # Usage: ./magnet2torrent "<magnet-uri>"
 
-DIR=./watch
+# rtorrent "watch" directory
+DIR=$HOME/Torrents/watch
 
 echo "Changing directory to $DIR..."
 cd $DIR
