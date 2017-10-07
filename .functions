@@ -19,7 +19,7 @@ function mkd() {
 }
 
 function markdown_to_pdf() {
-    pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3
+    pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=/Users/sebbe/Github/runcom/template.tex
 }
 
 function wav_to_mp3() {
