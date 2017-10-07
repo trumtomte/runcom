@@ -8,7 +8,6 @@ set charset = "utf-8"
 # set imap_pass               = "password"
 # set from                    = "name <email>"
 # set realname                = "name"
-source ~/.mutt/identity
 set mailcap_path            = ~/.mutt/.mailcap
 
 set editor                  = "vim"
@@ -25,6 +24,8 @@ mailboxes +INBOX
 
 set imap_check_subscribed   = yes
 set imap_list_subscribed    = yes
+
+source ~/.mutt/identity
 
 set header_cache            = ~/.mutt/cache/headers
 set message_cachedir        = ~/.mutt/cache/bodies

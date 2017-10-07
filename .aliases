@@ -12,17 +12,9 @@ alias week='date +%V'
 
 alias music='ncmpcpp'
 
-alias localip='ifconfig en1 | grep inet'
-alias externalip='curl ifconfig.co/x-ifconfig-ip'
-
-alias addhtaccess='add_htaccess'
-alias addvhost='add_vhost'
-
-alias apacheconf='vim /Applications/MAMP/conf/apache/httpd.conf'
-
 # Show/hide hidden files in Finder
-alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+# alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+# alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
 # Pandoc, Latex -> PDF
 alias md2pdf='markdown_to_pdf'
@@ -38,4 +30,6 @@ alias gp='git push'
 
 alias m2t='~/Torrents/magnet2torrent.sh'
 
-alias v='vim'
+alias wav2mp3='wav_to_mp3'
+alias dl='download_torrent'
+alias t='/usr/local/bin/timed'

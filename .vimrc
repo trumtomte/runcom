@@ -1,21 +1,14 @@
 set nocompatible
 
 " =========================
-" Pathogen
-" =========================
-" call pathogen#infect('~/.vim/bundle/{}')
-" call pathogen#helptags()
-
-" =========================
 " Vim-Plug
 " =========================
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'othree/yajs.vim'
 Plug 'tpope/vim-surround'
 Plug 'mxw/vim-jsx'
-Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
+Plug 'evanmiller/nginx-vim-syntax'
 call plug#end()
 
 colorscheme sherlock            " Colorscheme
@@ -37,7 +30,7 @@ else
     set t_Co=256
     " number width + relative
     set nuw=5
-    set rnu
+    " set rnu
 endif
 
 " =========================
@@ -58,8 +51,8 @@ set number                      " Show line numbers
 set nobackup                    " Disable swap files
 set noswapfile                  " --
 set nowb                        " --
+set undodir=~/.vim/undo         " where to save undo histories NOTE requires the dir to exist
 set undofile                    " Save undo's after file closes
-set undodir=~/.vim/undo//       " where to save undo histories
 set scrolloff=3                 " Show two extra lines when scrolling
 set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
