@@ -66,6 +66,7 @@ set splitbelow                  " Sp to bottom
 set autoread                    " Auto update file if it changes outside of vim
 set autochdir                   " --
 set foldmethod=marker           " automatic folds with {{{ }}}
+set cc=80
 
 " Leader key
 let mapleader = "\<Space>"

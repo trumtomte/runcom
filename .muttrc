@@ -97,13 +97,10 @@ bind pager R            group-reply
 macro attach S <save-entry><kill-line>/Users/sebbe/Downloads/<enter>\y<enter>
 
 bind editor <space> noop
+
 macro index,pager gi <change-folder>+Inbox<enter>
 macro index,pager gs <change-folder>+Sent\ Items<enter>
-# macro index,pager ga "<change-folder>+[Gmail]/All Mail" "Go to All Mail"
-# macro index,pager gd "<change-folder>+[Gmail]/Drafts" "Go to Drafts"
-
 macro index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
-
 
 # =========================
 # Colors (Sherlock)
@@ -149,46 +146,3 @@ color hdrdefault    color167    color235
 
 color error         color7      color167
 color tilde         color238    color235
-
-# Gotham
-# color normal        color67     color000
-# color tree          color167    color000
-# color indicator     color116    color010
-# color markers       color109    color000
-# 
-# color index         color116    color000    "~N"    # New
-# color index         color73     color000    "~O"    # Old
-# color index         color215    color000    "~U"    # Unread
-# color index         color73     color000    "~R"    # Read
-# color index         color194    color000    "~P"    # Sent
-# 
-# color header        color59     color000    ^(Date)
-# color header        color59     color000    ^(From)
-# color header        color59     color000    ^(To)
-# color header        color59     color000    ^(Cc)
-# color header        color73     color000    ^(Subject)
-# 
-# color body          color130    color000    "(finger|ftp|http|https|news|telnet)://[^ >]*"
-# color body          color130    color000    "<URL:[^ ]*>"
-# color body          color130    color000    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
-# color body          color130    color000    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
-# color body          color130    color000    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-# 
-# color attachment    color59    color000
-# 
-# color quoted        color237    color000
-# color quoted1       color237    color000
-# color quoted2       color237    color000
-# color quoted3       color237    color000
-# color quoted4       color237    color000
-# color quoted5       color237    color000
-# color quoted6       color237    color000
-# color quoted7       color237    color000
-# color quoted8       color237    color000
-# 
-# color signature     color59     color000
-# color status        color23     color000
-# color hdrdefault    color167    color000
-# 
-# color error         color167    color000
-# color tilde         color59     color000
