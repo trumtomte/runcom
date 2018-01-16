@@ -210,6 +210,7 @@ hi link javascriptConsoleMethod         SherlockBeige
 hi link jsDestructuringNoise    SherlockWhite
 hi link jsDestructuringBraces   SherlockWhite
 hi link jsBraces                SherlockWhite
+hi link jsBrackets              SherlockWhite
 hi link jsFuncBraces            SherlockWhite
 hi link jsFuncParens            SherlockWhite
 hi link jsObjectBraces          SherlockWhite
@@ -228,6 +229,9 @@ hi link jsObjectSeparator       SherlockWhite
 hi link jsModuleDefault         SherlockYellow
 hi link jsGlobalObjects         SherlockBeige
 hi link jsNull                  SherlockRed
+hi link jsUndefined             SherlockRed
+hi link jsClassBraces           SherlockWhite
+hi link jsAsyncKeyword          SherlockBlue
 
 " Jinja
 hi link jinjaVariable   SherlockBeige
