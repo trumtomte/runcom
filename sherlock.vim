@@ -1,20 +1,17 @@
 " Colorscheme:  Sherlock
 " Maintainer:   Sebastian Bengtegård <sebbebook@gmail.com>
-" Last Change:  23-03-2016
+" Last Change:  12-02-2018
 " URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
 
 " =========================
 " Colors
 " =========================
 " gui: #fbf8ff  cterm: 7        :white
-" gui: #ebdbb2  cterm: 223      :beige
-" gui: #fad46b  cterm: 179      :yellow
-" gui: #fb4934  cterm: 167      :red
-" gui: #83a589  cterm: 109      :blue
-"
-" aqua (green): #8ec07c, 108
-" purple: #d3869b, 175
-" orange: #fe8019, 208
+" gui: #ffd7af  cterm: 223      :beige
+" gui: #d7af5f  cterm: 179      :yellow
+" gui: #d75f5f  cterm: 167      :red
+" gui: #87afaf  cterm: 109      :blue
+
 
 set background=dark
 
@@ -268,9 +265,6 @@ hi link jadeClass   SherlockYellow
 " Go
 hi link goStructDef     SherlockBeige
 hi link goDeclaration   SherlockBlue
-
-" Markdown
-hi link markdownCode    SherlockBlue
 
 " XML
 hi link xmlEndTag   SherlockYellow
