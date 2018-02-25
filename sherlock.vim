@@ -13,6 +13,11 @@
 " gui: #87afaf  cterm: 109      :blue
 
 
+" bg #f7f7f9   (alt C4D5E3)
+" fg #171d1a, 031C23
+" green/blue #648f95
+" red   #97656e (alt B84C38, D06B66, DE98AC
+
 set background=dark
 
 hi clear

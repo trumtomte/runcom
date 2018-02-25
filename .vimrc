@@ -11,35 +11,17 @@ Plug 'pangloss/vim-javascript'
 Plug 'evanmiller/nginx-vim-syntax'
 call plug#end()
 
-colorscheme sherlock            " Colorscheme
-
-" let g:gruvbox_italic=1
-" set background=dark
-" colorscheme gruvbox
-
-set guifont=Menlo:h14           " Font
-
-if has('gui_running')           " Remove GUI features and set window size
-    set guioptions-=T
-    set guioptions-=m
-    set guioptions-=r
-    set guioptions-=L
-    set lines=50
-    set columns=160
-else
-    set t_Co=256
-    " number width + relative
-    set nuw=5
-    " set rnu
-endif
+colorscheme watson              " Colorscheme
+syntax on                       " Enable syntax highlightning
 
 " =========================
 " Settings
 " =========================
-syntax on                       " Enable syntax highlightning
 filetype plugin on
 filetype indent on
 
+set t_Co=256                    
+set nuw=5
 set backspace=indent,eol,start  " Allow backspace in insertmode
 set expandtab                   " Tabs/Indent
 set autoindent                  " --
@@ -178,12 +160,6 @@ nmap <leader>R :%s/
 " =========================
 " Misc
 " =========================
-
-" Fullscreen
-if has('gui_running')
-    set nofullscreen
-    nnoremap <leader>4 :set fullscreen!<CR>
-endif
 
 " Remove trailing spaces
 function! StripTrailingWhitespace()
