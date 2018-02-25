@@ -1,22 +1,16 @@
 " Colorscheme:  Sherlock
 " Maintainer:   Sebastian Bengtegård <sebbebook@gmail.com>
-" Last Change:  12-02-2018
+" Last Change:  25-02-2018
 " URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
 
-" =========================
+" ======
 " Colors
-" =========================
-" gui: #fbf8ff  cterm: 7        :white
-" gui: #ffd7af  cterm: 223      :beige
-" gui: #d7af5f  cterm: 179      :yellow
-" gui: #d75f5f  cterm: 167      :red
-" gui: #87afaf  cterm: 109      :blue
-
-
-" bg #f7f7f9   (alt C4D5E3)
-" fg #171d1a, 031C23
-" green/blue #648f95
-" red   #97656e (alt B84C38, D06B66, DE98AC
+" ======
+" White:    cterm=7
+" Beige:    cterm=233
+" Yellow:   cterm=179
+" Red:      cterm=167
+" Blue:     cterm=109
 
 set background=dark
 
@@ -27,43 +21,38 @@ endif
 
 let g:colors_name="sherlock"
 
-" Sherlock Color Groups
-hi SherlockWhite    guifg=#fbf8ff gui=none cterm=none ctermfg=7
-hi SherlockBeige    guifg=#ebdbb2 gui=none cterm=none ctermfg=223
-hi SherlockYellow   guifg=#fad46b gui=none cterm=none ctermfg=179
-hi SherlockRed      guifg=#fb4934 gui=none cterm=none ctermfg=167
-hi SherlockBlue     guifg=#83a589 gui=none cterm=none ctermfg=109
-hi Normal           guibg=#222222 guifg=#ebdbb2 ctermbg=235 ctermfg=223
+" ============
+" Color Groups
+" ============
+hi SherlockWhite    ctermfg=7       cterm=none 
+hi SherlockBeige    ctermfg=223     cterm=none 
+hi SherlockYellow   ctermfg=179     cterm=none 
+hi SherlockRed      ctermfg=167     cterm=none 
+hi SherlockBlue     ctermfg=109     cterm=none 
 
+hi Normal           ctermbg=235     ctermfg=223
+hi LineNr           ctermbg=235     ctermfg=240
+hi Comment          ctermbg=235     ctermfg=243     cterm=none
+hi CursorLine       ctermbg=236     cterm=none
+hi CursorLineNr     ctermbg=235     ctermfg=179
+hi NonText          ctermbg=235     ctermfg=243
+hi ColorColumn      ctermbg=236
+hi VertSplit        ctermbg=235     ctermfg=179     cterm=none
+hi Todo             ctermbg=109     ctermfg=0       cterm=none
+hi Folded           ctermbg=240     ctermfg=179     cterm=none
+hi MatchParen       ctermbg=167     ctermfg=179 
+hi Visual           ctermbg=238
 
 " Statusline Colors
-hi User1 guifg=#c1ae6e guibg=#181818 ctermfg=179 ctermbg=234
-hi User2 guifg=#cc2f47 guibg=#181818 ctermfg=167 ctermbg=234
-hi User3 guifg=#7c96bf guibg=#181818 ctermfg=109 ctermbg=234
-hi User4 guifg=#777777 guibg=#181818 ctermfg=109 ctermbg=234
+hi User1            ctermbg=234     ctermfg=179
+hi User2            ctermbg=234     ctermfg=167
+hi User3            ctermbg=234     ctermfg=109
+hi User4            ctermbg=234     ctermfg=109
 
-hi LineNr       guibg=#222222 guifg=#3a3a3a ctermbg=235 ctermfg=240
-hi Comment      guifg=#777777 gui=none ctermbg=235 ctermfg=243 cterm=none
-hi CursorLine   guibg=#333333 gui=none ctermbg=236 cterm=none
-hi CursorLineNr guifg=#fad46b guibg=#2b2b2b ctermfg=179 ctermbg=235
-hi NonText      guifg=#777777 ctermfg=243
-
-hi ColorColumn  guibg=#333333 ctermbg=236
-
-hi VertSplit    guibg=#2b2b2b guifg=#fad46b gui=none ctermfg=179 ctermbg=235 cterm=none
-hi Todo         guifg=#000000 guibg=#fad46b gui=none ctermfg=0 ctermbg=109 cterm=none
-hi Folded       guifg=#fad46b guibg=#555555 gui=none ctermfg=179 ctermbg=240 cterm=none
-hi MatchParen   guifg=#fad46b guibg=#eb3652 ctermfg=179 ctermbg=167
-hi Visual       guibg=#444444 ctermbg=238
-
-" Netrw
-hi link netrwDir    SherlockYellow
-hi netrwTreeBar     guifg=#5d5d5d
-
-" Tabs
-hi TabLine      ctermbg=236 ctermfg=179 cterm=none
-hi TabLineSel   ctermbg=239 ctermfg=179 cterm=none
-hi TabLineFill  ctermbg=236 ctermfg=0 cterm=none
+" Tabline
+hi TabLine          ctermbg=236     ctermfg=179     cterm=none
+hi TabLineSel       ctermbg=239     ctermfg=179     cterm=none
+hi TabLineFill      ctermbg=236     ctermfg=0       cterm=none
 
 hi! link Function       SherlockYellow
 hi! link Conditional    SherlockYellow
@@ -82,9 +71,9 @@ hi! link PreProc        SherlockBlue
 hi! link Type           SherlockBlue
 hi! link Keyword        SherlockYellow
 
-" =========================
-" Filetype specific
-" =========================
+" ====
+" Misc
+" ====
 
 " PHP
 hi link PhpVarSelector  SherlockBeige
