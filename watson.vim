@@ -34,7 +34,7 @@ hi WatsonGrey       ctermfg=249     cterm=none
 hi Normal           ctermbg=7       ctermfg=0
 hi Comment          ctermbg=7       ctermfg=249     cterm=none
 hi LineNr           ctermbg=7       ctermfg=252
-hi CursorLine       ctermbg=255     ctermfg=0       cterm=none
+hi CursorLine       ctermbg=255                     cterm=none
 hi CursorLineNr     ctermbg=7       ctermfg=0
 hi ColorColumn      ctermbg=255
 hi VertSplit        ctermbg=7       ctermfg=0       cterm=none
