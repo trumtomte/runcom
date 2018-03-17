@@ -97,6 +97,7 @@ hi link jsSuper             WatsonGreen
 
 " Python
 hi link pythonFunction      WatsonRed
+hi link pythonOperator      WatsonGreen
 
 " Django
 hi link djangoTagBlock      WatsonBlack
