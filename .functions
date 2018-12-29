@@ -1,5 +1,5 @@
 # Echo calendar - highlights today
-function today() {
+today() {
     cal_head=`cal | head -1`;
     cal_tail=`cal | tail -7`;
     today=`date "+%e"`;
@@ -9,32 +9,21 @@ function today() {
 }
 
 # Changes the extension of all files
-function change_extensions() {
+change_extensions() {
     for f in *.$1; do base=`basename $f .$1`; mv $f $base.$2; done
 }
 
 # Create a new directory and enter it
-function mkd() {
+mkd() {
     mkdir -p "$@" && cd "$@"
 }
 
-function markdown_to_pdf() {
-    pandoc $1 -o ${1%.*}.pdf --number-sections --latex-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=/Users/sebbe/Github/runcom/template.tex
+markdown_to_pdf() {
+    pandoc $1 -o ${1%.*}.pdf --number-sections --pdf-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=/Users/sebbe/Github/runcom/template.tex
 }
 
-function wav_to_mp3() {
+wav_to_mp3() {
     ffmpeg -i $1 -codec:a libmp3lame -qscale:a 2 ${1%.*}.mp3
-}
-
-# Create a new Go workspace
-function go_create_workspace() {
-    echo 'Creating new Go workspace'
-    mkdir -p $GOPATH/src/github.com/trumtomte/$1
-    cd $GOPATH/src/github.com/trumtomte/$1
-}
-# Re-initialize a Go workspace
-function go_initialize_workspace() {
-    cd $GOPATH/src/github.com/trumtomte/$1
 }
 
 download_torrent () {
@@ -49,4 +38,9 @@ download_torrent () {
 
 check_ssl_expiration() {
     echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates
+}
+
+# Excel to CSV without trailing commas
+xlsx_to_csv() {
+    xlsx2csv $1 | sed 's/,*$//g' | tee ${1%.*}.csv
 }

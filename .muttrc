@@ -22,6 +22,11 @@ set postponed               = "~/Maildir/work/Drafts"
 
 mailboxes +INBOX
 
+# set sidebar_visible         = yes
+# set sidebar_width           = 12
+# set sidebar_delim           = "|"
+# set sidebar_sort            = yes
+
 set imap_check_subscribed   = yes
 set imap_list_subscribed    = yes
 

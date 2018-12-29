@@ -43,6 +43,10 @@ hi Folded           ctermbg=240     ctermfg=179     cterm=none
 hi MatchParen       ctermbg=167     ctermfg=179 
 hi Visual           ctermbg=238
 
+" Indent guides
+hi IndentGuidesOdd  ctermbg=236
+hi IndentGuidesEven ctermbg=235
+
 " Statusline Colors
 hi User1            ctermbg=234     ctermfg=179
 hi User2            ctermbg=234     ctermfg=167
@@ -90,7 +94,7 @@ hi link cssValueNumber  SherlockRed
 hi link cssColor        SherlockRed
 hi link cssStringQ      SherlockRed
 
-" SASS
+" SASS/LESS
 hi link sassDefinition      SherlockBeige
 hi link sassClass           SherlockBlue
 hi link sassId              SherlockBlue
@@ -101,6 +105,8 @@ hi link sassVariable        SherlockYellow
 hi link sassExtend          SherlockYellow
 hi link sassCssAttribute    SherlockYellow
 hi link sassFunction        SherlockYellow
+hi link lessVariable        SherlockRed
+hi link lessId              SherlockBlue
 
 " HTML
 hi link htmlArg             SherlockYellow
@@ -201,6 +207,7 @@ hi link javascriptConsoleMethod         SherlockBeige
 hi link jsDestructuringNoise    SherlockWhite
 hi link jsDestructuringBraces   SherlockWhite
 hi link jsBraces                SherlockWhite
+hi link jsRepeatBraces          SherlockWhite
 hi link jsBrackets              SherlockWhite
 hi link jsFuncBraces            SherlockWhite
 hi link jsFuncParens            SherlockWhite
@@ -223,6 +230,17 @@ hi link jsNull                  SherlockRed
 hi link jsUndefined             SherlockRed
 hi link jsClassBraces           SherlockWhite
 hi link jsAsyncKeyword          SherlockBlue
+hi link jsIfElseBraces          SherlockWhite
+hi link jsGlobalNodeObjects     SherlockBeige
+hi link jsonQuote               SherlockWhite
+hi link jsonNoise               SherlockWhite
+hi link jsModuleBraces          SherlockWhite
+hi link jsTryCatchBraces        SherlockWhite
+hi link jsClassDefinition       SherlockBeige
+hi link jsClassKeyword          SherlockBlue
+hi link jsExtendsKeyword        SherlockBlue
+hi link jsSwitchBraces          SherlockWhite
+hi link jsFuncArgOperator       SherlockWhite
 
 " Jinja
 hi link jinjaVariable   SherlockBeige
@@ -271,3 +289,4 @@ hi link markdownCodeDelimiter       SherlockRed
 hi link markdownCode                SherlockRed
 hi link markdownLinkTextDelimiter   SherlockYellow
 hi link markdownLinkDelimiter       SherlockYellow
+

@@ -3,15 +3,17 @@ set nocompatible
 " =========================
 " Vim-Plug
 " =========================
-call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-surround'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'evanmiller/nginx-vim-syntax'
-call plug#end()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'chr4/nginx.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+call vundle#end()
 
-colorscheme watson              " Colorscheme
+colorscheme sherlock            " Colorscheme
 syntax on                       " Enable syntax highlightning
 
 " =========================
@@ -87,6 +89,12 @@ nmap <leader>3 :Vex <cr>
 " JSX
 " =========================
 let g:jsx_ext_required = 0
+
+" =========================
+" Indent guides
+" =========================
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
 
 " =========================
 " Markdown
@@ -186,3 +194,8 @@ autocmd BufNewFile,BufRead *.js call matchadd('Operator', '[')
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', ']')
 " For pep8
 autocmd BufNewFile,BufRead *.py set cc=80
+" Misc
+autocmd BufNewFile,BufRead *.schema setfiletype json
+autocmd BufNewFile,BufRead *.hbs setfiletype html
+" TMP
+" autocmd FileType javascript,json setlocal foldmarker={,}

@@ -94,6 +94,7 @@ hi link jsTemplateBraces    WatsonGreen
 hi link jsTemplateVar       WatsonRed
 hi link jsClassMethodType   WatsonGreen
 hi link jsSuper             WatsonGreen
+hi link jsClassDefinition   WatsonBlack
 
 " Python
 hi link pythonFunction      WatsonRed

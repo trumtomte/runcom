@@ -33,3 +33,5 @@ alias m2t='~/Torrents/magnet2torrent.sh'
 alias wav2mp3='wav_to_mp3'
 alias dl='download_torrent'
 alias t='/usr/local/bin/timed'
+
+alias x2c='xlsx_to_csv'
