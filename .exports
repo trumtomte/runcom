@@ -1,32 +1,11 @@
+unset PYTHONPATH
+
 export EDITOR='vim'
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
-
-# Historyfile
-export HISTFILE=~/.zhistory
-export HISTSIZE=32768
-export HISTFILESIZE=32768
-export SAVEHIST=32768
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
-
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto"
-
-# Go
-export GOPATH=$HOME/Go
-export PATH=$PATH:$GOPATH/bin
-
+export GREP_OPTIONS="--color=auto -n -i" # colors, line numbers, case-insensitive
 export TMPDIR=$HOME/tmp
-
-unset PYTHONPATH
-
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
-
-# Needed on el capitan?
 export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
-
-# export ANDROID_HOME=$HOME/Library/Android/sdk
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
 export ANDROID_HOME="/usr/local/share/android-sdk"
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"

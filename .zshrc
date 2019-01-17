@@ -2,9 +2,12 @@ setopt correct
 setopt prompt_subst
 
 # History
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt EXTENDED_HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+setopt appendhistory
+setopt SHARE_HISTORY
 
 autoload -U colors compinit promptinit
 colors && compinit && promptinit
@@ -36,34 +39,26 @@ function git_prompt_info() {
     echo "%{$fg[black]%}| %{$fg[yellow]%}${ref#refs/heads/}%{$reset_color%}"
 }
 
-function set_virtualenv_prompt() {
-    if test -z "$VIRTUAL_ENV" ; then
-        PYTHON_VIRTUALENV=""
-    else
-        PYTHON_VIRTUALENV="(`basename \"$VIRTUAL_ENV\"`) "
-    fi
-}
-
 # Before commands, update promt and window title
 function precmd() {
-    set_virtualenv_prompt
-    PROMPT="${PYTHON_VIRTUALENV}%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
     echo -n -e "\033]0;${USER}@${HOST}\007"
 }
 
 function setleftprompt() {
-    PROMPT="${PYTHON_VIRTUALENV}%{$fg[$(vi_mode_prompt_info)]%}🐕  "
-    # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}• %{$fg[yellow]%}➜ "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
 }
+
 function setrightprompt() {
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
 }
+
 function setprompt() {
-    set_virtualenv_prompt
     setleftprompt
     setrightprompt
 }
+
 # Set the custom prompt
 setprompt
 
@@ -72,8 +67,6 @@ zstyle ':completion::complete:*' use-cache 1                    # Cache
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'             # Case insensitive
 zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"     # Color
 
-# Vi mode
-# bindkey -v 
 # Emacs mode
 bindkey -e
 bindkey '^R' history-incremental-search-backward
