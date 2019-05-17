@@ -6,8 +6,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
-setopt appendhistory
-setopt SHARE_HISTORY
+setopt inc_append_history
 
 autoload -U colors compinit promptinit
 colors && compinit && promptinit

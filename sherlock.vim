@@ -107,6 +107,15 @@ hi link sassCssAttribute    SherlockYellow
 hi link sassFunction        SherlockYellow
 hi link lessVariable        SherlockRed
 hi link lessId              SherlockBlue
+" hi link cssTagName          SherlockYellow
+" hi link cssPositioningAttr  SherlockBeige
+" hi link cssBraces           SherlockWhite
+" hi link cssNoise            SherlockWhite
+" hi link lessClass           SherlockYellow
+" hi link lessNestedSelector  SherlockBlue
+" hi link cssKeyFrameProp     SherlockBlue
+" hi link cssFlexibleBoxAttr  SherlockBeige
+" hi link cssUIAttr           SherlockBeige
 
 " HTML
 hi link htmlArg             SherlockYellow
@@ -290,3 +299,11 @@ hi link markdownCode                SherlockRed
 hi link markdownLinkTextDelimiter   SherlockYellow
 hi link markdownLinkDelimiter       SherlockYellow
 
+" Elixir
+hi link ElixirModuleDeclaration     SherlockYellow
+hi link ElixirMapDelimiter          SherlockWhite
+hi link ElixirVariable              SherlockWhite
+hi link ElixirAlias                 SherlockYellow
+hi link ElixirTupleDelimiter        SherlockWhite
+hi link ElixirStringDelimiter       SherlockRed
+hi link ElixirAtom                  SherlockBlue

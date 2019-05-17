@@ -11,9 +11,11 @@ Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'chr4/nginx.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'hail2u/vim-css3-syntax'
 call vundle#end()
 
-colorscheme sherlock            " Colorscheme
+colorscheme watson            " Colorscheme
 syntax on                       " Enable syntax highlightning
 
 " =========================
@@ -159,7 +161,9 @@ inoremap <Right> <NOP>
 inoremap <Up>    <NOP>
 inoremap <Down>  <NOP>
 " Unbind command history
+map q: <NOP>
 nnoremap q: <NOP>
+nnoremap Q <NOP>
 " Find ...
 nmap <leader>r /
 " Search and replace %
