@@ -15,7 +15,7 @@ Plugin 'elixir-editors/vim-elixir'
 Plugin 'hail2u/vim-css3-syntax'
 call vundle#end()
 
-colorscheme watson            " Colorscheme
+colorscheme sherlock            " Colorscheme
 syntax on                       " Enable syntax highlightning
 
 " =========================
