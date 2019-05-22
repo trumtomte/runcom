@@ -40,13 +40,15 @@ function git_prompt_info() {
 
 # Before commands, update promt and window title
 function precmd() {
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}$ "
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
     echo -n -e "\033]0;${USER}@${HOST}\007"
 }
 
 function setleftprompt() {
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}$ "
 }
 
 function setrightprompt() {
