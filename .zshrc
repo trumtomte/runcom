@@ -40,15 +40,13 @@ function git_prompt_info() {
 
 # Before commands, update promt and window title
 function precmd() {
-    # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}$ "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}λ "
     RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
     echo -n -e "\033]0;${USER}@${HOST}\007"
 }
 
 function setleftprompt() {
-    # PROMPT="%{$fg[$(vi_mode_prompt_info)]%}🐕  "
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}$ "
+    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}λ "
 }
 
 function setrightprompt() {
@@ -77,3 +75,9 @@ bindkey '^N' history-search-forward
 
 # Installed via brew
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+. /usr/local/opt/asdf/asdf.sh

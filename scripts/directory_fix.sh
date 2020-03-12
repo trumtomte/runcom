@@ -1,14 +1,9 @@
 #!/bin/bash
 
-# List of characters
-# ==================
-# 
-# ô == Ö
-# î == ö
-# Ü == å
-# è == Å
-# Ñ == ä
-# TODO, ? == Ä
+# Converts the following characters to swedish ones
+# ô == Ö, î == ö
+# Ü == å, è == Å
+# Ñ == ä, TODO: Ä == ?
 
 # If no argument was provided set directory to "."
 SEARCHDIR=`echo ${1:-.}`

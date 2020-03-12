@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-surround'
-Plugin 'mxw/vim-jsx'
+Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'pangloss/vim-javascript'
 Plugin 'chr4/nginx.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -70,8 +70,9 @@ set statusline +=%3*\ %y\       " Filetype
 " ctrlP
 " =========================
 nmap <leader>f :CtrlP<CR>
+" search within file
 nmap <leader><S-f> :CtrlPLine<CR>
-nmap <leader><C-f> :CtrlPMRUFiles<CR>
+" nmap <leader><C-f> :CtrlPMRUFiles<CR>
 nmap <leader>, :CtrlPBuffer<CR>
 nmap <leader><tab> :CtrlPBuffer<CR><CR>
 let g:ctrlp_max_height = 25
@@ -83,7 +84,7 @@ let g:ctrlp_custom_ignore = "node_modules\|DS_store\|git\|sass-cache\|_site\|pyc
 let g:netrw_liststyle = 3       " Use tree-mode as default view
 let g:netrw_browse_split = 4    " Open file in previous buffer
 let g:netrw_preview = 1         " preview window shown in a vertically split
-let g:netrw_winsize = 10        " netrw window size (10%)
+let g:netrw_winsize = 15        " netrw window size (in %)
 let g:netrw_list_hide = '\.sass-cache\|\.DS_Store'
 nmap <leader>3 :Vex <cr>
 
@@ -113,9 +114,9 @@ autocmd BufNewFile,BufRead *.md syntax match Operator /^{%\shighlight.*%}\_.\{-}
 " =========================
 " Bindings
 " =========================
-" Jump between tabs
-nmap <leader>1 gT
-nmap <leader>2 gt
+" Jump between tabs, TODO: dont really use this anymore
+" nmap <leader>1 gT
+" nmap <leader>2 gt
 " Jump between windows with the arrow-keys
 nmap  <Up>    <C-w>k
 nmap  <Down>  <C-w>j
@@ -184,7 +185,7 @@ endfunction
 nnoremap <silent> <leader>5 :call StripTrailingWhitespace()<CR>
 
 " Show higlight group
-nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 

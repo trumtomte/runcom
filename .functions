@@ -1,12 +1,4 @@
-# Echo calendar - highlights today
-today() {
-    cal_head=`cal | head -1`;
-    cal_tail=`cal | tail -7`;
-    today=`date "+%e"`;
-    date "+%A %b %d, Week %V"
-    echo "$cal_head";
-    echo "${cal_tail/${today}/\033[1;34m${today}\033[0m}";
-}
+# vim: filetype=sh
 
 # Changes the extension of all files
 change_extensions() {
@@ -18,20 +10,19 @@ mkd() {
     mkdir -p "$@" && cd "$@"
 }
 
+# Convert a markdown file to PDF via `pandoc`
 markdown_to_pdf() {
-    pandoc $1 -o ${1%.*}.pdf --number-sections --pdf-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=/Users/sebbe/Github/runcom/template.tex
+    pandoc $1 -o ${1%.*}.pdf --number-sections --pdf-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=$HOME/Github/runcom/template.tex
 }
 
+# Basic conversion from wave to mp3
 wav_to_mp3() {
     ffmpeg -i $1 -codec:a libmp3lame -qscale:a 2 ${1%.*}.mp3
 }
 
+# Short hand for saving torrents in ~/Torrents
 download_torrent () {
-    aria2c "$@" --dir=/Users/sebbe/Torrents/downloaded
-}
-
-check_ssl_expiration() {
-    echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates
+    aria2c "$@" --dir=$HOME/Torrents
 }
 
 # Excel to CSV without trailing commas

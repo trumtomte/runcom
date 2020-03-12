@@ -1,0 +1,10 @@
+// vim: filetype=javascript
+
+global.FX_STYLE_LIST = {
+    fg: 'black',
+    bg: 'white',
+    selected: {
+        fg: 'black',
+        bg: 'yellow',
+    }
+}

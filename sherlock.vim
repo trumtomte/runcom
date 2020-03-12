@@ -1,13 +1,13 @@
 " Colorscheme:  Sherlock
-" Maintainer:   Sebastian Bengtegård <sebbebook@gmail.com>
-" Last Change:  25-02-2018
+" Maintainer:   Sebastian Bengtegård <sebastianbengtegard@gmail.com>
+" Last Change:  17-02-2020
 " URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
 
 " ======
 " Colors
 " ======
 " White:    cterm=7
-" Beige:    cterm=233
+" Beige:    cterm=223
 " Yellow:   cterm=179
 " Red:      cterm=167
 " Blue:     cterm=109
@@ -38,7 +38,7 @@ hi CursorLineNr     ctermbg=235     ctermfg=179
 hi NonText          ctermbg=235     ctermfg=243
 hi ColorColumn      ctermbg=236
 hi VertSplit        ctermbg=235     ctermfg=179     cterm=none
-hi Todo             ctermbg=109     ctermfg=0       cterm=none
+hi Todo             ctermbg=240     ctermfg=179     cterm=none
 hi Folded           ctermbg=240     ctermfg=179     cterm=none
 hi MatchParen       ctermbg=167     ctermfg=179 
 hi Visual           ctermbg=238
@@ -48,6 +48,9 @@ hi IndentGuidesOdd  ctermbg=236
 hi IndentGuidesEven ctermbg=235
 
 " Statusline Colors
+hi StatusLine       ctermbg=234     ctermfg=244     cterm=none
+hi StatusLineNC     ctermbg=236     ctermfg=243     cterm=none
+hi WildMenu         ctermbg=235     ctermfg=179     cterm=none
 hi User1            ctermbg=234     ctermfg=179
 hi User2            ctermbg=234     ctermfg=167
 hi User3            ctermbg=234     ctermfg=109
@@ -57,6 +60,12 @@ hi User4            ctermbg=234     ctermfg=109
 hi TabLine          ctermbg=236     ctermfg=179     cterm=none
 hi TabLineSel       ctermbg=239     ctermfg=179     cterm=none
 hi TabLineFill      ctermbg=236     ctermfg=0       cterm=none
+
+" VimDiff
+hi! link DiffDelete      User2
+hi! link DiffChange      MatchParen
+hi! link DiffText        User1
+hi       DiffAdd         ctermbg=234 ctermfg=243 cterm=none
 
 hi! link Function       SherlockYellow
 hi! link Conditional    SherlockYellow
@@ -307,3 +316,5 @@ hi link ElixirAlias                 SherlockYellow
 hi link ElixirTupleDelimiter        SherlockWhite
 hi link ElixirStringDelimiter       SherlockRed
 hi link ElixirAtom                  SherlockBlue
+hi link ElixirBlock                 SherlockWhite
+hi link ElixirDocTest               SherlockRed
