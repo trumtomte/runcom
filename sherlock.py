@@ -51,7 +51,7 @@ class Sherlock(ColorScheme):
                 bg = self.gray_bg
 
             if context.border:
-                fg = self.gray_bg
+                fg = 236
 
         elif context.in_titlebar:
             if context.hostname:
