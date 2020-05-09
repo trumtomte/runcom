@@ -1,128 +1,72 @@
 set nocompatible
 
-" =========================
 " Vim-Vundle
-" =========================
+" ==========
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'MaxMEllon/vim-jsx-pretty'
-Plugin 'pangloss/vim-javascript'
-Plugin 'chr4/nginx.vim'
+" Visually show indent guides 
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'elixir-editors/vim-elixir'
+" Improved focus mode
+Plugin 'junegunn/goyo.vim'
+" Better syntax highlights for JS
+Plugin 'pangloss/vim-javascript'
+" Better syntax highlights for JSX
+Plugin 'MaxMEllon/vim-jsx-pretty'
+" Better syntax highlights for CSS
 Plugin 'hail2u/vim-css3-syntax'
+" Better syntax highlights for nginx
+Plugin 'chr4/nginx.vim'
+" Better syntax highlights for elixir
+Plugin 'elixir-editors/vim-elixir'
 call vundle#end()
 
-colorscheme sherlock            " Colorscheme
-syntax on                       " Enable syntax highlightning
-
-" =========================
 " Settings
-" =========================
+" ========
+syntax on
 filetype plugin on
 filetype indent on
+colorscheme sherlock
 
-set t_Co=256                    
-set nuw=5
+set t_Co=256
 set backspace=indent,eol,start  " Allow backspace in insertmode
-set expandtab                   " Tabs/Indent
-set autoindent                  " --
-set shiftwidth=4                " --
-set softtabstop=4               " --
-set hlsearch                    " Enable search highlighting
-set incsearch                   " Enable incremental search
+set expandtab                   " Use spaces for tabs instead
+set autoindent                  " Copy indent from previous line
+set shiftwidth=4                " Number of spaces when autoindenting
+set softtabstop=4               " Number of spaces that counts as one <Tab>
+set hlsearch                    " Show highlights when searching
+set incsearch                   " Show highlights when typing
 set number                      " Show line numbers
+set numberwidth=5               " Minimum width for line numbers
 set nobackup                    " Disable swap files
 set noswapfile                  " --
-set nowb                        " --
-set undodir=~/.vim/undo         " where to save undo histories NOTE requires the dir to exist
-set undofile                    " Save undo's after file closes
+set undofile                    " Persist undo files
+set undodir=~/.vim/undo         " Directory for undo files
 set scrolloff=3                 " Show two extra lines when scrolling
 set mousehide                   " Hide mouse when moving/writing
 set wildmenu                    " Enable wildmenu for tab-completion
-set wildmode=longest:list       " --
-set wildignore+=*/*git/*,*/*hg/*,*/*svn/*,*/*sass-cache/*,*/*node_modules/*,*DS_Store*,*pyc*,*/*_site/*,*.png,*.jpg,*.gif
 set laststatus=2                " Always have a status line at the last window
-set nowrap                      " Don't wrap lines
-set cursorline                  " Enable cursorline
+set showbreak=...               " Wrapped linebreaks begin with `...`
+set cursorline                  " Highlight current line
 set splitright                  " Vsp to Right
 set splitbelow                  " Sp to bottom
 set autoread                    " Auto update file if it changes outside of vim
-set autochdir                   " --
-set foldmethod=marker           " automatic folds with {{{ }}}
-set cc=80
-
-" Leader key
-let mapleader = "\<Space>"
-
-" =========================
-" Statusline
-" =========================
+set colorcolumn=81
+set textwidth=80
 set statusline=
 set statusline +=%2*\ %r\ %m\   " Read-only + Modified?
 set statusline +=%1*\ %f\       " File + Path
 set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
 
-" =========================
-" ctrlP
-" =========================
-nmap <leader>f :CtrlP<CR>
-" search within file
-nmap <leader><S-f> :CtrlPLine<CR>
-" nmap <leader><C-f> :CtrlPMRUFiles<CR>
-nmap <leader>, :CtrlPBuffer<CR>
-nmap <leader><tab> :CtrlPBuffer<CR><CR>
-let g:ctrlp_max_height = 25
-let g:ctrlp_custom_ignore = "node_modules\|DS_store\|git\|sass-cache\|_site\|pyc"
-
-" =========================
-" Netrw
-" =========================
-let g:netrw_liststyle = 3       " Use tree-mode as default view
-let g:netrw_browse_split = 4    " Open file in previous buffer
-let g:netrw_preview = 1         " preview window shown in a vertically split
-let g:netrw_winsize = 15        " netrw window size (in %)
-let g:netrw_list_hide = '\.sass-cache\|\.DS_Store'
-nmap <leader>3 :Vex <cr>
-
-" =========================
-" JSX
-" =========================
-let g:jsx_ext_required = 0
-
-" =========================
-" Indent guides
-" =========================
+" Custom settings
+" ===============
+let mapleader = "\<Space>"
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
+let g:jsx_ext_required = 0
 
-" =========================
-" Markdown
-" =========================
-let g:vim_markdown_folding_disabled = 1
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNewFile,BufRead *.md set wrap
-
-" Jekyll
-autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
-" syntax for old highlight via pygments
-autocmd BufNewFile,BufRead *.md syntax match Operator /^{%\shighlight.*%}\_.\{-}{%\sendhighlight\s%}$/
-
-" =========================
 " Bindings
-" =========================
-" Jump between tabs, TODO: dont really use this anymore
-" nmap <leader>1 gT
-" nmap <leader>2 gt
-" Jump between windows with the arrow-keys
-nmap  <Up>    <C-w>k
-nmap  <Down>  <C-w>j
-nmap  <Left>  <C-w>h
-nmap  <Right> <C-w>l
-" Remap escape in insert-mode
+" ========
 inoremap jj <ESC>
 " Jump up/down a paragraph
 nmap K {
@@ -137,70 +81,34 @@ vmap <C-h> ^
 vmap <C-l> <END>
 " Make 'U' work as redo
 nmap <S-u> <C-r>
-" Maps -, § to horizontal and vertical split respectively
 nmap - :sp
 nmap _ :vsp
-" Easy hotkey to repeat commands
 nmap § .
-" Tab through windows
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W>h
-" Indenting multilines in visual mode keeps the selection afterwards
+" Keep selection when indenting
 vmap < <gv
 vmap > >gv
-" Sudo write + regular write
-noremap <leader>W :w !sudo tee %<CR>
-nmap <leader>s :w<CR>
+
 nmap <leader>w :w<CR>
-" Close file
 nmap <leader>q :q<CR>
-" Remove highlight of found matches
 nmap <leader>n :noh <CR>
-" Disable arrow-keys in insert-mode
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-" Unbind command history
-map q: <NOP>
-nnoremap q: <NOP>
-nnoremap Q <NOP>
-" Find ...
-nmap <leader>r /
-" Search and replace %
-nmap <leader>R :%s/
+nmap <leader>g :Goyo<CR>
 
-" =========================
-" Misc
-" =========================
+" Print highlight group
+nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 
-" Remove trailing spaces
-function! StripTrailingWhitespace()
-    let l:previousPosition = getpos('.')
-    let l:previousSearch = @/
-    %s/\s\+$//e
-    let @/ = l:previousSearch
-    call setpos('.', l:previousPosition)
-endfunction
-nnoremap <silent> <leader>5 :call StripTrailingWhitespace()<CR>
-
-" Show higlight group
-nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" ====================
 " Auto commands
-" ====================
-
-autocmd BufNewFile,BufRead *.go setfiletype go
-" ugly hack for js
+" =============
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', '[')
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', ']')
-" For pep8
-autocmd BufNewFile,BufRead *.py set cc=80
-" Misc
-autocmd BufNewFile,BufRead *.schema setfiletype json
-autocmd BufNewFile,BufRead *.hbs setfiletype html
-" TMP
-" autocmd FileType javascript,json setlocal foldmarker={,}
+autocmd BufNewFile,BufRead *.schema set filetype=json
+autocmd BufNewFile,BufRead *.hbs set filetype=html
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.md setlocal wrap
+autocmd BufNewFile,BufRead *.md setlocal tw=80
+autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
+autocmd BufNewFile,BufRead *.md syntax match Operator /^{%\shighlight.*%}\_.\{-}{%\sendhighlight\s%}$/
+autocmd BufNewFile,BufRead *.html syntax match Comment /\%^---\_.\{-}---$/
+autocmd BufNewFile,BufRead *.ts set filetype=javascript
+autocmd BufNewFile,BufRead *.svelte set filetype=html

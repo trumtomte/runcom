@@ -29,3 +29,18 @@ download_torrent () {
 xlsx_to_csv() {
     xlsx2csv $1 | sed 's/,*$//g' | tee ${1%.*}.csv
 }
+
+# Unzip with zip filename as directory name
+unzip_d() {
+    zipfile="$1"
+    zipdir=${1%.zip}
+    unzip -d "$zipdir" "$zipfile"
+}
+
+# Unzip all files in a directory
+unzip_all() {
+    for i in *.zip; do
+        [ -f "$i" ] || break
+        unzip_d $i
+    done
+}

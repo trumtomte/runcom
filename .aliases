@@ -1,20 +1,10 @@
 # vim: filetype=sh
 
-# Make directory swapping easier
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-
-# Misc
 alias ls='ls -G'
 alias ll='ls -ahlG'
-alias week='date +%V'
-
-# Mapped to .functions
+alias cat='bat'
 alias cext='change_extensions'
 alias md2pdf='markdown_to_pdf'
 alias wav2mp3='wav_to_mp3'
 alias dl='download_torrent'
 alias x2c='xlsx_to_csv'
-
-# TODO: Git commands

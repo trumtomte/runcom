@@ -39,7 +39,7 @@ hi NonText          ctermbg=235     ctermfg=243
 hi ColorColumn      ctermbg=236
 hi VertSplit        ctermbg=235     ctermfg=179     cterm=none
 hi Todo             ctermbg=240     ctermfg=179     cterm=none
-hi Folded           ctermbg=240     ctermfg=179     cterm=none
+hi Folded           ctermbg=234     ctermfg=179     cterm=none
 hi MatchParen       ctermbg=167     ctermfg=179 
 hi Visual           ctermbg=238
 

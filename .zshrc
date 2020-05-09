@@ -1,35 +1,22 @@
-setopt correct
 setopt prompt_subst
+setopt no_case_glob
+setopt auto_cd
+setopt inc_append_history
+setopt extended_history     # Add timestamp and elapsed time
+setopt share_history        # Share history across sessions
+setopt hist_ignore_dups     # Dont store duplicates
 
-# History
-HISTFILE=~/.zsh_history
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
-setopt inc_append_history
 
-autoload -U colors compinit promptinit
+autoload -Uz colors compinit promptinit
 colors && compinit && promptinit
 
 . ~/.exports
 . ~/.functions
 . ~/.aliases
-
-# set VIMODE according to the current mode (default “[i]”)
-function zle-keymap-select zle-line-init zle-line-finish {
-    setleftprompt
-    zle reset-prompt
-    zle -R
-}
-
-zle -N zle-line-init
-zle -N zle-line-finish
-zle -N zle-keymap-select
-
-# Change the terminal circle color when in Vi mode
-function vi_mode_prompt_info() {
-    echo "${${KEYMAP/vicmd/green}/(main|viins)/red}"
-}
 
 # Current Git branch
 function git_prompt_info() {
@@ -38,15 +25,8 @@ function git_prompt_info() {
     echo "%{$fg[black]%}| %{$fg[yellow]%}${ref#refs/heads/}%{$reset_color%}"
 }
 
-# Before commands, update promt and window title
-function precmd() {
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}λ "
-    RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%}$(git_prompt_info)"
-    echo -n -e "\033]0;${USER}@${HOST}\007"
-}
-
 function setleftprompt() {
-    PROMPT="%{$fg[$(vi_mode_prompt_info)]%}%{$fg[yellow]%}λ "
+    PROMPT="%{$fg[yellow]%}λ "
 }
 
 function setrightprompt() {
@@ -58,13 +38,18 @@ function setprompt() {
     setrightprompt
 }
 
+function precmd() {
+    setprompt
+}
+
 # Set the custom prompt
 setprompt
 
-zstyle ':completion:*' menu select                              # Menu select
-zstyle ':completion::complete:*' use-cache 1                    # Cache
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'             # Case insensitive
-zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"     # Color
+# Menu select, case insensitive, default coloring and custom for `options´
+zstyle ':completion:*'              menu select
+zstyle ':completion:*'              matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*'              list-colors ''
+zstyle ':completion:*:options'      list-colors '=^(-- *)=32'
 
 # Emacs mode
 bindkey -e
@@ -80,4 +65,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# TODO use asdf instead of nvm
 . /usr/local/opt/asdf/asdf.sh

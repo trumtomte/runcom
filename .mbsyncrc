@@ -1,10 +1,5 @@
-# Notes:
-# @MaildirStore
-#   eg. MaxSize 120k
+# NOTE: MaildirStore option MaxSize 120k
 
-# == ACCOUNTS ==
-
-# =====
 # Doris
 # =====
 IMAPAccount doris
@@ -63,7 +58,6 @@ Channel doris-sent
 Channel doris-deleted
 Channel doris-archive
 
-# =====
 # Gmail
 # =====
 IMAPAccount gmail
@@ -113,7 +107,6 @@ Channel gmail-inbox
 Channel gmail-sent
 Channel gmail-archive
 
-# =================
 # Malmö Universitet
 # =================
 IMAPAccount mau

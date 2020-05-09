@@ -85,6 +85,7 @@ set pager_context           = 3
 set query_command           = "mu cfind --format=mutt-ab '%s'"
 
 # Sidebar
+# =======
 set sidebar_visible
 set sidebar_short_path
 set sidebar_folder_indent
@@ -120,36 +121,37 @@ macro index ,b "<limit>~b" "search in the message body"
 macro index,pager ,u "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" "call urlview to extract URLs out of a message"
 macro attach,compose ,u "<enter-command>set pipe_decode = yes<enter><pipe-entry>urlview<enter><enter-command>set pipe_decode = no<enter>" "call urlview to extract URLs out of a message"
 
-macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
-macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+macro index b "<enter-command>toggle sidebar_visible<enter><refresh>"
+macro pager b "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
 
 macro index §   "<shell-escape>mbsync -a<enter>" "Sync all mail"
-macro attach S <save-entry><kill-line>~/Downloads/<enter>\y<enter>
+macro index I   "<shell-escape>mu index --maildir=~/Mail<enter>" "Index all mail"
+macro attach S  <save-entry><kill-line>~/Downloads/<enter>\y<enter> "Save attachment to the Downloads folder"
 
 # Bindings
 # ========
 bind editor <Tab> complete-query
 
-bind index B bounce-message
-bind index J    next-unread
-bind index K    previous-unread
-bind index gg   first-entry
-bind index G    last-entry
-bind index R    group-reply
-bind index <Space> collapse-thread
-bind index <Tab> collapse-all
-bind index \Cu half-up
-bind index \Cd half-down
+bind index B        bounce-message
+bind index J        next-unread
+bind index K        previous-unread
+bind index gg       first-entry
+bind index G        last-entry
+bind index R        group-reply
+bind index <Space>  collapse-thread
+bind index <Tab>    collapse-all
+bind index \Cu      half-up
+bind index \Cd      half-down
 
-bind pager j    next-line
-bind pager k    previous-line
-bind pager J    next-undeleted
-bind pager K    previous-undeleted
-bind pager gg   top
-bind pager G    bottom
-bind pager R    group-reply
-bind pager \Cu half-up
-bind pager \Cd half-down
+bind pager j        next-line
+bind pager k        previous-line
+bind pager J        next-undeleted
+bind pager K        previous-undeleted
+bind pager gg       top
+bind pager G        bottom
+bind pager R        group-reply
+bind pager \Cu      half-up
+bind pager \Cd      half-down
 
 # Colors (sherlock)
 # =================
@@ -163,6 +165,8 @@ color index         color223    color235    "~O"    # Old
 color index         color109    color235    "~U"    # Unread
 color index         color223    color235    "~R"    # Read
 color index         color223    color235    "~P"    # Sent
+color index         color109    color234    "~F"    # Important
+color index         color179    color234    "~v"    # Messages part of a thread
 
 color header        color241    color235    ^(X-Mailer)
 color header        color241    color235    ^(User-Agent)
@@ -203,9 +207,6 @@ color error         color7      color167
 color tilde         color238    color235
 color message       color179    color235
 color prompt        color109    color234
-
-# messages part of a collapsed thread
-color index         color179    color234    "~v" 
 
 color sidebar_highlight     color179    color235
 color sidebar_divider       color241    color235
