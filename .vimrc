@@ -5,7 +5,7 @@ set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Visually show indent guides 
-Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'nathanaelkane/vim-indent-guides'
 " Improved focus mode
 Plugin 'junegunn/goyo.vim'
 " Better syntax highlights for JS
@@ -18,7 +18,13 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'chr4/nginx.vim'
 " Better syntax highlights for elixir
 Plugin 'elixir-editors/vim-elixir'
+
+" syntax pack
+" Plug 'sheerun/vim-polyglot'
 call vundle#end()
+
+" Enables fzf
+set rtp+=/usr/local/opt/fzf
 
 " Settings
 " ========
@@ -61,8 +67,8 @@ set statusline +=%3*\ %y\       " Filetype
 " Custom settings
 " ===============
 let mapleader = "\<Space>"
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_auto_colors = 0
+" let g:indent_guides_enable_on_vim_startup = 1
 let g:jsx_ext_required = 0
 
 " Bindings
@@ -90,10 +96,13 @@ nmap <S-Tab> <C-W>h
 vmap < <gv
 vmap > >gv
 
+" Leader bindings
 nmap <leader>w :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>n :noh <CR>
 nmap <leader>g :Goyo<CR>
+nmap <leader>c :set cursorcolumn!<CR>
+nmap <leader>r /
 
 " Print highlight group
 nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
@@ -102,6 +111,8 @@ nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 " =============
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', '[')
 autocmd BufNewFile,BufRead *.js call matchadd('Operator', ']')
+" autocmd BufNewFile,BufRead *.js setlocal shiftwidth=2
+" autocmd BufNewFile,BufRead *.js setlocal softtabstop=2
 autocmd BufNewFile,BufRead *.schema set filetype=json
 autocmd BufNewFile,BufRead *.hbs set filetype=html
 autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -112,3 +123,6 @@ autocmd BufNewFile,BufRead *.md syntax match Operator /^{%\shighlight.*%}\_.\{-}
 autocmd BufNewFile,BufRead *.html syntax match Comment /\%^---\_.\{-}---$/
 autocmd BufNewFile,BufRead *.ts set filetype=javascript
 autocmd BufNewFile,BufRead *.svelte set filetype=html
+autocmd BufNewFile,BufRead *.vue set filetype=html
+autocmd BufNewFile,BufRead *.vue setlocal shiftwidth=2
+autocmd BufNewFile,BufRead *.vue setlocal softtabstop=2
