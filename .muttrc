@@ -11,7 +11,7 @@ folder-hook gmail source ~/.mutt/account.com.gmail.sebbebook
 folder-hook mau source ~/.mutt/account.se.mau.sebastianbengtegard
 
 # Initial account
-source ~/.mutt/account.tech.doris.sebastian
+source ~/.mutt/account.com.gmail.sebbebook
 
 # Account file structure:
 # =======================
@@ -83,6 +83,7 @@ set index_format            = "[%Z] %?X?A&-? %D  %-25.25F  %s"
 set pager_index_lines       = 8
 set pager_context           = 3
 set query_command           = "mu cfind --format=mutt-ab '%s'"
+set rfc2047_parameters      = yes   # Fixes issue with PDF-naming
 
 # Sidebar
 # =======
