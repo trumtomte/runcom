@@ -34,7 +34,9 @@ xlsx_to_csv() {
 unzip_d() {
     zipfile="$1"
     zipdir=${1%.zip}
-    unzip -d "$zipdir" "$zipfile"
+    ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
+    # Older version, had issues with utf-8 characters
+    # unzip -d "$zipdir" "$zipfile"
 }
 
 # Unzip all files in a directory
