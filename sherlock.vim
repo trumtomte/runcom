@@ -35,6 +35,7 @@ hi LineNr           ctermbg=235     ctermfg=240
 hi Comment          ctermbg=235     ctermfg=243     cterm=none
 hi CursorLine       ctermbg=236     cterm=none
 hi CursorLineNr     ctermbg=235     ctermfg=179
+hi CursorColumn     ctermbg=237     cterm=none
 hi NonText          ctermbg=235     ctermfg=243
 hi ColorColumn      ctermbg=236
 hi VertSplit        ctermbg=235     ctermfg=179     cterm=none
