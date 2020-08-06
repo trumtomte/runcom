@@ -11,26 +11,29 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-autoload -Uz colors compinit promptinit
+autoload -Uz colors compinit promptinit edit-command-line
 colors && compinit && promptinit
+
+zle -N edit-command-line
 
 . ~/.exports
 . ~/.functions
 . ~/.aliases
 
 # Current Git branch
-function git_prompt_info() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-    echo "%{$fg[black]%}| %{$fg[yellow]%}${ref#refs/heads/}%{$reset_color%}"
-}
+# function git_prompt_info() {
+#     ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+#     ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+#     echo "%{$fg[black]%}| %{$fg[yellow]%}${ref#refs/heads/}%{$reset_color%}"
+# }
 
 function setleftprompt() {
     PROMPT="%{$fg[yellow]%}λ "
 }
 
 function setrightprompt() {
-    RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
+    # RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%* %{$reset_color%} $(git_prompt_info)"
+    RPROMPT="%{$fg[green]%}%~ %{$fg[black]%}| %{$fg[red]%}%"
 }
 
 function setprompt() {
@@ -58,6 +61,9 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 
+# Edit the command line (bash style)
+bindkey "^X^E" edit-command-line
+
 # Installed via brew
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -67,3 +73,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # TODO use asdf instead of nvm
 . /usr/local/opt/asdf/asdf.sh
+
+# Added by FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
