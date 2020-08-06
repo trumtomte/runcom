@@ -1,9 +1,7 @@
 # Mailcap
-text/html; lynx -dump -assume_charset=%{charset} -display_charset='utf8' %s; nametemplate=%s.html; copiousoutput
-# Images
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
 image/jpg; ~/.mutt/view_attachment.sh %s jpg
 image/jpeg; ~/.mutt/view_attachment.sh %s jpg
 image/png; ~/.mutt/view_attachment.sh %s png
 image/gif; ~/.mutt/view_attachment.sh %s gif
-# PDF
 application/pdf; ~/.mutt/view_attachment.sh %s pdf
