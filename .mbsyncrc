@@ -10,7 +10,7 @@ AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile ~/.mutt/Certificates.cer
-PipelineDepth 50
+# PipelineDepth 50
 
 IMAPStore doris-remote
 Account doris
@@ -66,9 +66,9 @@ User sebbebook@gmail.com
 PassCmd "pass Sebbe/Google/gmail_mutt"
 AuthMechs LOGIN
 SSLType IMAPS
-SSLVersions TLSv1.2
+# SSLVersions TLSv1.2
 CertificateFile ~/.mutt/Certificates.cer
-PipelineDepth 50
+# PipelineDepth 1
 
 IMAPStore gmail-remote
 Account gmail
@@ -116,7 +116,7 @@ PassCmd "pass Sebbe/MaU/sebastian.bengtegard@mau.se"
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile ~/.mutt/Certificates.cer
-PipelineDepth 50
+# PipelineDepth 50
 
 IMAPStore mau-remote
 Account mau

@@ -9,18 +9,18 @@ call vundle#begin()
 " Improved focus mode
 Plugin 'junegunn/goyo.vim'
 " Better syntax highlights for JS
-Plugin 'pangloss/vim-javascript'
+" Plugin 'pangloss/vim-javascript'
 " Better syntax highlights for JSX
-Plugin 'MaxMEllon/vim-jsx-pretty'
+" Plugin 'MaxMEllon/vim-jsx-pretty'
 " Better syntax highlights for CSS
-Plugin 'hail2u/vim-css3-syntax'
+" Plugin 'hail2u/vim-css3-syntax'
 " Better syntax highlights for nginx
-Plugin 'chr4/nginx.vim'
+" Plugin 'chr4/nginx.vim'
 " Better syntax highlights for elixir
-Plugin 'elixir-editors/vim-elixir'
+" Plugin 'elixir-editors/vim-elixir'
 
 " syntax pack
-" Plug 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot'
 call vundle#end()
 
 " Enables fzf

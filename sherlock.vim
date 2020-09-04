@@ -126,6 +126,15 @@ hi link lessId              SherlockBlue
 " hi link cssKeyFrameProp     SherlockBlue
 " hi link cssFlexibleBoxAttr  SherlockBeige
 " hi link cssUIAttr           SherlockBeige
+hi link cssInteractAttr     SherlockBeige
+hi link cssBorderAttr       SherlockBeige
+hi link cssClassName        SherlockBlue
+hi link cssClassNameDot     SherlockWhite
+hi link cssUIAttr           SherlockBeige
+
+hi link lessNestedSelector  SherlockBlue
+hi link cssKeyFrameProp     SherlockBlue
+hi link lessVariable        SherlockYellow
 
 " HTML
 hi link htmlArg             SherlockYellow

@@ -66,13 +66,7 @@ bindkey "^X^E" edit-command-line
 
 # Installed via brew
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# TODO use asdf instead of nvm
-. /usr/local/opt/asdf/asdf.sh
+source /usr/local/opt/asdf/asdf.sh
 
 # Added by FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
