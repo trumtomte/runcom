@@ -81,15 +81,15 @@ nmap J }
 nmap <C-j> 5<C-e>
 nmap <C-k> 5<C-y>
 " Go to start/end of the current line in insert/visual mode
-nmap <C-h> ^
-nmap <C-l> <END>
-vmap <C-h> ^
-vmap <C-l> <END>
+" nmap <C-h> ^
+" nmap <C-l> <END>
+" vmap <C-h> ^
+" vmap <C-l> <END>
 " Make 'U' work as redo
-nmap <S-u> <C-r>
+" nmap <S-u> <C-r>
 nmap - :sp
 nmap _ :vsp
-nmap § .
+" nmap § .
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W>h
 " Keep selection when indenting
