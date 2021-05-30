@@ -5,14 +5,16 @@ change_extensions() {
     for f in *.$1; do base=`basename $f .$1`; mv $f $base.$2; done
 }
 
-# Create a new directory and enter it
-mkd() {
-    mkdir -p "$@" && cd "$@"
-}
-
 # Convert a markdown file to PDF via `pandoc`
 markdown_to_pdf() {
-    pandoc $1 -o ${1%.*}.pdf --number-sections --pdf-engine=xelatex -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=$HOME/Github/runcom/template.tex
+    pandoc $1 -o ${1%.*}.pdf --number-sections -V geometry:margin=1.4in -V fontsize=11pt -V linestretch=1.3 --template=$HOME/Github/runcom/template.tex
+}
+
+all_markdown_to_pdf() {
+    for i in *.md; do
+        [ -f "$i" ] || break
+        markdown_to_pdf $i
+    done
 }
 
 # Basic conversion from wave to mp3
@@ -20,14 +22,14 @@ wav_to_mp3() {
     ffmpeg -i $1 -codec:a libmp3lame -qscale:a 2 ${1%.*}.mp3
 }
 
+# Convert .mov to .mp4 (same name)
+mov_to_mp4() {
+    ffmpeg -i $1 -q:v 0 ${1%.*}.mp4
+}
+
 # Short hand for saving torrents in ~/Torrents
 download_torrent () {
     aria2c "$@" --dir=$HOME/Torrents
-}
-
-# Excel to CSV without trailing commas
-xlsx_to_csv() {
-    xlsx2csv $1 | sed 's/,*$//g' | tee ${1%.*}.csv
 }
 
 # Unzip with zip filename as directory name
@@ -44,5 +46,20 @@ unzip_all() {
     for i in *.zip; do
         [ -f "$i" ] || break
         unzip_d $i
+    done
+}
+
+# Unrar with rar filename as directory name
+unrar_d() {
+    rarfile="$1"
+    rardir=${1%.rar}
+    unrar x $rarfile $rardir/
+}
+
+# Unrar all files in a directory
+unrar_all() {
+    for i in *.rar; do
+        [ -f "$i" ] || break
+        unrar_d $i
     done
 }

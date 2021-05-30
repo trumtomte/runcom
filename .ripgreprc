@@ -1,4 +1,0 @@
-# vim filetype=sh
-
-# Colorize found path
---colors=path:fg:yellow

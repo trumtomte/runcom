@@ -3,163 +3,218 @@
 # Doris
 # =====
 IMAPAccount doris
-Host imap01.binero.se
-User sebastian@doris.tech
-PassCmd "pass Doris/binero.se/sebastian@doris.tech"
-AuthMechs LOGIN
-SSLType IMAPS
-SSLVersions TLSv1.2
-CertificateFile ~/.mutt/Certificates.cer
-# PipelineDepth 50
+    Host imap01.binero.se
+    User sebastian@doris.tech
+    PassCmd "pass Doris/binero.se/sebastian@doris.tech"
+    SSLType IMAPS
+    SSLVersions TLSv1.2
+    AuthMechs LOGIN
+    # CertificateFile ~/Mail/Certificates.cer
 
 IMAPStore doris-remote
-Account doris
+    Account doris
 
 MaildirStore doris-local
-SubFolders Verbatim
-Path ~/Mail/doris
-Inbox ~/Mail/doris/INBOX
+    SubFolders Verbatim
+    Path ~/Mail/doris/
+    Inbox ~/Mail/doris/INBOX
 
 Channel doris-inbox
-Master :doris-remote:"INBOX"
-Slave :doris-local:INBOX
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :doris-remote:"INBOX"
+    Near :doris-local:INBOX
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Channel doris-sent
-Master :doris-remote:"Sent Messages"
-Slave :doris-local:/sent
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :doris-remote:"Sent Messages"
+    Near :doris-local:/sent
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Channel doris-deleted
-Master :doris-remote:"Deleted Messages"
-Slave :doris-local:/deleted
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :doris-remote:"Deleted Messages"
+    Near :doris-local:/deleted
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Channel doris-archive
-Master :doris-remote:"Archive"
-Slave :doris-local:/archive
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :doris-remote:"Archive"
+    Near :doris-local:/archive
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Group doris
-Channel doris-inbox
-Channel doris-sent
-Channel doris-deleted
-Channel doris-archive
-
-# Gmail
-# =====
-IMAPAccount gmail
-Host imap.gmail.com
-User sebbebook@gmail.com
-PassCmd "pass Sebbe/Google/gmail_mutt"
-AuthMechs LOGIN
-SSLType IMAPS
-# SSLVersions TLSv1.2
-CertificateFile ~/.mutt/Certificates.cer
-# PipelineDepth 1
-
-IMAPStore gmail-remote
-Account gmail
-
-MaildirStore gmail-local
-SubFolders Verbatim
-Path ~/Mail/gmail
-Inbox ~/Mail/gmail/INBOX
-
-Channel gmail-inbox
-Master :gmail-remote:"INBOX"
-Slave :gmail-local:INBOX
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
-
-Channel gmail-sent
-Master :gmail-remote:"\[Gmail\]/Sent Mail"
-Slave :gmail-local:/sent
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
-
-Channel gmail-archive
-Master :gmail-remote:"\[Gmail\]/All Mail"
-Slave :gmail-local:/archive
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
-
-Group gmail
-Channel gmail-inbox
-Channel gmail-sent
-Channel gmail-archive
+    Channel doris-inbox
+    Channel doris-sent
+    Channel doris-deleted
+    Channel doris-archive
 
 # Malmö Universitet
 # =================
 IMAPAccount mau
-Host outlook.office365.com
-User sebastian.bengtegard@mau.se
-PassCmd "pass Sebbe/MaU/sebastian.bengtegard@mau.se"
-SSLType IMAPS
-SSLVersions TLSv1.2
-CertificateFile ~/.mutt/Certificates.cer
-# PipelineDepth 50
+    Host outlook.office365.com
+    User sebastian.bengtegard@mau.se
+    PassCmd "pass Sebbe/MaU/sebastian.bengtegard@mau.se"
+    SSLType IMAPS
+    SSLVersions TLSv1.2
+    # CertificateFile ~/Mail/Certificates.cer
 
 IMAPStore mau-remote
-Account mau
+    Account mau
 
 MaildirStore mau-local
-SubFolders Verbatim
-Path ~/Mail/mau
-Inbox ~/Mail/mau/INBOX
+    SubFolders Verbatim
+    Path ~/Mail/mau/
+    Inbox ~/Mail/mau/INBOX
 
 Channel mau-inbox
-Master :mau-remote:"INBOX"
-Slave :mau-local:INBOX
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :mau-remote:"INBOX"
+    Near :mau-local:INBOX
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Channel mau-sent
-Master :mau-remote:"Sent Items"
-Slave :mau-local:/sent
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :mau-remote:"Sent Items"
+    Near :mau-local:/sent
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Channel mau-deleted
-Master :mau-remote:"Deleted Items"
-Slave :mau-local:/deleted
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :mau-remote:"Deleted Items"
+    Near :mau-local:/deleted
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Channel mau-archive
-Master :mau-remote:"Archive"
-Slave :mau-local:/archive
-CopyArrivalDate Yes
-Create Both
-Expunge Both
-SyncState *
+    Far :mau-remote:"Archive"
+    Near :mau-local:/archive
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
 
 Group mau
-Channel mau-inbox
-Channel mau-sent
-Channel mau-deleted
-Channel mau-archive
+    Channel mau-inbox
+    Channel mau-sent
+    Channel mau-deleted
+    Channel mau-archive
+
+# ProtonMail
+# ==========
+IMAPAccount pm
+    Host 127.0.0.1
+    Port 1143
+    User sebastianbengtegard@protonmail.com
+    PassCmd "pass Sebbe/protonbridge"
+    SSLType None
+    # AuthMechs LOGIN
+    # SSLType STARTTLS
+    # SSLVersions TLSv1.2
+    # CertificateFile ~/.mutt/protonbridgeX.pem
+
+IMAPStore pm-remote
+    Account pm
+
+MaildirStore pm-local
+    SubFolders Verbatim
+    Path ~/Mail/pm/
+    Inbox ~/Mail/pm/INBOX
+
+Channel pm-inbox
+    Far :pm-remote:"INBOX"
+    Near :pm-local:INBOX
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
+
+Channel pm-sent
+    Far :pm-remote:"Sent"
+    Near :pm-local:/sent
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
+
+Channel pm-deleted
+    Far :pm-remote:"Trash"
+    Near :pm-local:/deleted
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
+
+Channel pm-archive
+    Far :pm-remote:"All Mail"
+    Near :pm-local:/archive
+    CopyArrivalDate Yes
+    Create Both
+    Expunge Both
+    SyncState *
+
+Group pm
+    Channel pm-inbox
+    Channel pm-sent
+    Channel pm-deleted
+    Channel pm-archive
+
+# Gmail
+# =====
+# IMAPAccount gmail
+#     Host imap.gmail.com
+#     User sebbebook@gmail.com
+#     PassCmd "pass Sebbe/Google/gmail_mutt"
+#     AuthMechs LOGIN
+#     SSLType IMAPS
+#     CertificateFile ~/.mutt/Certificates.cer
+# 
+# IMAPStore gmail-remote
+#     Account gmail
+# 
+# MaildirStore gmail-local
+#     SubFolders Verbatim
+#     Path ~/Mail/gmail
+#     Inbox ~/Mail/gmail/INBOX
+# 
+# Channel gmail-inbox
+#     Master :gmail-remote:"INBOX"
+#     Slave :gmail-local:INBOX
+#     CopyArrivalDate Yes
+#     Create Both
+#     Expunge Both
+#     SyncState *
+# 
+# Channel gmail-sent
+#     Master :gmail-remote:"\[Gmail\]/Sent Mail"
+#     Slave :gmail-local:/sent
+#     CopyArrivalDate Yes
+#     Create Both
+#     Expunge Both
+#     SyncState *
+# 
+# Channel gmail-archive
+#     Master :gmail-remote:"\[Gmail\]/All Mail"
+#     Slave :gmail-local:/archive
+#     CopyArrivalDate Yes
+#     Create Both
+#     Expunge Both
+#     SyncState *
+# 
+# Group gmail
+#     Channel gmail-inbox
+#     Channel gmail-sent
+#     Channel gmail-archive

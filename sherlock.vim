@@ -1,6 +1,6 @@
 " Colorscheme:  Sherlock
-" Maintainer:   Sebastian Bengtegård <sebastianbengtegard@gmail.com>
-" Last Change:  17-02-2020
+" Maintainer:   Sebastian Bengtegård <sebastianbengtegard@protonmail.com>
+" Last Change:  07-12-2020
 " URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
 
 " ======
@@ -11,6 +11,7 @@
 " Yellow:   cterm=179
 " Red:      cterm=167
 " Blue:     cterm=109
+" Green:    cterm=71
 
 set background=dark
 
@@ -41,7 +42,7 @@ hi ColorColumn      ctermbg=236
 hi VertSplit        ctermbg=235     ctermfg=179     cterm=none
 hi Todo             ctermbg=240     ctermfg=179     cterm=none
 hi Folded           ctermbg=234     ctermfg=179     cterm=none
-hi MatchParen       ctermbg=167     ctermfg=179 
+hi MatchParen       ctermbg=179     ctermfg=167 
 hi Visual           ctermbg=238
 
 " Indent guides
@@ -96,13 +97,19 @@ hi link phpStorageClass SherlockBlue
 hi link phpStructure    SherlockWhite
 
 " CSS
-hi link cssProp         SherlockBeige
-hi link cssAttr         SherlockBlue
-hi link cssTagName      SherlockBlue
-hi link cssValueLength  SherlockRed
-hi link cssValueNumber  SherlockRed
-hi link cssColor        SherlockRed
-hi link cssStringQ      SherlockRed
+hi link cssProp             SherlockBeige
+hi link cssAttr             SherlockBlue
+hi link cssTagName          SherlockBlue
+hi link cssValueLength      SherlockRed
+hi link cssValueNumber      SherlockRed
+hi link cssColor            SherlockRed
+hi link cssStringQ          SherlockRed
+hi link cssKeyFrameProp     SherlockBlue
+hi link cssInteractAttr     SherlockBeige
+hi link cssBorderAttr       SherlockBeige
+hi link cssClassName        SherlockBlue
+hi link cssClassNameDot     SherlockWhite
+hi link cssUIAttr           SherlockBeige
 
 " SASS/LESS
 hi link sassDefinition      SherlockBeige
@@ -117,23 +124,7 @@ hi link sassCssAttribute    SherlockYellow
 hi link sassFunction        SherlockYellow
 hi link lessVariable        SherlockRed
 hi link lessId              SherlockBlue
-" hi link cssTagName          SherlockYellow
-" hi link cssPositioningAttr  SherlockBeige
-" hi link cssBraces           SherlockWhite
-" hi link cssNoise            SherlockWhite
-" hi link lessClass           SherlockYellow
-" hi link lessNestedSelector  SherlockBlue
-" hi link cssKeyFrameProp     SherlockBlue
-" hi link cssFlexibleBoxAttr  SherlockBeige
-" hi link cssUIAttr           SherlockBeige
-hi link cssInteractAttr     SherlockBeige
-hi link cssBorderAttr       SherlockBeige
-hi link cssClassName        SherlockBlue
-hi link cssClassNameDot     SherlockWhite
-hi link cssUIAttr           SherlockBeige
-
 hi link lessNestedSelector  SherlockBlue
-hi link cssKeyFrameProp     SherlockBlue
 hi link lessVariable        SherlockYellow
 
 " HTML
@@ -145,6 +136,7 @@ hi link htmlSpecialTagName  SherlockBlue
 hi link htmlString          SherlockRed
 hi link htmlValue           SherlockRed
 hi link htmlLink            SherlockWhite
+hi link htmlItalic          SherlockBlue
 hi link htmlH1              SherlockWhite
 hi link htmlH2              SherlockWhite
 hi link htmlH3              SherlockWhite
@@ -270,11 +262,6 @@ hi link jsExtendsKeyword        SherlockBlue
 hi link jsSwitchBraces          SherlockWhite
 hi link jsFuncArgOperator       SherlockWhite
 
-" Jinja
-hi link jinjaVariable   SherlockBeige
-hi link jinjaString     SherlockRed
-hi link jinjaNumber     SherlockBlue
-
 " Python
 hi link pythonBuiltinFunc   SherlockYellow
 hi link pythonBuiltinObj    SherlockRed
@@ -293,14 +280,6 @@ hi link sqlSpecial  SherlockRed
 
 " Haskell
 hi link hsDelimiter SherlockWhite
-
-" Haml
-hi link hamlId      SherlockYellow
-hi link hamlClass   SherlockYellow
-
-" Jade
-hi link jadeId      SherlockYellow
-hi link jadeClass   SherlockYellow
 
 " Go
 hi link goStructDef     SherlockBeige
@@ -328,3 +307,4 @@ hi link ElixirStringDelimiter       SherlockRed
 hi link ElixirAtom                  SherlockBlue
 hi link ElixirBlock                 SherlockWhite
 hi link ElixirDocTest               SherlockRed
+hi link ElixirStructDefine          SherlockYellow

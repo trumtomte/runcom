@@ -1,50 +1,23 @@
-# Variables
+# Variables, Hooks and Mailboxes
 # =========
 set my_doris_pass   = `pass Doris/binero.se/sebastian@doris.tech`
 set my_mau_pass     = `pass Sebbe/MaU/sebastian.bengtegard@mau.se`
-set my_gmail_pass   = `pass Sebbe/Google/gmail_mutt`
+set my_pm_pass      = `pass Sebbe/protonbridge`
+# set my_gmail_pass   = `pass Sebbe/Google/gmail_mutt`
 
-# Hooks
-# =====
 folder-hook doris source ~/.mutt/account.tech.doris.sebastian
-folder-hook gmail source ~/.mutt/account.com.gmail.sebbebook
 folder-hook mau source ~/.mutt/account.se.mau.sebastianbengtegard
+folder-hook pm source ~/.mutt/account.me.pm.sebastianbengtegard
+# folder-hook gmail source ~/.mutt/account.com.gmail.sebbebook
 
-# Initial account
-source ~/.mutt/account.com.gmail.sebbebook
+mailboxes +Doris +doris/INBOX +doris/sent +doris/archive
+mailboxes +MaU +mau/INBOX +mau/sent +mau/deleted +mau/archive
+mailboxes +PM +pm/INBOX +pm/sent +pm/deleted +pm/archive
+# mailboxes +Gmail +gmail/INBOX +gmail/sent +gmail/archive
 
-# Account file structure:
-# =======================
-#   set from = "Sebastian Bengtegård <sebbebook@gmail.com>"
-#   set realname = "Sebastian Bengtegård"
-#   set spoolfile = "+gmail/INBOX"
-#   set mbox = "+gmail/archive"
-#   set record = "+gmail/sent"
-#   set smtp_url = "smtps://sebbebook@gmail.com@smtp.gmail.com:465/"
-#   set smtp_pass = $my_gmail_pass
-#   set smtp_authenticators = 'gssapi:login'
-#   set ssl_force_tls = yes
-#   set header_cache = ~/.mutt/com.gmail.sebbebook/cache/headers
-#   set message_cachedir = ~/.mutt/com.gmail.sebbebook/cache/bodies
-#   set certificate_file = ~/.mutt/Certificates.cer
-#   
-#   macro index,pager a \
-#       "<save-message>+gmail/archive<enter>"  \
-#       "move message to the archive"
-#   
-#   macro index,pager i \
-#       "<save-message>+gmail/INBOX<enter>"  \
-#       "move message to the inbox"
-
-
-# Mailboxes
-# =========
-mailboxes +doris
-mailboxes +doris/INBOX +doris/sent +doris/deleted +doris/archive
-mailboxes +gmail
-mailboxes +gmail/INBOX +gmail/sent +gmail/archive
-mailboxes +mau
-mailboxes +mau/INBOX +mau/sent +mau/deleted +mau/archive
+# Initial account + Colorscheme
+source ~/.mutt/account.me.pm.sebastianbengtegard
+source ~/.mutt/sherlock.mutt
 
 # Configuration
 # =============
@@ -53,37 +26,40 @@ unset markers
 unset imap_check_subscribed
 unset imap_list_subscribed
 
-set mail_check_stats
-set edit_headers
-set menu_scroll
 set charset                 = "utf-8"
-set mailcap_path            = ~/.mutt/.mailcap
+set mailcap_path            = "~/.mutt/.mailcap"
 set editor                  = "vim"
 set mbox_type               = Maildir
+set folder                  = "~/Mail"
+set tmpdir                  = "+tmp"
+set postponed               = "+postponed"
+set header_cache            = "+cache_headers"
+set message_cachedir        = "+cache_bodies"
+set certificate_file        = "+certificates"
+set display_filter          = "/usr/bin/sed /./,/^$/!d"
+set edit_headers            = yes
 set mail_check              = 0
+set mail_check_stats        = yes
 set timeout                 = 3
 set wait_key                = no
-set folder                  = ~/Mail/
-set display_filter          = "/usr/bin/sed -f ~/.mutt/display_filter"
 set quit                    = ask-yes
 set fast_reply              = yes
 set include                 = yes
 set forward_format          = "Fwd: %s"
 set forward_quote           = yes
-set move                    = no
-set copy                    = yes
-set pager_stop              = yes   # Dont move to next message automatically
+set menu_scroll             = yes
+set pager_stop              = yes 
 set sort                    = reverse-threads
 set sort_aux                = last-date-received
 set status_chars            = " +RA"
 set status_format           = "%r %f [%m messages%?n?, %n new?%?d?, %d to delete?%?t?, %t tagged?%?p?, %p postponed?]"
 set compose_format          = "[Compose] %h [Size: %l, Attachments: %a] %v"
-set date_format             = "%d-%m-%y %H:%M"
-set index_format            = "[%Z] %?X?A&-? %D  %-25.25F  %s"
-set pager_index_lines       = 8
+set date_format             = "%d.%m.%y %H:%M"
+set index_format            = "%4C [%Z] %?X?A&-? %D  %-20.20F  %s"
+set pager_index_lines       = 5
 set pager_context           = 3
 set query_command           = "mu cfind --format=mutt-ab '%s'"
-set rfc2047_parameters      = yes   # Fixes issue with PDF-naming
+set rfc2047_parameters      = yes # Fixes issue with PDF-naming
 
 # Sidebar
 # =======
@@ -98,117 +74,62 @@ set sidebar_format          = "%B %* [%?N?%N/?%S]"
 # Ordering & Auto_view
 # ====================
 auto_view text/html application/octet-stream
-
 ignore *
-unignore from: to: cc: bcc: date: subject: x-mailing-list: posted-to: x-mailer: user-agent:
-
+unignore date: from: to: cc: bcc: subject:
 unhdr_order *
-hdr_order x-mailing-list: posted-to: x-mailer: user-agent: from: to: cc: bcc: date: subject:
-
+hdr_order date: from: to: cc: bcc: subject:
 unalternative_order *
 alternative_order multipart/mixed multipart/related multipart/alternative text/plain text/html *
 
 # Macros
 # ======
-macro index <f2> "<change-folder>+doris/INBOX<enter>"
-macro index <f3> "<change-folder>+gmail/INBOX<enter>"
-macro index <f4> "<change-folder>+mau/INBOX<enter>"
+macro index,pager <f1> "<change-folder>+doris/INBOX<enter>"
+macro index,pager <f2> "<change-folder>+mau/INBOX<enter>"
+macro index,pager <f3> "<change-folder>+pm/INBOX<enter>"
 
-macro index ,f "<limit>~f " "search by sender address"
-macro index ,a "<limit>all<enter>" "limit to all messages again"
-macro index ,s "<limit>~B " "search in the entire message"
-macro index ,b "<limit>~b" "search in the message body"
+macro index,pager ,u \
+    "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" \
+    "Call urlview to extract URLs out of a message"
 
-macro index,pager ,u "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" "call urlview to extract URLs out of a message"
-macro attach,compose ,u "<enter-command>set pipe_decode = yes<enter><pipe-entry>urlview<enter><enter-command>set pipe_decode = no<enter>" "call urlview to extract URLs out of a message"
+macro attach,compose ,u \
+    "<enter-command>set pipe_decode = yes<enter><pipe-entry>urlview<enter><enter-command>set pipe_decode = no<enter>" \
+    "Call urlview to extract URLs out of a message"
 
-macro index b "<enter-command>toggle sidebar_visible<enter><refresh>"
-macro pager b "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
+macro index S \
+    "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Mail/search " \
+    "Search via mu-find"
 
-macro index §   "<shell-escape>mbsync -a<enter>" "Sync all mail"
-macro index I   "<shell-escape>mu index --maildir=~/Mail<enter>" "Index all mail"
-macro attach S  <save-entry><kill-line>~/Downloads/<enter>\y<enter> "Save attachment to the Downloads folder"
+macro index ,s \
+    "<change-folder-readonly>~/Mail/search<enter>" \
+    "Show search results from mu-find"
+
+macro index,pager § \
+    "<shell-escape>clear && mbsync -a<enter>" \
+    "Sync all mail"
+
+macro index I \
+    "<shell-escape>clear && mu index --maildir=~/Mail<enter>" \
+    "Index all mail"
+
+macro attach S \
+    "<save-entry><kill-line>~/Downloads/<enter>\y<enter>" \
+    "Save attachment to the Downloads folder"
 
 # Bindings
 # ========
-bind editor <Tab> complete-query
-
-bind index B        bounce-message
-bind index J        next-unread
-bind index K        previous-unread
-bind index gg       first-entry
-bind index G        last-entry
-bind index R        group-reply
-bind index <Space>  collapse-thread
-bind index <Tab>    collapse-all
-bind index \Cu      half-up
-bind index \Cd      half-down
-
-bind pager j        next-line
-bind pager k        previous-line
-bind pager J        next-undeleted
-bind pager K        previous-undeleted
-bind pager gg       top
-bind pager G        bottom
-bind pager R        group-reply
-bind pager \Cu      half-up
-bind pager \Cd      half-down
-
-# Colors (sherlock)
-# =================
-color indicator     color7      color237
-color normal        color223    color235
-color tree          color167    color235
-color markers       color109    color235
-
-color index         color109    color235    "~N"    # New
-color index         color223    color235    "~O"    # Old
-color index         color109    color235    "~U"    # Unread
-color index         color223    color235    "~R"    # Read
-color index         color223    color235    "~P"    # Sent
-color index         color109    color234    "~F"    # Important
-color index         color179    color234    "~v"    # Messages part of a thread
-
-color header        color241    color235    ^(X-Mailer)
-color header        color241    color235    ^(User-Agent)
-color header        color241    color235    ^(From)
-color header        color241    color235    ^(To)
-color header        color241    color235    ^(Cc)
-color header        color241    color235    ^(Bcc)
-color header        color109    color235    ^(Date)
-color header        color179    color235    ^(Subject)
-
-color body          color241    color235    "(-----Original Message-----)"
-color body          color241    color235    "(-----Ursprungligt meddelande-----)"
-color body          color241    color235    "(Från:|Till:|Kopia:)"
-color body          color109    color235    "(Skickat:|Datum:)"
-color body          color7      color235    "(Ämne:)"
-
-color body          color179    color235    "(finger|ftp|http|https|news|telnet)://[^ >]*"
-color body          color179    color235    "<URL:[^ ]*>"
-color body          color179    color235    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
-color body          color179    color235    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
-color body          color179    color235    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-
-color quoted        color59     color235
-color quoted1       color59     color235
-color quoted2       color59     color235
-color quoted3       color59     color235
-color quoted4       color59     color235
-color quoted5       color59     color235
-color quoted6       color59     color235
-color quoted7       color59     color235
-color quoted8       color59     color235
-
-color attachment    color242    color235
-color signature     color242    color235
-color status        color179    color234
-color hdrdefault    color167    color235
-color error         color7      color167
-color tilde         color238    color235
-color message       color179    color235
-color prompt        color109    color234
-
-color sidebar_highlight     color179    color235
-color sidebar_divider       color241    color235
-color sidebar_new           color109    color235
+bind editor <Tab>       complete-query
+bind index <Space>      collapse-thread
+bind index <Tab>        collapse-all
+bind pager j            next-line
+bind pager k            previous-line
+bind index J            next-unread
+bind pager J            next-undeleted
+bind index K            previous-unread
+bind pager K            previous-undeleted
+bind index gg           first-entry
+bind pager gg           top
+bind index G            last-entry
+bind pager G            bottom
+bind index,pager R      group-reply
+bind index,pager \Cu    half-up
+bind index,pager \Cd    half-down

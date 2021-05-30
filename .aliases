@@ -1,10 +1,15 @@
 # vim: filetype=sh
 
 alias ls='ls -G'
-alias ll='ls -ahlG'
-alias cat='bat'
+alias ll='ls -Gahl'
 alias cext='change_extensions'
 alias md2pdf='markdown_to_pdf'
 alias wav2mp3='wav_to_mp3'
+alias mov2mp4='mov_to_mp4'
 alias dl='download_torrent'
-alias x2c='xlsx_to_csv'
+alias cat='bat'
+alias v='vim'
+alias nnn='nnn'
+alias n='nnn'
+alias grep='rg -M160 --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white'
+alias rg='rg -M160 --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white'

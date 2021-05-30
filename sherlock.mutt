@@ -1,0 +1,60 @@
+# vim: ft=muttrc
+
+# Colorscheme: Sherlock
+# =================
+color indicator     color7      color237
+color normal        color223    color235
+color tree          color167    color235
+color markers       color109    color235
+
+color index         color109    color235    "~N"    # New
+color index         color223    color235    "~O"    # Old
+color index         color109    color235    "~U"    # Unread
+color index         color223    color235    "~R"    # Read
+color index         color223    color235    "~P"    # Sent
+color index         color109    color234    "~F"    # Important
+color index         color179    color234    "~v"    # Messages part of a thread
+
+color header        color241    color235    ^(X-Mailer)
+color header        color241    color235    ^(User-Agent)
+color header        color109    color235    ^(From)
+color header        color109    color235    ^(To)
+color header        color109    color235    ^(Cc)
+color header        color109    color235    ^(Bcc)
+color header        color241    color235    ^(Date)
+color header        color179    color235    ^(Subject)
+
+color body          color241    color235    "(-----Original Message-----)"
+color body          color241    color235    "(-----Ursprungligt meddelande-----)"
+color body          color241    color235    "(Från:|Till:|Kopia:)"
+color body          color109    color235    "(Skickat:|Datum:)"
+color body          color7      color235    "(Ämne:)"
+
+color body          color179    color235    "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body          color179    color235    "<URL:[^ ]*>"
+color body          color179    color235    "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body          color179    color235    "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body          color179    color235    "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+
+color quoted        color59     color235
+color quoted1       color59     color235
+color quoted2       color59     color235
+color quoted3       color59     color235
+color quoted4       color59     color235
+color quoted5       color59     color235
+color quoted6       color59     color235
+color quoted7       color59     color235
+color quoted8       color59     color235
+
+color attachment    color242    color235
+color signature     color242    color235
+color status        color179    color234
+color hdrdefault    color167    color235
+color error         color7      color167
+color tilde         color238    color235
+color message       color179    color235
+color prompt        color109    color234
+
+color sidebar_highlight     color179    color235
+color sidebar_divider       color241    color235
+color sidebar_new           color109    color235

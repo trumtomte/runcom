@@ -6,29 +6,20 @@ ln -s .exports ~/.exports
 ln -s .functions ~/.functions
 ln -s .zshrc ~/.zshrc
 ln -s .tmux.conf ~/.tmux.conf
-
 # REPL
 ln -s .iex.exs ~/.iex.exs
 ln -s .fxrc ~/.fxrc
-
 # Mutt
 mkdir ~/.mutt
 ln -s .muttrc ~/.muttrc
 ln -s .mbsyncrc ~/.mbsyncrc
 ln -s .mailcap ~/.mutt/.mailcap
-ln -s display_filter ~/.mutt/display_filter
 ln -s view_attachment.sh ~/.mutt/view_attachment.sh
-
+ln -s sherlock.mutt ~/.mutt
 # Vim
 mkdir ~/.vim/colors
 ln -s .vimrc ~/.vimrc
 ln -s sherlock.vim ~/.vim/colors/sherlock.vim
-
-# Ranger
-mkdir ~/.config/ranger/colorschems
-ln -s rc.conf ~/.config/ranger/rc.conf
-ln -s sherlock.py ~/.config/ranger/colorschemes/sherlock.py
-
 # Misc
 ln -s .lftprc ~/.lftprc
 
