@@ -30,6 +30,7 @@ hi SherlockBeige    ctermfg=223     cterm=none
 hi SherlockYellow   ctermfg=179     cterm=none 
 hi SherlockRed      ctermfg=167     cterm=none 
 hi SherlockBlue     ctermfg=109     cterm=none 
+hi SherlockGreen    ctermfg=71      cterm=none 
 
 hi Normal           ctermbg=235     ctermfg=223
 hi LineNr           ctermbg=235     ctermfg=240
@@ -308,3 +309,8 @@ hi link ElixirAtom                  SherlockBlue
 hi link ElixirBlock                 SherlockWhite
 hi link ElixirDocTest               SherlockRed
 hi link ElixirStructDefine          SherlockYellow
+
+" JSON
+hi link jsonNumber      SherlockBlue
+hi link jsonNull        SherlockGreen
+hi link jsonBoolean     SherlockGreen

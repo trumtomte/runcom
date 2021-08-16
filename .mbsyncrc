@@ -5,7 +5,7 @@
 IMAPAccount doris
     Host imap01.binero.se
     User sebastian@doris.tech
-    PassCmd "pass Doris/binero.se/sebastian@doris.tech"
+    PassCmd "pass Doris/loopia/sebastian@doris.tech"
     SSLType IMAPS
     SSLVersions TLSv1.2
     AuthMechs LOGIN

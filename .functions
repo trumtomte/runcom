@@ -37,8 +37,6 @@ unzip_d() {
     zipfile="$1"
     zipdir=${1%.zip}
     ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
-    # Older version, had issues with utf-8 characters
-    # unzip -d "$zipdir" "$zipfile"
 }
 
 # Unzip all files in a directory

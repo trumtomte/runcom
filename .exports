@@ -20,9 +20,12 @@ export FZF_DEFAULT_OPTS='
     --color info:243,prompt:179,spinner:167,pointer:167,marker:167,header:223
 '
 # https://github.com/jarun/nnn/wiki/Usage#configuration
-export NNN_OPTS='d'
+export NNN_OPTS='dc'
 export NNN_PLUG='p:preview-tui;'
 export NNN_FIFO=$TMPDIR/nnn.fifo
 export NNN_FCOLORS='0000b3070000f3f3006d6da7'
 export NNN_COLORS='#f36da7b3'
 export NNN_OPENER=vim
+
+# Requires `fd` and `.fdignore` to ignore files/folders
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'

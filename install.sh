@@ -1,27 +1,19 @@
 #!/bin/bash
 
-# Terminal
-ln -s .aliases ~/.aliases
-ln -s .exports ~/.exports
-ln -s .functions ~/.functions
-ln -s .zshrc ~/.zshrc
-ln -s .tmux.conf ~/.tmux.conf
-# REPL
-ln -s .iex.exs ~/.iex.exs
-ln -s .fxrc ~/.fxrc
-# Mutt
-mkdir ~/.mutt
-ln -s .muttrc ~/.muttrc
-ln -s .mbsyncrc ~/.mbsyncrc
-ln -s .mailcap ~/.mutt/.mailcap
-ln -s view_attachment.sh ~/.mutt/view_attachment.sh
-ln -s sherlock.mutt ~/.mutt
-# Vim
-mkdir ~/.vim/colors
-ln -s .vimrc ~/.vimrc
+# NOTE: has to be run from this directory
+
+# Directories
+# ===========
+mkdir ~/{tmp,Torrents}
+mkdir -p ~/.mutt/{undo,tmp/attachments}
+mkdir -p ~/.vim/{colors,bundle}
+
+# Symlinks
+# ========
+ln -s .{aliases,exports,functions,zshrc,vimrc,tmux.conf,muttrc,mbsyncrc} ~/
+ln -s {.mailcap,sherlock.mutt,open_mutt_attachment.sh} ~/.mutt/
 ln -s sherlock.vim ~/.vim/colors/sherlock.vim
-# Misc
-ln -s .lftprc ~/.lftprc
+ln -s .{lftprc,iex.exs} ~/
 
 # MacOS
 # =====

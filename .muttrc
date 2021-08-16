@@ -1,6 +1,6 @@
 # Variables, Hooks and Mailboxes
 # =========
-set my_doris_pass   = `pass Doris/binero.se/sebastian@doris.tech`
+set my_doris_pass   = `pass Doris/loopia/sebastian@doris.tech`
 set my_mau_pass     = `pass Sebbe/MaU/sebastian.bengtegard@mau.se`
 set my_pm_pass      = `pass Sebbe/protonbridge`
 # set my_gmail_pass   = `pass Sebbe/Google/gmail_mutt`

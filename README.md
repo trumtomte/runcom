@@ -1,5 +1,9 @@
 # Run commands
 
+## TODO
+
+Installation script for servers
+
 Repository for run commands (ie. dotfiles) and more.
 
 ## CLI tools
@@ -34,19 +38,7 @@ libxslt, libtool, watchman, java, pandoc, basictex*
 
 *Misc 2: jq (json query), jo (create json), fx (navigate json)*
 
-```
-$ ln -s ~/Github/runcom/.{f1,f2,f3} ~/
-```
-
-Create folders for vim (colors/bundle) + mutt.
-Symlink into these.
-
-Create "tmp" in home folder
-
 Run install script for fzf
-
-create undo dir for vim
-
 add lftp bookmarks to this repository?
 
 ## Apps

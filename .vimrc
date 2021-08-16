@@ -47,7 +47,7 @@ set autoread                    " Auto update file if it changes outside of vim
 set colorcolumn=81              " Show eol-border
 set textwidth=80
 set statusline=                 " Customize the status line
-set statusline +=%2*\ %r\ %m\   " Read-only + Modified?
+set statusline +=%2*\ %r\ %m\   " Read-only + Modified
 set statusline +=%1*\ %f\       " File + Path
 set statusline +=%=             " Separator
 set statusline +=%3*\ %y\       " Filetype
@@ -92,8 +92,9 @@ nmap <leader>o :FZF<CR>
 nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 " Auto commands
 " =============
-autocmd BufNewFile,BufRead *.js call matchadd('Operator', '[')
-autocmd BufNewFile,BufRead *.js call matchadd('Operator', ']')
-autocmd BufNewFile,BufRead *.js set shiftwidth=2
-autocmd BufNewFile,BufRead *.schema set filetype=json
-autocmd BufNewFile,BufRead *.html set shiftwidth=2
+au BufNewFile,BufRead *.schema set filetype=json
+au BufNewFile,BufRead *.html set shiftwidth=2
+au BufNewFile,BufRead *.js 
+    \ call matchadd('Operator', '[') |
+    \ call matchadd('Operator', ']') |
+    \ set shiftwidth=2
