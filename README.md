@@ -1,83 +1,56 @@
 # Run commands
 
+> Repository for run commands (aka. dotfiles) and more.
+
 ## TODO
 
-Installation script for servers
+- [ ] Proper setup script
 
-Repository for run commands (ie. dotfiles) and more.
+## Packages
 
-## CLI tools
-
-- [asdf](https://asdf-vm.com/#/) to manange versions of CLI tools (node, etc.)
-- [ripgrep](https://github.com/BurntSushi/ripgrep/), substitute for `grep`
-- [bat](https://github.com/sharkdp/bat), substitute for `cat`
-- tmux - screen multiplexer
-    - reattach-to-user-namespace (copy/paste for MacOS)
-- mutt - email
-    - urlview - extract urls in mutt
-    - mu - email indexing
-    - isync (mbsync)
-    - w3m (render HTML emails)
-- nnn - directory navigator
-- zsh - shell
-    - zsh-syntax-highlighting
-- aria2 - torrents
-- pass - password manager
 - git
-- tig - git log viewer
-- vim - editor
-- postgresql
-- imagemagick
+- vim
+- nnn
+- fzf
+- pass
+- aria2
+- ripgrep
+- bat
+- zsh, zsh-syntax-highlighting
+- tmux, reattach-to-user-namespace
+- mutt, urlview, mu, isync (mbsync), w3m
+- asdf
+- tig
 - lftp
-- fzf (fuzzy finder)
-- elixir/erlang
-- ruby
+- imagemagick
+- pandoc, basictex
+- elixir, erlang, ruby, node (via asdf)
+- postgresql
 
 *Misc: libxml2, coreutils, automake, autoconf, openssl, libyaml, readline,
-libxslt, libtool, watchman, java, pandoc, basictex*
+libxslt, libtool, watchman*
 
-*Misc 2: jq (json query), jo (create json), fx (navigate json)*
+## Terminal colorscheme: Sherlock
 
-Run install script for fzf
-add lftp bookmarks to this repository?
+```txt
+white   = 7    #fbf8ff
+beige   = 223  #ffd7af 0xdf
+yellow  = 179  #d7af5f 0xb3
+red     = 167  #d75f5f 0xa7
+blue    = 109  #87afaf 0x6d
+green   = 71   #5faf5f
+gray1   = 235  #262626
+gray2   = 243  #767676 0xf3
 
-## Apps
-
-- Browsers: Qutebrowser, Firefox, Chrome
-- Chat: Discord, Slack, Teams, Zoom
-- Music: Spotify, (Ozone 8, Youlean Loudness Meter 2)
-- Misc: VLC, Mullvad VPN, Docker, Rectangle (VM), VirtualBox
-
-## Small tidbits
-
-Create a timelapse of screenshots.
-
-```bash
-# Saves a screenshot every 1.5s
-
-while true; do
-    scrot
-    sleep 1.5s
-end;
-
-# Use ffmpeg to compose a timelapse.
+gray_misc1 = 234 #1c1c1c 0xea
+gray_misc2 = 235 #262626 0xeb
+gray_misc3 = 236 #303030 0xec
+gray_misc4 = 240
 ```
 
-## Colorscheme: Sherlock
+## Mutt account template
 
-```
-white = 7 rgb(250, 247, 255), should be 15 (xterm)?
-beige = 223 (#ffd7af) 0xdf
-yellow = 179 (#d7af5f) 0xb3
-red = 167 (#d75f5f) 0xa7
-blue = 109 (#87afaf) 0x6d
-gray_light = 243 (#767676) 0xf3
-gray_variants = 234/235/236 (#1c1c1c/#262626/#303030) 0xea/0xeb/0xec
-```
-
-## Mutt
-
-```
+```muttrc
 # vim: ft=muttrc
 set from = "Sebastian Bengtegård <sebastian@mail.com>"
 set realname = "Sebastian Bengtegård"
@@ -96,3 +69,11 @@ macro index,pager i \
     "<save-message>+something/INBOX<enter>"  \
     "move message to the inbox"
 ```
+
+## Reminder: Apps
+
+- Browsers: Qutebrowser, Firefox
+- Chat: Discord, Slack, Teams, Zoom
+- Music: Spotify, (Ozone 8, Youlean Loudness Meter 2)
+- Work: Docker, VirtualBox
+- Misc: VLC, Mullvad VPN, Rectangle (WM), Amphetamine

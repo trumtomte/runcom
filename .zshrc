@@ -20,14 +20,7 @@ compinit && colors
 # Edit command line widget
 zle -N edit-command-line
 
-#autoload zmv
-#alias zcp='zmv -C' zln='zmv -L'
-# batch rename
-#zmv '(*).jpeg' '$1.jpg'
-#zmv '(*)-backup.(*)' 'backups/$1.$2'
-
 source ~/.exports
-source ~/.functions
 source ~/.aliases
 
 function setprompt() {

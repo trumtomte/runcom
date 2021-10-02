@@ -9,7 +9,6 @@ IMAPAccount doris
     SSLType IMAPS
     SSLVersions TLSv1.2
     AuthMechs LOGIN
-    # CertificateFile ~/Mail/Certificates.cer
 
 IMAPStore doris-remote
     Account doris
@@ -65,7 +64,6 @@ IMAPAccount mau
     PassCmd "pass Sebbe/MaU/sebastian.bengtegard@mau.se"
     SSLType IMAPS
     SSLVersions TLSv1.2
-    # CertificateFile ~/Mail/Certificates.cer
 
 IMAPStore mau-remote
     Account mau
@@ -121,10 +119,6 @@ IMAPAccount pm
     User sebastianbengtegard@protonmail.com
     PassCmd "pass Sebbe/protonbridge"
     SSLType None
-    # AuthMechs LOGIN
-    # SSLType STARTTLS
-    # SSLVersions TLSv1.2
-    # CertificateFile ~/.mutt/protonbridgeX.pem
 
 IMAPStore pm-remote
     Account pm
@@ -159,7 +153,7 @@ Channel pm-deleted
     SyncState *
 
 Channel pm-archive
-    Far :pm-remote:"All Mail"
+    Far :pm-remote:"Archive"
     Near :pm-local:/archive
     CopyArrivalDate Yes
     Create Both

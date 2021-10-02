@@ -5,14 +5,14 @@ set my_mau_pass     = `pass Sebbe/MaU/sebastian.bengtegard@mau.se`
 set my_pm_pass      = `pass Sebbe/protonbridge`
 # set my_gmail_pass   = `pass Sebbe/Google/gmail_mutt`
 
+folder-hook pm source ~/.mutt/account.me.pm.sebastianbengtegard
 folder-hook doris source ~/.mutt/account.tech.doris.sebastian
 folder-hook mau source ~/.mutt/account.se.mau.sebastianbengtegard
-folder-hook pm source ~/.mutt/account.me.pm.sebastianbengtegard
 # folder-hook gmail source ~/.mutt/account.com.gmail.sebbebook
 
+mailboxes +PM +pm/INBOX +pm/sent +pm/deleted +pm/archive
 mailboxes +Doris +doris/INBOX +doris/sent +doris/archive
 mailboxes +MaU +mau/INBOX +mau/sent +mau/deleted +mau/archive
-mailboxes +PM +pm/INBOX +pm/sent +pm/deleted +pm/archive
 # mailboxes +Gmail +gmail/INBOX +gmail/sent +gmail/archive
 
 # Initial account + Colorscheme
@@ -60,6 +60,7 @@ set pager_index_lines       = 5
 set pager_context           = 3
 set query_command           = "mu cfind --format=mutt-ab '%s'"
 set rfc2047_parameters      = yes # Fixes issue with PDF-naming
+set wrap                    = 80 # Message line width
 
 # Sidebar
 # =======
@@ -79,13 +80,13 @@ unignore date: from: to: cc: bcc: subject:
 unhdr_order *
 hdr_order date: from: to: cc: bcc: subject:
 unalternative_order *
-alternative_order multipart/mixed multipart/related multipart/alternative text/plain text/html *
+alternative_order text/html text/plain *
 
 # Macros
 # ======
-macro index,pager <f1> "<change-folder>+doris/INBOX<enter>"
-macro index,pager <f2> "<change-folder>+mau/INBOX<enter>"
-macro index,pager <f3> "<change-folder>+pm/INBOX<enter>"
+macro index,pager <f1> "<change-folder>+pm/INBOX<enter>"
+macro index,pager <f2> "<change-folder>+doris/INBOX<enter>"
+macro index,pager <f3> "<change-folder>+mau/INBOX<enter>"
 
 macro index,pager ,u \
     "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" \
@@ -104,6 +105,10 @@ macro index ,s \
     "Show search results from mu-find"
 
 macro index,pager § \
+    "<shell-escape>clear && mbsync -a<enter>" \
+    "Sync all mail"
+
+macro index,pager \Cl \
     "<shell-escape>clear && mbsync -a<enter>" \
     "Sync all mail"
 

@@ -1,13 +1,78 @@
-# vim: filetype=sh
+# vim: filetype=zsh
 
-alias ls='ls -G'
-alias ll='ls -Gahl'
-alias cext='change_extensions'
-alias md2pdf='markdown_to_pdf'
-alias wav2mp3='wav_to_mp3'
-alias mov2mp4='mov_to_mp4'
-alias dl='download_torrent'
-alias cat='bat'
-alias n='nnn'
-alias grep='rg -M160 --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white'
-alias rg='rg -M160 --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white'
+# Global
+alias -g cat=bat
+alias -g grep=rg
+alias -g rg="rg --max-columns 160 --max-columns-preview --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white"
+# Regular 
+alias n=nnn
+alias ll="ls -Gahl"
+
+# Download torrents
+dl() {
+    aria2c $@ --dir=$HOME/Torrents
+}
+# MOV to mp4
+mov2mp4() {
+    ffmpeg -i $1 -q:v 0 ${1%.*}.mp4
+}
+
+# WAV to mp3
+wav2mp3() {
+    ffmpeg -i $1 -codec:a libmp3lame -qscale:a 2 ${1%.*}.mp3
+}
+
+# Markdown to PDF
+md2pdf() {
+    pandoc $1 -o ${1%.*}.pdf \
+        --number-sections \
+        -V geometry:margin=1.4in \
+        -V fontsize=11pt \
+        -V linestretch=1.3
+}
+
+# Convert all .md files in pwd
+md2pdf_all() {
+    for i in *.md; do
+        [ -f "$i" ] || break
+        md2pdf $i
+    done
+}
+
+# Unzip with zip filename as directory name
+unzip_d() {
+    zipfile="$1"
+    zipdir=${1%.zip}
+    ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
+}
+
+# Unzip all files in a directory
+unzip_all() {
+    for i in *.zip; do
+        [ -f "$i" ] || break
+        unzip_d $i
+    done
+}
+
+# Unrar with rar filename as directory name
+unrar_d() {
+    rarfile="$1"
+    rardir=${1%.rar}
+    unrar x $rarfile $rardir/
+}
+
+# Unrar all files in a directory
+unrar_all() {
+    for i in *.rar; do
+        [ -f "$i" ] || break
+        unrar_d $i
+    done
+}
+
+# Take a screenshot every 1.5s (use ffmpeg to compile a timelapse)
+take_screenshots() {
+    while true; do
+        scrot
+        sleep 1.5s
+    done
+}
