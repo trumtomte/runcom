@@ -6,7 +6,8 @@ alias -g grep=rg
 alias -g rg="rg --max-columns 160 --max-columns-preview --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white"
 # Regular 
 alias n=nnn
-alias ll="ls -Gahl"
+alias ll="ls -GahlF"
+alias notes="vim ~/Documents/notes.md"
 
 # Download torrents
 dl() {

@@ -1,4 +1,5 @@
 set color:use-color auto
 set color:dir-colors "rs=0:di=01;36:fi=01;32:ln=01;31:*.txt=01;35:*.html=00;35:"
 set prompt "\[\e[1;30m\][\[\e[0;34m\]lftp\[\e[1m\]\[\e[37m\]\[\e[30m\]] \[\e[34m\]\u\[\e[0;34m\]\@\[\e[1m\]\h\[\e[1;30m\]:\[\e[1;34m\]\w\[\e[1;30m\]>\[\e[0m\] "
+set ssl:verify-certificate false
 alias ll 'ls -l'

@@ -1,5 +1,5 @@
 # Variables, Hooks and Mailboxes
-# =========
+# ==============================
 set my_doris_pass   = `pass Doris/loopia/sebastian@doris.tech`
 set my_mau_pass     = `pass Sebbe/MaU/sebastian.bengtegard@mau.se`
 set my_pm_pass      = `pass Sebbe/protonbridge`
@@ -103,11 +103,6 @@ macro index S \
 macro index ,s \
     "<change-folder-readonly>~/Mail/search<enter>" \
     "Show search results from mu-find"
-
-macro index,pager § \
-    "<shell-escape>clear && mbsync -a<enter>" \
-    "Sync all mail"
-
 macro index,pager \Cl \
     "<shell-escape>clear && mbsync -a<enter>" \
     "Sync all mail"
@@ -119,6 +114,10 @@ macro index I \
 macro attach S \
     "<save-entry><kill-line>~/Downloads/<enter>\y<enter>" \
     "Save attachment to the Downloads folder"
+
+macro index,pager B \
+    "<enter-command>toggle sidebar_visible<enter>" \
+    "Toggle sidebar visibility"
 
 # Bindings
 # ========

@@ -1,19 +1,6 @@
 set nocompatible
-
-" Vim-Vundle
-" ==========
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" Improved focus mode
-Plugin 'junegunn/goyo.vim'
-" Be able to open mac .plist files
-Plugin 'darfink/vim-plist'
-" syntax pack
-Plugin 'sheerun/vim-polyglot'
-call vundle#end()
-
 " Enables fzf
-set rtp+=/usr/local/opt/fzf
+set runtimepath+=/usr/local/opt/fzf
 
 " Settings
 " ========
@@ -25,8 +12,8 @@ set t_Co=256
 set backspace=indent,eol,start  " Allow backspace in insertmode
 set expandtab                   " Use spaces for tabs instead
 set autoindent                  " Copy indent from previous line
-set shiftwidth=4                " Number of spaces when autoindenting
-set softtabstop=4               " Number of spaces that counts as one <Tab>
+set shiftwidth=2                " Number of spaces when autoindenting
+set softtabstop=2               " Number of spaces that counts as one <Tab>
 set hlsearch                    " Show highlights when searching
 set incsearch                   " Show highlights when typing
 set number                      " Show line numbers
@@ -83,18 +70,29 @@ let mapleader = "\<Space>"
 nmap <leader>w :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>n :noh <CR>
-nmap <leader>g :Goyo<CR>
 nmap <leader>c :set cursorcolumn!<CR>
 nmap <leader>r /
 nmap <leader>e :set rnu!<CR>
-nmap <leader>o :FZF<CR>
+" nmap <leader>o :FZF<CR>
+" with fzf.vim
+nmap <leader>o :Files<CR>
+nmap <leader>- :Rg<CR>
+nmap <leader>f :BLines<CR>
 " Print highlight group
 nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 " Auto commands
 " =============
 au BufNewFile,BufRead *.schema set filetype=json
 au BufNewFile,BufRead *.html set shiftwidth=2
-au BufNewFile,BufRead *.js 
-    \ call matchadd('Operator', '[') |
-    \ call matchadd('Operator', ']') |
-    \ set shiftwidth=2
+" au BufNewFile,BufRead *.js 
+"     \ call matchadd('Operator', '[') |
+"     \ call matchadd('Operator', ']') |
+"     \ set shiftwidth=2
+
+au BufNewFile,BufRead *.lisp
+    \ hi Special        ctermfg=243 |
+    \ hi MatchParen     ctermfg=7 |
+
+" Slimv
+" =====
+let g:slimv_repl_split=4

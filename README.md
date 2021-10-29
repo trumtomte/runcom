@@ -9,7 +9,7 @@
 ## Packages
 
 - git
-- vim
+- vim (fzf.vim, slimv, vim-polygot, vim-plist)
 - nnn
 - fzf
 - pass
@@ -24,7 +24,7 @@
 - lftp
 - imagemagick
 - pandoc, basictex
-- elixir, erlang, ruby, node (via asdf)
+- elixir, erlang, ruby, node (via asdf), sbcl (common lisp)
 - postgresql
 
 *Misc: libxml2, coreutils, automake, autoconf, openssl, libyaml, readline,
