@@ -11,8 +11,6 @@ export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 export GEM_HOME=$HOME/gems
 export PATH=$GEM_HOME/bin:$PATH
 # https://github.com/sharkdp/bat
-# TODO: make sherlock work with base16?
-# export BAT_THEME="base16"
 export BAT_THEME="Nord"
 # https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS="
