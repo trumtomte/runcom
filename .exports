@@ -11,7 +11,7 @@ export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 export GEM_HOME=$HOME/gems
 export PATH=$GEM_HOME/bin:$PATH
 # https://github.com/sharkdp/bat
-export BAT_THEME="Nord"
+export BAT_THEME="base16"
 # https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS="
     --height 40% --layout=reverse

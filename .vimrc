@@ -41,7 +41,6 @@ set statusline +=%3*\ %y\       " Filetype
 
 " Bindings
 " ========
-" Quicker esc
 inoremap jj <ESC>
 " Jump up/down a paragraph
 nmap K {
@@ -65,6 +64,8 @@ vmap > >gv
 " Easy folding
 nmap <Tab> za
 nmap <S-Tab> zx
+" Print highlight group
+nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 " Leader bindings
 let mapleader = "\<Space>"
 nmap <leader>w :w<CR>
@@ -73,25 +74,14 @@ nmap <leader>n :noh <CR>
 nmap <leader>c :set cursorcolumn!<CR>
 nmap <leader>r /
 nmap <leader>e :set rnu!<CR>
-" nmap <leader>o :FZF<CR>
-" with fzf.vim
+" fzf.vim
 nmap <leader>o :Files<CR>
 nmap <leader>- :Rg<CR>
 nmap <leader>f :BLines<CR>
-" Print highlight group
-nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 " Auto commands
 " =============
 au BufNewFile,BufRead *.schema set filetype=json
-au BufNewFile,BufRead *.html set shiftwidth=2
-" au BufNewFile,BufRead *.js 
-"     \ call matchadd('Operator', '[') |
-"     \ call matchadd('Operator', ']') |
-"     \ set shiftwidth=2
-
-au BufNewFile,BufRead *.lisp
-    \ hi Special        ctermfg=243 |
-    \ hi MatchParen     ctermfg=7 |
+au BufNewFile,BufRead *.lisp hi MatchParen ctermfg=7
 
 " Slimv
 " =====

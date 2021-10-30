@@ -39,7 +39,7 @@ hi CursorColumn         ctermbg=237                     cterm=none
 hi NonText              ctermbg=235     ctermfg=243
 hi ColorColumn          ctermbg=236
 hi VertSplit            ctermbg=235     ctermfg=179     cterm=none
-hi Todo                 ctermbg=240     ctermfg=179     cterm=none
+hi Todo                 ctermbg=238     ctermfg=179     cterm=none
 hi Folded               ctermbg=234     ctermfg=179     cterm=none
 hi MatchParen           ctermbg=235     ctermfg=167 
 hi Visual               ctermbg=238
@@ -88,11 +88,11 @@ hi! link SpecialChar    SherlockRed
 hi! link Statement      SherlockYellow
 hi! link StorageClass   SherlockBlue
 hi! link String         SherlockRed
-hi! link Structure      SherlockWhite
+hi! link Structure      SherlockBlue
 hi! link Tag            SherlockWhite
 hi! link Title          SherlockWhite
 hi! link Type           SherlockBlue
-hi! link Typedef        SherlockBlue
+hi! link Typedef        SherlockYellow
 
 " Elixir
 hi link ElixirModuleDeclaration     SherlockYellow
