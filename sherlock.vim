@@ -1,7 +1,7 @@
 " Colorscheme:  Sherlock
 " Maintainer:   Sebastian Bengtegård <sebastianbengtegard@protonmail.com>
-" Last Change:  30-10-2021
-" URL:	        https://github.com/trumtomte/runcom/blob/master/sherlock.vim
+" Last Change:  30-12-2021
+" URL:	        https://github.com/trumtomte/runcom
 
 " Colors
 " ======
@@ -36,6 +36,7 @@ hi Comment              ctermbg=235     ctermfg=243     cterm=none
 hi CursorLine           ctermbg=236                     cterm=none
 hi CursorLineNr         ctermbg=235     ctermfg=179
 hi CursorColumn         ctermbg=237                     cterm=none
+hi SignColumn           ctermbg=234     ctermfg=179
 hi NonText              ctermbg=235     ctermfg=243
 hi ColorColumn          ctermbg=236
 hi VertSplit            ctermbg=235     ctermfg=179     cterm=none
@@ -43,6 +44,7 @@ hi Todo                 ctermbg=238     ctermfg=179     cterm=none
 hi Folded               ctermbg=234     ctermfg=179     cterm=none
 hi MatchParen           ctermbg=235     ctermfg=167 
 hi Visual               ctermbg=238
+hi Underlined           ctermbg=235     ctermfg=109     cterm=none
 hi Pmenu                ctermbg=236     ctermfg=223     cterm=none
 hi PmenuSel             ctermbg=234     ctermfg=179     cterm=none
 hi PmenuSbar            ctermbg=237     ctermfg=109     cterm=none
@@ -58,9 +60,11 @@ hi TabLine              ctermbg=236     ctermfg=179     cterm=none
 hi TabLineSel           ctermbg=239     ctermfg=179     cterm=none
 hi TabLineFill          ctermbg=236     ctermfg=0       cterm=none
 hi DiffAdd              ctermbg=234     ctermfg=243     cterm=none
+
 hi! link DiffText       User1
 hi! link DiffDelete     User2
 hi! link DiffChange     MatchParen
+
 hi link netrwDir        SherlockYellow
 hi link netrwExe        SherlockRed
 hi link netrwSymLink    SherlockBlue
@@ -113,3 +117,6 @@ hi link jsonBoolean     SherlockGreen
 
 " LISP
 hi link lispParen      Comment
+
+" CoC
+hi link CocWarningSign  SherlockRed

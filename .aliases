@@ -1,29 +1,30 @@
 # vim: filetype=zsh
 
-# Global
-alias -g cat=bat
-alias -g grep=rg
 alias -g rg="rg --max-columns 160 --max-columns-preview --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white"
-# Regular 
+alias -g notes="vim ~/Documents/notes.md"
 alias n=nnn
-alias ll="ls -GahlF"
-alias notes="vim ~/Documents/notes.md"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias ll="ls -ahlF --color"
+    alias -g cat=batcat
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    alias ll="ls -GahlF"
+    alias -g cat=bat
+fi
 
 # Download torrents
 dl() {
     aria2c $@ --dir=$HOME/Torrents
 }
-# MOV to mp4
+
 mov2mp4() {
     ffmpeg -i $1 -q:v 0 ${1%.*}.mp4
 }
 
-# WAV to mp3
 wav2mp3() {
     ffmpeg -i $1 -codec:a libmp3lame -qscale:a 2 ${1%.*}.mp3
 }
 
-# Markdown to PDF
 md2pdf() {
     pandoc $1 -o ${1%.*}.pdf \
         --number-sections \
@@ -32,7 +33,6 @@ md2pdf() {
         -V linestretch=1.3
 }
 
-# Convert all .md files in pwd
 md2pdf_all() {
     for i in *.md; do
         [ -f "$i" ] || break
@@ -44,7 +44,12 @@ md2pdf_all() {
 unzip_d() {
     zipfile="$1"
     zipdir=${1%.zip}
-    ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
+
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        unzip $zipfile -d $zipdir
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
+    fi
 }
 
 # Unzip all files in a directory
@@ -67,13 +72,5 @@ unrar_all() {
     for i in *.rar; do
         [ -f "$i" ] || break
         unrar_d $i
-    done
-}
-
-# Take a screenshot every 1.5s (use ffmpeg to compile a timelapse)
-take_screenshots() {
-    while true; do
-        scrot
-        sleep 1.5s
     done
 }

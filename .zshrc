@@ -23,9 +23,13 @@ zle -N edit-command-line
 source ~/.exports
 source ~/.aliases
 
+if [[ -f "~/.exports.local" ]]; then
+    source ~/.exports.local
+fi
+
 function setprompt() {
-    PROMPT="%{$fg[yellow]%}λ "
-    RPROMPT=" %{$fg[blue]%}%~ "
+    PROMPT="%{$fg[blue]%}%n %{$fg[yellow]%}λ "
+    RPROMPT=" %{$fg[blue]%}%~ %{$fg[yellow]%}%m"
 }
 
 function precmd() {
@@ -48,13 +52,3 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 bindkey '^X^E' edit-command-line
-
-# Installed via brew
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/opt/asdf/asdf.sh
-
-# Added by FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# FZF tab
-[ -f ~/.fzf-tab/fzf-tab.plugin.zsh ] && source ~/.fzf-tab/fzf-tab.plugin.zsh

@@ -1,6 +1,4 @@
 set nocompatible
-" Enables fzf
-set runtimepath+=/usr/local/opt/fzf
 
 " Settings
 " ========
@@ -42,47 +40,23 @@ set statusline +=%3*\ %y\       " Filetype
 " Bindings
 " ========
 inoremap jj <ESC>
-" Jump up/down a paragraph
-nmap K {
-nmap J }
-vmap K {
-vmap J }
 " Scroll down/up 5 lines
 nmap <C-j> 5<C-e>
 nmap <C-k> 5<C-y>
-" Go to start/end of the current line in insert/visual mode
-nmap <C-h> ^
-nmap <C-l> <END>
-vmap <C-h> ^
-vmap <C-l> <END>
-" Easy splits
-nmap _ :sp 
-nmap - :vsp 
-" Keep selection when indenting
-vmap < <gv
-vmap > >gv
-" Easy folding
-nmap <Tab> za
-nmap <S-Tab> zx
-" Print highlight group
-nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 " Leader bindings
 let mapleader = "\<Space>"
 nmap <leader>w :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>n :noh <CR>
-nmap <leader>c :set cursorcolumn!<CR>
-nmap <leader>r /
 nmap <leader>e :set rnu!<CR>
 " fzf.vim
 nmap <leader>o :Files<CR>
-nmap <leader>- :Rg<CR>
-nmap <leader>f :BLines<CR>
-" Auto commands
-" =============
-au BufNewFile,BufRead *.schema set filetype=json
-au BufNewFile,BufRead *.lisp hi MatchParen ctermfg=7
+nmap <leader>f :Rg<CR>
+nmap <leader>F :BLines<CR>
+nmap <leader>b :Buffers<CR>
+" Print highlight group
+nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 
-" Slimv
-" =====
-let g:slimv_repl_split=4
+if filereadable("~/.vimrc.local")
+    source ~/.vimrc.local
+endif

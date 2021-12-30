@@ -1,28 +1,23 @@
 # vim: filetype=zsh
 
+export SHELL=/bin/zsh
 export VISUAL="vim"
 export EDITOR="vim"
 export TMPDIR=$HOME/tmp
-export LANG=en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8
-export LDFLAGS="-L/usr/local/opt/libffi/lib"
-export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
-# Ruby gems
-export GEM_HOME=$HOME/gems
-export PATH=$GEM_HOME/bin:$PATH
-# https://github.com/sharkdp/bat
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export NNN_OPTS="dc"
+export NNN_FIFO=$TMPDIR/nnn.fifo
+export NNN_FCOLORS="0000b3070000f3f3006d6da7"
+export NNN_COLORS="#f36da7b3"
+export NNN_OPENER="vim"
 export BAT_THEME="base16"
-# https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS="
     --height 40% --layout=reverse
     --color fg:243,bg:235,hl:223,fg+:179,bg+:234,hl+:179
     --color info:243,prompt:179,spinner:167,pointer:167,marker:167,header:223
 "
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-# https://github.com/jarun/nnn/wiki/Usage#configuration
-export NNN_OPTS="dc"
-export NNN_PLUG="p:preview-tui;"
-export NNN_FIFO=$TMPDIR/nnn.fifo
-export NNN_FCOLORS="0000b3070000f3f3006d6da7"
-export NNN_COLORS="#f36da7b3"
-export NNN_OPENER="vim"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+fi
