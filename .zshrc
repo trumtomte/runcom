@@ -20,12 +20,8 @@ compinit && colors
 # Edit command line widget
 zle -N edit-command-line
 
-source ~/.exports
-source ~/.aliases
-
-if [[ -f "~/.exports.local" ]]; then
-    source ~/.exports.local
-fi
+source $HOME/.exports
+source $HOME/.aliases
 
 function setprompt() {
     PROMPT="%{$fg[blue]%}%n %{$fg[yellow]%}λ "
@@ -52,3 +48,8 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 bindkey '^X^E' edit-command-line
+
+# Local configuration
+if [[ -f "$HOME/.zshrc.local" ]]; then
+    source $HOME/.zshrc.local
+fi

@@ -62,7 +62,7 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\android\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\ios\\'"))
 
-;; TODO: find out how to append (in time) to the type '(repeat string)
+;; TODO: find out how to append, wordpress, (in time) to the type '(repeat string)
 (setq lsp-intelephense-stubs
   ["apache" "bcmath" "bz2" "calendar" "com_dotnet" "Core" "ctype" "curl" "date"
    "dba" "dom" "enchant" "exif" "fileinfo" "filter" "fpm" "ftp" "gd" "hash"
