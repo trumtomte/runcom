@@ -57,6 +57,6 @@ nmap <leader>b :Buffers<CR>
 " Print highlight group
 nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 
-if filereadable("~/.vimrc.local")
+if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
