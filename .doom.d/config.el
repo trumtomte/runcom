@@ -84,8 +84,8 @@
         mu4e-headers-time-format "%R"
         mu4e-headers-date-format "%d/%m/%y"
         mm-text-html-renderer 'w3m-standalone
-        mm-discouraged-alternatives '("text/html" "text/richtext")
-        mu4e-html2text-command "w3m -dump -T text/html -cols 80 -F -I utf8 -O utf8 -o display_link_number=true")
+        ;; mm-discouraged-alternatives '("text/html" "text/richtext")
+        mu4e-html2text-command "w3m -dump -T text/html -cols 80 -o display_link_number=true")
   ;; Bookmarks
   (add-to-list 'mu4e-bookmarks
                '(:name "Inbox - Protonmail"
