@@ -1,18 +1,20 @@
+# -*- mode: sh -*-
 # vim: filetype=zsh
 
-alias -g rg="rg --max-columns 160 --max-columns-preview --colors=path:fg:179 --colors=line:fg:243 --colors=match:fg:white"
-alias -g notes="vim ~/Documents/notes.md"
 alias n=nnn
+alias grep="grep --color"
+alias rgrep="rgrep --color"
+alias gs="git status"
+alias gap="git add -p"
+alias gc="git commit"
+alias gd="git diff"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    alias ll="ls -ahlF --color"
-    alias -g cat=batcat
+    alias ll="ls -ahlF --color=auto"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     alias ll="ls -GahlF"
-    alias -g cat=bat
 fi
 
-# Download torrents
 dl() {
     aria2c $@ --dir=$HOME/Torrents
 }
@@ -28,7 +30,7 @@ wav2mp3() {
 md2pdf() {
     pandoc $1 -o ${1%.*}.pdf \
         --number-sections \
-        -V geometry:margin=1.4in \
+        -V geometry:margin=1.2in \
         -V fontsize=11pt \
         -V linestretch=1.3
 }
@@ -40,7 +42,7 @@ md2pdf_all() {
     done
 }
 
-# Unzip with zip filename as directory name
+# Unzip with filename as directory name
 unzip_d() {
     zipfile="$1"
     zipdir=${1%.zip}
@@ -52,7 +54,6 @@ unzip_d() {
     fi
 }
 
-# Unzip all files in a directory
 unzip_all() {
     for i in *.zip; do
         [ -f "$i" ] || break
@@ -60,14 +61,13 @@ unzip_all() {
     done
 }
 
-# Unrar with rar filename as directory name
+# Unrar with filename as directory name
 unrar_d() {
     rarfile="$1"
     rardir=${1%.rar}
     unrar x $rarfile $rardir/
 }
 
-# Unrar all files in a directory
 unrar_all() {
     for i in *.rar; do
         [ -f "$i" ] || break
