@@ -1,19 +1,13 @@
 # Variables, Hooks and Mailboxes
 # ==============================
-set my_doris_pass   = `pass Doris/loopia/sebastian@doris.tech`
-set my_mau_pass     = `pass Sebbe/MaU/sebastian.bengtegard@mau.se`
-set my_pm_pass      = `pass Sebbe/protonbridge2`
+set my_email_pass   = `pass Email/ABC`
 
-folder-hook pm source ~/.mutt/account.me.pm.sebastianbengtegard
-folder-hook doris source ~/.mutt/account.tech.doris.sebastian
-folder-hook mau source ~/.mutt/account.se.mau.sebastianbengtegard
+folder-hook email source ~/.mutt/account.my.email
 
-mailboxes +Protonmail +pm/INBOX
-mailboxes +Doris +doris/INBOX
-mailboxes +MaU +mau/INBOX
+mailboxes +Email +email/INBOX
 
 # Initial account + Colorscheme
-source ~/.mutt/account.me.pm.sebastianbengtegard
+source ~/.mutt/account.my.email
 source ~/.mutt/sherlock.mutt
 
 # Configuration

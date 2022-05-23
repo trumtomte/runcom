@@ -2,7 +2,7 @@
 set from = "Sebastian Bengtegård <sebastian@mail.com>"
 set realname = "Sebastian Bengtegård"
 set smtp_url = "smtp://sebastian@mail.com@hostname.com:587/"
-set smtp_pass = $my_something_pass
+set smtp_pass = $my_email_pass
 set spoolfile = "+something/INBOX"
 set mbox = "+something/Archive"
 set record = "+something/Sent Messages"
