@@ -8,12 +8,13 @@ IMAPStore doris-remote
     SSLVersions TLSv1.2
     AuthMechs LOGIN
     PipeLineDepth 3 # nr of concurrent cmds
+    # Timeout 120
 
 MaildirStore doris-local
     SubFolders Verbatim
     Path ~/Mail/doris/
     Inbox ~/Mail/doris/INBOX
-    MaxSize 400k
+    MaxSize 1500k
 
 Channel doris-inbox
     Master :doris-remote:
@@ -23,31 +24,6 @@ Channel doris-inbox
     Expunge Both
     SyncState *
     Patterns "INBOX" "Sent Messages" "Archive" "Deleted Messages"
-
-# MaU
-# ===
-IMAPStore mau-remote
-    Host outlook.office365.com
-    User sebastian.bengtegard@mau.se
-    PassCmd "pass Sebbe/MaU/sebastian.bengtegard@mau.se"
-    SSLType IMAPS
-    SSLVersions TLSv1.2
-    PipeLineDepth 5
-
-MaildirStore mau-local
-    SubFolders Verbatim
-    Path ~/Mail/mau/
-    Inbox ~/Mail/mau/INBOX
-    # MaxSize 120k
-
-Channel mau-inbox
-    Master :mau-remote:
-    Slave :mau-local:
-    CopyArrivalDate Yes
-    Create Both
-    Expunge Both
-    SyncState *
-    Patterns "INBOX" "Sent Items" "Archive" "Deleted Items"
 
 # Protonmail
 # ==========
