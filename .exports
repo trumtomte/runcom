@@ -1,3 +1,4 @@
+# -*- mode: sh -*-
 # vim: filetype=zsh
 
 export SHELL=/bin/zsh
@@ -6,11 +7,13 @@ export EDITOR="vim"
 export TMPDIR=$HOME/tmp
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
 export NNN_OPTS="dc"
 export NNN_FIFO=$TMPDIR/nnn.fifo
 export NNN_FCOLORS="0000b3070000f3f3006d6da7"
 export NNN_COLORS="#f36da7b3"
 export NNN_OPENER="vim"
+
 export BAT_THEME="base16"
 export FZF_DEFAULT_OPTS="
     --height 40% --layout=reverse
