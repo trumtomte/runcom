@@ -83,9 +83,10 @@
         mu4e-attachment-dir "~/Downloads"
         mu4e-headers-time-format "%R"
         mu4e-headers-date-format "%d/%m/%y"
-        mm-text-html-renderer 'w3m-standalone
+        mm-text-html-renderer 'gnus-w3m)
+        ;; mm-text-html-renderer 'w3m-standalone
         ;; mm-discouraged-alternatives '("text/html" "text/richtext")
-        mu4e-html2text-command "w3m -dump -T text/html -cols 80 -o display_link_number=true")
+        ;; mu4e-html2text-command "w3m -dump -T text/html -cols 80 -o display_link_number=true")
   ;; Bookmarks
   (add-to-list 'mu4e-bookmarks
                '(:name "Inbox - Protonmail"
@@ -95,10 +96,10 @@
                '(:name "Inbox - Doris"
                  :query "maildir:/doris/INBOX"
                  :key ?d))
-  (add-to-list 'mu4e-bookmarks
-               '(:name "Inbox - MaU"
-                 :query "maildir:/mau/INBOX"
-                 :key ?m))
+  ;; (add-to-list 'mu4e-bookmarks
+  ;;              '(:name "Inbox - MaU"
+  ;;                :query "maildir:/mau/INBOX"
+  ;;                :key ?m))
   ;; Accounts
   (set-email-account! "doris"
                       '((mu4e-sent-folder . "/doris/Sent Messages")
@@ -121,13 +122,14 @@
                         (smtpmail-stream-type . plain)
                         (smtpmail-smtp-user . "sebastianbengtegard@protonmail.com"))
                       t)
-  (set-email-account! "mau"
-                      '((mu4e-sent-folder . "/mau/Sent Items")
-                        (mu4e-drafts-folder . "/mau/Drafts")
-                        (mu4e-trash-folder . "/mau/Deleted Items")
-                        (mu4e-refile-folder . "/mau/Archive")
-                        (user-mail-address . "sebastian.bengtegard@mau.se")
-                        (smtpmail-smtp-service . 587)
-                        (smtpmail-smtp-server . "smtp.office365.com")
-                        (smtpmail-smtp-user . "sebastian.bengtegard@mau.se"))
-                      t))
+  ;; (set-email-account! "mau"
+  ;;                     '((mu4e-sent-folder . "/mau/Sent Items")
+  ;;                       (mu4e-drafts-folder . "/mau/Drafts")
+  ;;                       (mu4e-trash-folder . "/mau/Deleted Items")
+  ;;                       (mu4e-refile-folder . "/mau/Archive")
+  ;;                       (user-mail-address . "sebastian.bengtegard@mau.se")
+  ;;                       (smtpmail-smtp-service . 587)
+  ;;                       (smtpmail-smtp-server . "smtp.office365.com")
+  ;;                       (smtpmail-smtp-user . "sebastian.bengtegard@mau.se"))
+  ;;                     t)
+  )
