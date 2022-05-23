@@ -4,7 +4,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help:ll:n:nnn"
 
-setopt auto_cd              # cd by just typing paths
 setopt prompt_subst         # prompts for parameter expansions, etc.
 setopt no_match             # errors for non matching filenames
 setopt inc_append_history   # continously add to history
@@ -13,41 +12,27 @@ setopt hist_ignore_dups     # ignore duplicate previous commands
 setopt no_case_glob         # case insensitive globbing
 setopt no_beep              # silence!
 
+# Completion system, colornames, editable command line
+zmodload zsh/complist
 autoload -Uz compinit colors edit-command-line
-# Completion system and colornames (for the prompt below)
 compinit && colors
-
-# Edit command line widget
 zle -N edit-command-line
 
 source $HOME/.exports
 source $HOME/.aliases
 
-function setprompt() {
-    PROMPT="%{$fg[blue]%}%n %{$fg[yellow]%}λ "
-    RPROMPT=" %{$fg[blue]%}%~ %{$fg[yellow]%}%m"
-}
+PROMPT="%{$fg[blue]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$fg[yellow]%}λ%{$reset_color%} "
 
-function precmd() {
-    setprompt
-}
+# menu selection, case insensitive match, list all files
+zstyle ':completion:*'                      menu select
+zstyle ':completion:*'                      matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*'                      file-list all
 
-# Set the custom prompt
-setprompt
-
-# Menu select, case insensitive, default coloring and custom for `options´
-zstyle ':completion:*'              menu select
-zstyle ':completion:*'              matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*'              list-colors ''
-zstyle ':completion:*:options'      list-colors '=^(-- *)=32'
-
-# Emacs mode
-bindkey -e
-bindkey '^R' history-incremental-search-backward
-bindkey '^S' history-incremental-search-forward
-bindkey '^P' history-search-backward
-bindkey '^N' history-search-forward 
 bindkey '^X^E' edit-command-line
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
 
 # Local configuration
 if [[ -f "$HOME/.zshrc.local" ]]; then
