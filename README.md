@@ -26,3 +26,11 @@ Local configuration for `zsh` and `vim` are loaded from `$HOME/.zshrc.local` and
 
 - [ ] Make setup.sh prompt for what files are to be symlinked
 - [ ] Setup for BASH
+
+## MacOS
+
+Dragable windows by `ctrl + cmd`:
+
+```bash
+$ defaults write -g NSWindowShouldDragOnGesture -bool yes
+```
