@@ -41,4 +41,3 @@ CommandLoginShell=TRUE
 RunCustomCommand=TRUE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 BackgroundDarkness=0.950000
-
