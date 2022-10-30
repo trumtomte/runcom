@@ -21,6 +21,8 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font (font-spec :family "JetBrains Mono NL" :size 16 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "Inter" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -96,10 +98,6 @@
                '(:name "Inbox - Doris"
                  :query "maildir:/doris/INBOX"
                  :key ?d))
-  ;; (add-to-list 'mu4e-bookmarks
-  ;;              '(:name "Inbox - MaU"
-  ;;                :query "maildir:/mau/INBOX"
-  ;;                :key ?m))
   ;; Accounts
   (set-email-account! "doris"
                       '((mu4e-sent-folder . "/doris/Sent Messages")
@@ -119,17 +117,10 @@
                         (user-mail-address . "sebastianbengtegard@protonmail.com")
                         (smtpmail-smtp-service . 1025)
                         (smtpmail-smtp-server . "127.0.0.1")
-                        (smtpmail-stream-type . plain)
+                        (smtpmail-stream-type . 'starttls)
                         (smtpmail-smtp-user . "sebastianbengtegard@protonmail.com"))
                       t)
-  ;; (set-email-account! "mau"
-  ;;                     '((mu4e-sent-folder . "/mau/Sent Items")
-  ;;                       (mu4e-drafts-folder . "/mau/Drafts")
-  ;;                       (mu4e-trash-folder . "/mau/Deleted Items")
-  ;;                       (mu4e-refile-folder . "/mau/Archive")
-  ;;                       (user-mail-address . "sebastian.bengtegard@mau.se")
-  ;;                       (smtpmail-smtp-service . 587)
-  ;;                       (smtpmail-smtp-server . "smtp.office365.com")
-  ;;                       (smtpmail-smtp-user . "sebastian.bengtegard@mau.se"))
-  ;;                     t)
   )
+
+(provide 'config)
+;;; config.el ends here
