@@ -1,7 +1,6 @@
+# General
 aria2
 bat
-elixir
-erlang
 ffmpeg
 fzf
 git
@@ -11,10 +10,8 @@ lftp
 maildir-utils
 mu
 nnn
-node
 pandoc
 pass
-postgresql
 ripgrep
 tmux
 urlview
@@ -22,3 +19,10 @@ vim (fzf.vim, vim-polygot)
 w3m
 zsh
 zsh-syntax-highlighting
+
+# Langs/DBs
+elixir
+erlang
+golang
+node
+postgresql
