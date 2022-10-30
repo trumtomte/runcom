@@ -7,14 +7,14 @@ IMAPStore doris-remote
     SSLType IMAPS
     SSLVersions TLSv1.2
     AuthMechs LOGIN
-    PipeLineDepth 3 # nr of concurrent cmds
-    # Timeout 120
+    PipeLineDepth 2 # nr of concurrent cmds
+    Timeout 120
 
 MaildirStore doris-local
     SubFolders Verbatim
     Path ~/Mail/doris/
     Inbox ~/Mail/doris/INBOX
-    MaxSize 1500k
+    MaxSize 2000k
 
 Channel doris-inbox
     Master :doris-remote:
