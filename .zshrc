@@ -21,12 +21,12 @@ zle -N edit-command-line
 source $HOME/.exports
 source $HOME/.aliases
 
-PROMPT="%{$fg[blue]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$fg[yellow]%}λ%{$reset_color%} "
+PROMPT="%{$fg[blue]%}%n%{$fg[yellow]%}:%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$fg[yellow]%}λ%{$reset_color%} "
 
 # menu selection, case insensitive match, list all files
-zstyle ':completion:*'                      menu select
-zstyle ':completion:*'                      matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*'                      file-list all
+zstyle ':completion:*'  menu select
+zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*'  file-list all
 
 bindkey '^X^E' edit-command-line
 bindkey -M menuselect 'h' vi-backward-char
