@@ -1,7 +1,0 @@
-# Mailcap
-text/html; w3m -v -F -o display_link_number=1 -I %{charset} -T text/html %s; nametemplate=%s.html; copiousoutput; needsterminal
-image/jpg; ~/.mutt/open_mutt_attachment.sh %s jpg
-image/jpeg; ~/.mutt/open_mutt_attachment.sh %s jpg
-image/png; ~/.mutt/open_mutt_attachment.sh %s png
-image/gif; ~/.mutt/open_mutt_attachment.sh %s gif
-application/pdf; ~/.mutt/open_mutt_attachment.sh %s pdf

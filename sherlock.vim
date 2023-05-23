@@ -5,12 +5,14 @@
 
 " Colors
 " ======
-" White:    7
-" Beige:    223
-" Yellow:   179
-" Red:      167
-" Blue:     109
-" Green:    71
+" White:        7
+" Beige:        223     (foreground)
+" Yellow:       179
+" Red:          167
+" Blue:         109
+" Green:        71
+" Gray:         243
+" Background:   235
 
 set background=dark
 
@@ -58,20 +60,20 @@ hi link netrwExe        SherlockRed
 hi link netrwSymLink    SherlockBlue
 
 " Syntax 
-hi! link Boolean        SherlockRed
+hi! link Boolean        SherlockGreen
 hi! link Character      SherlockRed
-hi! link Conditional    SherlockYellow
+hi! link Conditional    SherlockBlue
 hi! link Constant       SherlockRed
 hi! link Define         SherlockBlue
 hi! link Delimiter      SherlockWhite
 hi! link Float          SherlockRed
-hi! link Function       SherlockYellow
+hi! link Function       SherlockWhite
 hi! link Identifier     SherlockWhite
 hi! link Include        SherlockBlue
 hi! link Keyword        SherlockYellow
 hi! link Label          SherlockYellow
-hi! link Number         SherlockRed
 hi! link Noise          SherlockWhite
+hi! link Number         SherlockRed
 hi! link Operator       SherlockWhite
 hi! link PreProc        SherlockBlue
 hi! link Repeat         SherlockBlue
@@ -83,25 +85,5 @@ hi! link String         SherlockRed
 hi! link Structure      SherlockBlue
 hi! link Tag            SherlockWhite
 hi! link Title          SherlockWhite
-hi! link Type           SherlockBlue
+hi! link Type           SherlockYellow
 hi! link Typedef        SherlockYellow
-
-" Elixir
-hi link ElixirModuleDeclaration     SherlockYellow
-hi link ElixirMapDelimiter          SherlockWhite
-hi link ElixirVariable              SherlockWhite
-hi link ElixirAlias                 SherlockYellow
-hi link ElixirTupleDelimiter        SherlockWhite
-hi link ElixirStringDelimiter       SherlockRed
-hi link ElixirAtom                  SherlockBlue
-hi link ElixirBlock                 SherlockWhite
-hi link ElixirDocTest               SherlockRed
-hi link ElixirStructDefine          SherlockYellow
-
-" JSON
-hi link jsonNumber      SherlockBlue
-hi link jsonNull        SherlockGreen
-hi link jsonBoolean     SherlockGreen
-
-" LISP
-hi link lispParen      Comment

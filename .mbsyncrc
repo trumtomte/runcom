@@ -1,9 +1,9 @@
 # Doris
 # =====
 IMAPStore doris-remote
-    Host imap01.binero.se
+    Host csrv11.aname.net
     User sebastian@doris.tech
-    PassCmd "pass Doris/loopia/sebastian@doris.tech"
+    PassCmd "pass Doris/fsdata/mail/sebastian@doris.tech"
     SSLType IMAPS
     SSLVersions TLSv1.2
     AuthMechs LOGIN
@@ -23,7 +23,7 @@ Channel doris-inbox
     Create Both
     Expunge Both
     SyncState *
-    Patterns "INBOX" "Sent Messages" "Archive" "Deleted Messages"
+    Patterns "INBOX" "Sent" "Archive" "Trash"
 
 # Protonmail
 # ==========
@@ -31,15 +31,17 @@ IMAPStore pm-remote
     Host 127.0.0.1
     Port 1143
     User sebastianbengtegard@protonmail.com
-    PassCmd "pass Sebbe/protonbridge2"
-    SSLType None
+    PassCmd "pass Sebbe/protonmail/bridge"
+    SSLType STARTTLS
+    CertificateFile ~/.config/protonmail/bridge/cert.pem
     PipeLineDepth 5
+    Timeout 120
 
 MaildirStore pm-local
     SubFolders Verbatim
     Path ~/Mail/pm/
     Inbox ~/Mail/pm/INBOX
-    # MaxSize 120k
+    # MaxSize 5M
 
 Channel pm-inbox
     Master :pm-remote:
