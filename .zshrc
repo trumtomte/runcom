@@ -23,6 +23,8 @@ source $HOME/.aliases
 
 PROMPT="%{$fg[blue]%}%n%{$fg[yellow]%}:%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$fg[yellow]%}λ%{$reset_color%} "
 
+[ -n "$NNNLVL" ] && PROMPT="nnn($NNNLVL) $PROMPT"
+
 # menu selection, case insensitive match, list all files
 zstyle ':completion:*'  menu select
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
