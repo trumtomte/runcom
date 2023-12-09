@@ -22,7 +22,7 @@ source $HOME/.exports
 source $HOME/.aliases
 
 PROMPT="%{$fg[blue]%}%n%{$fg[yellow]%}:%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$fg[yellow]%}λ%{$reset_color%} "
-
+# Show nnn's current depth (level)
 [ -n "$NNNLVL" ] && PROMPT="nnn($NNNLVL) $PROMPT"
 
 # menu selection, case insensitive match, list all files
@@ -30,6 +30,8 @@ zstyle ':completion:*'  menu select
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*'  file-list all
 
+bindkey '^[[1;5D' vi-backward-blank-word
+bindkey '^[[1;5C' vi-forward-blank-word
 bindkey '^X^E' edit-command-line
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history

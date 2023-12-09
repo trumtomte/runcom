@@ -74,3 +74,18 @@ unrar_all() {
         unrar_d $i
     done
 }
+
+c() {
+    cc -g3 -Wall -Wextra \
+        -Wconversion \
+        -Wdouble-promotion \
+        -Wno-unused-parameter \
+        -Wno-unused-function \
+        -Wno-sign-conversion \
+        -fsanitize=undefined \
+        $1 -o ${1%.c}
+}
+
+dlf() {
+    curl $1 --output ${1##*/}
+}

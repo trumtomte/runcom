@@ -8,6 +8,10 @@ export TMPDIR=$HOME/tmp
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# C
+export ASAN_OPTIONS=abort_on_error=1:halt_on_error=1
+export UBSAN_OPTIONS=abort_on_error=1:halt_on_error=1
+
 export NNN_OPTS="dc"
 export NNN_FIFO=$TMPDIR/nnn.fifo
 export NNN_FCOLORS="0000b3070000f3f3006d6da7"

@@ -17,8 +17,8 @@ MaildirStore doris-local
     MaxSize 2000k
 
 Channel doris-inbox
-    Master :doris-remote:
-    Slave :doris-local:
+    Far :doris-remote:
+    Near :doris-local:
     CopyArrivalDate Yes
     Create Both
     Expunge Both
@@ -44,8 +44,8 @@ MaildirStore pm-local
     # MaxSize 5M
 
 Channel pm-inbox
-    Master :pm-remote:
-    Slave :pm-local:
+    Far :pm-remote:
+    Near :pm-local:
     CopyArrivalDate Yes
     Create Both
     Expunge Both
