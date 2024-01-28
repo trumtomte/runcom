@@ -36,3 +36,15 @@ Dragable windows by `ctrl + cmd`:
 ```bash
 $ defaults write -g NSWindowShouldDragOnGesture -bool yes
 ```
+
+## Packages
+
+aria2 bat ffmpeg fzf git imagemagick isync lftp maildir-utils mu nnn pandoc pass
+ripgrep vim (fzf.vim, vim-polygot) zsh zsh-syntax-highlighting
+
+## Getting started
+
+mkdirs: tmp, Torrents, .vim/{undo,colors,pack}
+symlinks: .{aliases,exports,zshrc,vimrc,mbsyncrc,lftprc} to home
+symlinks: sherlock.vim to .vim/colors
+cp doom config.el to doom dir

@@ -1,8 +1,8 @@
 # History
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help:ll:n:nnn"
+HISTSIZE=100000
+SAVEHIST=100000
+HISTORY_IGNORE="(ls|ls *|ll|ll *|cd|cd *|pwd|exit|date|* --help|n|nnn|vim *|man *|history|history *)"
 
 setopt prompt_subst         # prompts for parameter expansions, etc.
 setopt no_match             # errors for non matching filenames

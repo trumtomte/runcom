@@ -28,5 +28,4 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 fi
 
-# TODO: might drop this?
 export BAT_THEME="base16"

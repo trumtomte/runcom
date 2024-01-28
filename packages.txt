@@ -1,8 +1,0 @@
-# General
-
-aria2 bat ffmpeg fzf git imagemagick isync lftp maildir-utils mu nnn pandoc pass
-ripgrep tmux urlview vim (fzf.vim, vim-polygot) w3m zsh zsh-syntax-highlighting
-
-# Langs/DBs
-
-elixir erlang golang node postgresql

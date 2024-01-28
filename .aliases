@@ -42,36 +42,25 @@ md2pdf_all() {
     done
 }
 
-# Unzip with filename as directory name
-unzip_d() {
-    zipfile="$1"
-    zipdir=${1%.zip}
-
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        unzip $zipfile -d $zipdir
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
-    fi
-}
-
-unzip_all() {
+# Un{zip,rar} stuff
+unpack() {
     for i in *.zip; do
         [ -f "$i" ] || break
-        unzip_d $i
+        zipfile="$1"
+        zipdir=${1%.zip}
+
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            unzip $zipfile -d $zipdir
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+            ditto -V -x -k --sequesterRsrc --rsrc $zipfile $zipdir
+        fi
     done
-}
 
-# Unrar with filename as directory name
-unrar_d() {
-    rarfile="$1"
-    rardir=${1%.rar}
-    unrar x $rarfile $rardir/
-}
-
-unrar_all() {
     for i in *.rar; do
         [ -f "$i" ] || break
-        unrar_d $i
+        rarfile="$1"
+        rardir=${1%.rar}
+        unrar x $rarfile $rardir/
     done
 }
 
@@ -84,8 +73,4 @@ c() {
         -Wno-sign-conversion \
         -fsanitize=undefined \
         $1 -o ${1%.c}
-}
-
-dlf() {
-    curl $1 --output ${1##*/}
 }

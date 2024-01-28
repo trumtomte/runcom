@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Sebastian Bengtegård"
@@ -28,8 +27,8 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
-(setq doom-font (font-spec :family "JetBrains Mono NL" :size 16 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Inter" :size 16))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 17 :weight 'medium)
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 17))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -75,7 +74,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;;
 
+(setq pixel-scroll-precision-mode t)
 (setq evil-escape-key-sequence "jj")
 (setq calendar-week-start-day 1)
 
@@ -85,10 +86,10 @@
         mu4e-headers-time-format "%R"
         mu4e-headers-date-format "%d/%m/%y"
         mm-text-html-renderer 'gnus-w3m)
-
+  ;; Shortcuts
   (add-to-list 'mu4e-maildir-shortcuts '(:maildir "/pm/INBOX" :key ?p))
   (add-to-list 'mu4e-maildir-shortcuts '(:maildir "/doris/INBOX" :key ?d))
-
+  ;; Accounts
   (set-email-account! "doris"
                       '((mu4e-sent-folder . "/doris/Sent")
                         (mu4e-drafts-folder . "/doris/Drafts")
@@ -110,5 +111,50 @@
                         (smtpmail-smtp-server . "127.0.0.1")
                         (smtpmail-stream-type . plain)
                         (smtpmail-smtp-user . "sebastianbengtegard@protonmail.com"))
-                      t)
+                      t))
+
+(use-package! org-ref
+  :after org
+  :custom
+  (org-ref-default-bibliography "/home/sebbe/Zotero/library.bib"))
+
+(after! org
+  (define-key org-mode-map (kbd "C-c i") 'org-ref-insert-link)
+  (define-key org-mode-map (kbd "C-c r") 'org-ref-insert-ref-link)
+  (setq bibtex-completion-bibliography '("/home/sebbe/Zotero/library.bib"))
+  ;; (setq org-cite-global-bibliography '("/home/sebbe/Zotero/library.bib"))
+  (setq org-latex-compiler "pdfxelatex")
+  (setq org-latex-pdf-process '("latexmk -pdfxe -interaction=\"nonstopmode\" -bibtex -f %f"))
+
+  (add-to-list 'org-latex-classes
+               '("IEEEtran" "\\documentclass{IEEEtran}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("llncs" "\\documentclass{llncs}"
+                 ("\\section{%s}" . "\\section{%s}")
+                 ("\\subsection{%s}" . "\\subsection{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+  (add-to-list 'org-latex-classes
+               '("apa7" "\\documentclass{apa7}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   )
+
+(after! lsp-mode
+  (add-hook 'before-save-hook #'+format/buffer nil t)
+  (setq  lsp-go-analyses '((fieldalignment . t)
+                           (nilness . t)
+                           (shadow . t)
+                           (unusedparams . t)
+                           (unusedwrite . t)
+                           (useany . t)
+                           (unusedvariable . t))))

@@ -1,4 +1,3 @@
-export PATH=$PATH:$HOME/Git/elixir-ls
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
 source /usr/share/doc/fzf/examples/key-bindings.zsh
