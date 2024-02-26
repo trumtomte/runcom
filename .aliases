@@ -35,13 +35,6 @@ md2pdf() {
         -V linestretch=1.3
 }
 
-md2pdf_all() {
-    for i in *.md; do
-        [ -f "$i" ] || break
-        md2pdf $i
-    done
-}
-
 # Un{zip,rar} stuff
 unpack() {
     for i in *.zip; do
@@ -62,15 +55,4 @@ unpack() {
         rardir=${1%.rar}
         unrar x $rarfile $rardir/
     done
-}
-
-c() {
-    cc -g3 -Wall -Wextra \
-        -Wconversion \
-        -Wdouble-promotion \
-        -Wno-unused-parameter \
-        -Wno-unused-function \
-        -Wno-sign-conversion \
-        -fsanitize=undefined \
-        $1 -o ${1%.c}
 }

@@ -37,7 +37,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type nil)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -76,9 +76,7 @@
 ;; they are implemented.
 ;;
 
-(setq pixel-scroll-precision-mode t)
 (setq evil-escape-key-sequence "jj")
-(setq calendar-week-start-day 1)
 
 (after! mu4e
   ;; General settings
@@ -113,35 +111,39 @@
                         (smtpmail-smtp-user . "sebastianbengtegard@protonmail.com"))
                       t))
 
-(use-package! org-ref
-  :after org
-  :custom
-  (org-ref-default-bibliography "/home/sebbe/Zotero/library.bib"))
+;; (use-package! org-ref
+;;   :after org
+;;   :custom
+;;   (setq bibtex-completion-bibliography '("/home/sebbe/Zotero/library.bib"))
+;;   (define-key org-mode-map (kbd "C-c i") 'org-ref-insert-link)
+;;   (define-key org-mode-map (kbd "C-c r") 'org-ref-insert-ref-link))
+;;
 
 (after! org
-  (define-key org-mode-map (kbd "C-c i") 'org-ref-insert-link)
-  (define-key org-mode-map (kbd "C-c r") 'org-ref-insert-ref-link)
-  (setq bibtex-completion-bibliography '("/home/sebbe/Zotero/library.bib"))
-  ;; (setq org-cite-global-bibliography '("/home/sebbe/Zotero/library.bib"))
+  (setq org-cite-global-bibliography '("/home/sebbe/Zotero/library.bib"))
   (setq org-latex-compiler "pdfxelatex")
-  (setq org-latex-pdf-process '("latexmk -pdfxe -interaction=\"nonstopmode\" -bibtex -f %f"))
+  (setq org-latex-pdf-process '("latexmk -pdfxe -interaction=\"nonstopmode\" -bibtex -f %f")))
 
+(use-package! oc-bibtex
+  :after org)
+
+(after! ox-latex
   (add-to-list 'org-latex-classes
-               '("IEEEtran" "\\documentclass{IEEEtran}"
+               '("IEEEtran" "\\documentclass[10pt]{IEEEtran}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   (add-to-list 'org-latex-classes
-               '("llncs" "\\documentclass{llncs}"
+               '("llncs" "\\documentclass[10pt]{llncs}"
                  ("\\section{%s}" . "\\section{%s}")
                  ("\\subsection{%s}" . "\\subsection{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection{%s}")
                  ("\\paragraph{%s}" . "\\paragraph{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
   (add-to-list 'org-latex-classes
-               '("apa7" "\\documentclass{apa7}"
+               '("apa7" "\\documentclass[10pt]{apa7}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -150,11 +152,29 @@
   )
 
 (after! lsp-mode
-  (add-hook 'before-save-hook #'+format/buffer nil t)
-  (setq  lsp-go-analyses '((fieldalignment . t)
-                           (nilness . t)
-                           (shadow . t)
-                           (unusedparams . t)
-                           (unusedwrite . t)
-                           (useany . t)
-                           (unusedvariable . t))))
+  (setq lsp-go-analyses '((fieldalignment . t)
+                          (nilness . t)
+                          (shadow . t)
+                          (unusedparams . t)
+                          (unusedwrite . t)
+                          (useany . t)
+                          (unusedvariable . t))))
+
+;; C/C++ debugging
+(setq gdb-many-windows t)
+(setq gdb-speedbar-auto-raise t)
+(map! :localleader
+      (:map (c++-mode-map c-mode-map)
+            (:desc "Run GDB" "g" #'gdb)
+            (:prefix ("d" . "debug")
+                     (:desc "Display GDB buffer" "g" #'gdb-display-gdb-buffer)
+                     (:desc "Display memory buffer" "m" #'gdb-display-memory-buffer)
+                     (:desc "Display locals buffer" "l" #'gdb-display-locals-buffer)
+                     (:desc "Display locals buffer" "l" #'gdb-display-locals-buffer)
+                     (:desc "Display locals buffer" "l" #'gdb-display-locals-buffer)
+                     (:desc "Display I/O buffer" "i" #'gdb-display-io-buffer)
+                     (:desc "Run the program" "r" #'gud-run)
+                     (:desc "Step one line (next)" "n" #'gud-next)
+                     (:desc "Watch expression at point" "w" #'gud-watch)
+                     (:desc "Set breakpoint" "b" #'gud-break)
+                     (:desc "Set breakpoint" "B" #'gud-remove))))

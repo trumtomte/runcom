@@ -40,7 +40,12 @@ $ defaults write -g NSWindowShouldDragOnGesture -bool yes
 ## Packages
 
 aria2 bat ffmpeg fzf git imagemagick isync lftp maildir-utils mu nnn pandoc pass
-ripgrep vim (fzf.vim, vim-polygot) zsh zsh-syntax-highlighting
+ripgrep vim (fzf.vim, vim-polygot) zsh zsh-syntax-highlighting texlive-xetex
+texlive-latex-extra textlive-bibtex-extra texlive-publishers latexmk htop
+
+qalculate, ghex/okteta, zathura, wireshark, zotero, vlc, discord, emacs, firefox
+
+papirus-icon-theme
 
 ## Getting started
 
