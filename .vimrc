@@ -34,11 +34,6 @@ nmap <leader>bs :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>n :noh <CR>
 nmap <leader>e :set rnu!<CR>
-" fzf.vim
-nmap <leader>o :Files<CR>
-nmap <leader>f :Rg<CR>
-nmap <leader>F :BLines<CR>
-nmap <leader>b :Buffers<CR>
 
 " Print highlight group
 nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
