@@ -18,6 +18,7 @@
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (electric-pair-mode t)
+  (global-hl-line-mode 1)
   :hook ((prog-mode . subword-mode)
 	 (prog-mode . add-fixme-and-todo-font-lock))
   :bind ([f9] . 'open-personal-wiki)
@@ -50,7 +51,8 @@
 
 (use-package which-key
   :load-path "~/.emacs.d/local/which-key"
-  :config (which-key-mode))
+  :commands (which-key-mode)
+  :init (which-key-mode))
 
 (use-package rainbow-delimiters
   :load-path "~/.emacs.d/local/rainbow-delimiters"
@@ -62,7 +64,8 @@
 	 ("M-v" . View-scroll-half-page-backward)))
 
 (use-package org
-  :hook (org-mode . visual-line-mode)
+  :hook ((org-mode . visual-line-mode)
+	 (org-mode . flyspell-mode))
   :custom (org-startup-indented t))
 
 (use-package ox-latex
@@ -87,9 +90,17 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
+(use-package markdown-mode
+  :load-path "~/.emacs.d/local/markdown-mode"
+  :mode "\\.md\\'"
+  :magic "\\.md\\'"
+  :hook ((markdown-mode . visual-line-mode)
+	 (markdown-mode . flyspell-mode)))
+
 (use-package eldoc
   :init (global-eldoc-mode)
-  :custom (eldoc-echo-area-use-multiline-p nil))
+  :custom
+  (eldoc-echo-area-use-multiline-p nil))
 
 (defun reactivate-flymake-backend ()
   "Allow more flymake backends simultaneously (e.g. ruff for python)."
@@ -99,8 +110,6 @@
 (use-package eglot
   :hook ((c-ts-mode cpp-ts-mode go-ts-mode python-ts-mode js-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
-	      ("C-c c a" . eglot-code-actions)
-	      ("C-c c o" . eglot-code-actions-organize-imports)
 	      ("C-c c r" . eglot-rename)
 	      ("C-c c f" . eglot-format))
   :config
@@ -118,17 +127,13 @@
   :custom
   (python-flymake-command '("~/.local/bin/ruff" "check" "--quiet" "--stdin-filename" "stdin")))
 
+(use-package c-ts-mode
+  :bind (:map c-ts-mode-map
+	 ("C-c C-d" . gdb)
+	 ("C-c C-b" . compile)))
+
 (use-package go-ts-mode
   :mode "\\.go\\'")
-
-  ;; (setq lsp-go-analyses '((fieldalignment . t)
-  ;;                         (nilness . t)
-  ;;                         (shadow . t)
-  ;;                         (unusedparams . t)
-  ;;                         (unusedwrite . t)
-  ;;                         (useany . t)
-  ;;                         (unusedvariable . t))))
-
 
 (use-package go-mod-ts-mode
   :mode "/go\\.mod\\'")
@@ -136,8 +141,4 @@
 (use-package php-mode
   :load-path "~/.emacs.d/local/php-mode/lisp")
 
-(use-package markdown-mode
-  :load-path "~/.emacs.d/local/markdown-mode"
-  :mode "\\.md\\'"
-  :magic "\\.md\\'")
-
+;;; .emacs ends here

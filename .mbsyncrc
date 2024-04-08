@@ -7,14 +7,14 @@ IMAPStore doris-remote
     SSLType IMAPS
     SSLVersions TLSv1.2
     AuthMechs LOGIN
-    PipeLineDepth 2 # nr of concurrent cmds
+    PipeLineDepth 5 # nr of concurrent cmds
     Timeout 120
 
 MaildirStore doris-local
     SubFolders Verbatim
     Path ~/Mail/doris/
     Inbox ~/Mail/doris/INBOX
-    MaxSize 2000k
+    # MaxSize 2000k
 
 Channel doris-inbox
     Far :doris-remote:
@@ -50,4 +50,4 @@ Channel pm-inbox
     Create Both
     Expunge Both
     SyncState *
-    Patterns "INBOX" "Sent" "Trash" "Archive"
+    Patterns "INBOX" "Sent" "Archive" "Trash"
