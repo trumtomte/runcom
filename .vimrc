@@ -3,8 +3,6 @@ syntax on
 filetype plugin indent on
 colorscheme sherlock
 
-" Settings
-" ========
 set autoindent                  " Copy indent from previous line
 set autoread                    " Auto update file if it changes outside of vim
 set backspace=indent,eol,start  " Allow backspace in insertmode
@@ -25,20 +23,17 @@ set undodir=~/.vim/undo         " Directory for undo files
 set undofile                    " Persist undo files
 set wildmenu                    " Enable wildmenu for tab-completion
 
-" Bindings
-" ========
 let mapleader = "\<Space>"
 inoremap jj <ESC>
+
 nmap <leader>w :w<CR>
 nmap <leader>bs :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>n :noh <CR>
 nmap <leader>e :set rnu!<CR>
-
-" Print highlight group
+" Show syntax group
 nmap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . ">"<CR>
 
-" Local .vimrc config
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif

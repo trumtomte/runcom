@@ -24,10 +24,13 @@ gray4   = 240
 Local configuration for `zsh` and `vim` are loaded from `$HOME/.zshrc.local` and
 `$HOME/.vimrc.local` respectively.
 
-## TODO
+For example, `.zshrc.local`:
 
-- [ ] Make setup.sh prompt for what files are to be symlinked
-- [ ] Setup for BASH
+```
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+```
 
 ## MacOS
 
@@ -37,19 +40,20 @@ Dragable windows by `ctrl + cmd`:
 $ defaults write -g NSWindowShouldDragOnGesture -bool yes
 ```
 
-## Packages
+## Stuff to install
 
-aria2 bat ffmpeg fzf git imagemagick isync lftp maildir-utils mu nnn pandoc pass
-ripgrep vim (fzf.vim, vim-polygot) zsh zsh-syntax-highlighting texlive-xetex
-texlive-latex-extra textlive-bibtex-extra texlive-publishers latexmk htop
+*General*
 
-qalculate, ghex/okteta, zathura, wireshark, zotero, vlc, discord, emacs, firefox
+aria2, ffmpeg, fzf, git, imagemagick, lftp, nnn, pass, ripgrep, vim,
+zsh, zsh-syntax-highlighting, emacs
 
-papirus-icon-theme
+qalculate, ghex/okteta, zathura, wireshark, zotero, vlc, discord,
+
+papirus-icon-theme, IBM Plex font
 
 ## Getting started
 
-mkdirs: tmp, Torrents, .vim/{undo,colors,pack}
-symlinks: .{aliases,exports,zshrc,vimrc,mbsyncrc,lftprc} to home
-symlinks: sherlock.vim to .vim/colors
-cp doom config.el to doom dir
+mkdir: $HOME/.vim/{undo,colors}
+ln: .{zshrc,vimrc,lftprc,emacs} to $HOME
+ln: sherlock.vim to $HOME/.vim/colors
+cp: terminalc to $HOME/.config/xfce4/terminal
