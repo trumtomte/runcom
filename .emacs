@@ -84,7 +84,6 @@
      (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
      (css "https://github.com/tree-sitter/tree-sitter-css")
      (go "https://github.com/tree-sitter/tree-sitter-go")
-     (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
      (js "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
      (json "https://github.com/tree-sitter/tree-sitter-json")
      (python "https://github.com/tree-sitter/tree-sitter-python")))
@@ -154,12 +153,12 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
-(use-package markdown-mode
-  :load-path "~/.emacs.d/local/markdown-mode"
-  :mode "\\.md\\'"
-  :magic "\\.md\\'"
-  :hook ((markdown-mode . visual-line-mode)
-	 (markdown-mode . flyspell-mode)))
+;; (use-package markdown-mode
+;;   :load-path "~/.emacs.d/local/markdown-mode"
+;;   :mode "\\.md\\'"
+;;   :magic "\\.md\\'"
+;;   :hook ((markdown-mode . visual-line-mode)
+;; 	 (markdown-mode . flyspell-mode)))
 
 (use-package eldoc
   :init (global-eldoc-mode)
@@ -238,12 +237,12 @@
   :bind (:map go-ts-mode-map
 	      ("C-c c" . compile)))
 
-(use-package go-mod-ts-mode
-  :mode "/go\\.mod\\'")
+;; (use-package go-mod-ts-mode
+;;   :mode "/go\\.mod\\'")
 
-(use-package php-mode
-  :load-path "~/.emacs.d/local/php-mode/lisp"
-  :mode "\\.php\\'")
+;; (use-package php-mode
+;;   :load-path "~/.emacs.d/local/php-mode/lisp"
+;;   :mode "\\.php\\'")
 
 (defun set-personal-gnus-topics ()
   "Set custom topics for topic mode."
