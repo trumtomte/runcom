@@ -102,7 +102,7 @@ export NNN_COLORS="#f36da7b3"
 export NNN_OPENER="vim"
 
 export FZF_DEFAULT_OPTS="
---height 40% --layout=reverse
+--height 80% --layout=reverse
 --color fg:243,bg:235,hl:223,fg+:179,bg+:234,hl+:179
 --color info:243,prompt:179,spinner:167,pointer:167,marker:167,header:223
 "
