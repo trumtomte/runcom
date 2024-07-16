@@ -1,28 +1,5 @@
-;;; package --- Sebbes Emacs configuration
-;;; Commentary:
-;;; Code:
+;;; Emacs config
 
-;;; TODO: personal color theme (i.e. replace the doom theme)
-;;;       list-faces-display
-;;; blue: #51afef, #6bbbf1
-;;; cyan: #46d9ff, #61deff
-;;; green: #98be65, #a7c77c
-;;; white: #bbc2cf, #dfdfdf
-;;; black: #282c34 (this is the editor bg), fg #1b2229, bg, #202328 (bright)
-;;; magenta: #c678dd, #ce8ce2
-;;; yellow: #ecbe7b, #eec78e
-;;; red: #ff6c6b, #ff8281
-;;; orange: #da8548
-;;; purple: #a9a1e1
-;;; pink: #dcaeea
-
-(defun seb/keyword-highlight ()
-  "Highlight the keywords `FIXME:`, `TODO:` and `NOTE:`."
-  (font-lock-add-keywords nil
-			  '(("\\<\\(FIXME\\):" 1 '((t :foreground "#ff6c6b" :weight bold :underline t)) t)
-			    ("\\<\\(TODO\\):" 1 '((t :foreground "#ecbe7b" :weight bold :underline t)) t)
-			    ("\\<\\(NOTE\\):" 1 '((t :foreground "#98be65" :weight bold :underline t)) t))))
-				 
 (defun seb/open-config ()
   "Open the Emacs configuration file."
   (interactive)
@@ -38,9 +15,17 @@
   (interactive "sString to surround region with: ")
   (insert-pair nil str str))
 
+(defun seb/keyword-highlight ()
+  "Highlight the keywords `FIXME:`, `TODO:` and `NOTE:`."
+  (font-lock-add-keywords nil
+			  '(("\\<\\(FIXME\\)" 1 '((t :foreground "#ff6c6b" :weight bold :underline t)) t)
+			    ("\\<\\(TODO\\)" 1 '((t :foreground "#ecbe7b" :weight bold :underline t)) t)
+			    ("\\<\\(NOTE\\)" 1 '((t :foreground "#98be65" :weight bold :underline t)) t))))
+
 (use-package emacs
   :init
   (set-face-attribute 'default nil :font "IBM Plex Mono Medium" :height 130)
+  (load-theme 'watson t)
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
@@ -48,7 +33,6 @@
   (electric-pair-mode t)
   (global-hl-line-mode 1)
   (repeat-mode 1)
-    
   (advice-add 'other-window :before
 	      (defun seb/other-window-split-if-single (&rest _)
 		"Split the frame first if there is a single window."
@@ -64,6 +48,7 @@
 	 ("M-\"" . 'seb/surround-region)
 	 ("M-o" . 'other-window)
 	 ("M-O" . 'window-swap-states)
+	 ("C-;" . 'mark-sexp)
 	 ("C-x C-b" . 'ibuffer)
 	 ("C-x C-k" . 'kill-this-buffer)
 	 ("C-<return>" . 'switch-to-buffer)) ;; NOTE: maybe project- or find-file?
@@ -77,6 +62,7 @@
   (gdb-speedbar-auto-raise t)
   (backup-directory-alist '(("." . "~/.emacs.d/backup")))
   (auto-save-file-name-transforms '((".*" "~/.emacs.d/backup" t)))
+  
   ;; Tree sitter setup
   (treesit-font-lock-level 4)
   (treesit-language-source-alist
@@ -93,21 +79,7 @@
      (python-mode . python-ts-mode)
      (css-mode . css-ts-mode)
      (js-json-mode . json-ts-mode)
-     (javascript-mode . js-ts-mode)))
-  :custom-face
-  (lazy-highlight ((t (:background "#3e493d" :foreground "#98be65" :weight bold)))))
-
-(use-package doom-themes
-  :load-path "~/.emacs.d/local/doom-themes"
-  :config (load-theme 'doom-one t)
-  :custom
-  (doom-themes-enable-bold t)
-  (doom-themes-enable-italic t))
-
-;; (use-package which-key
-;;   :load-path "~/.emacs.d/local/which-key"
-;;   :commands (which-key-mode)
-;;   :init (which-key-mode))
+     (javascript-mode . js-ts-mode))))
 
 (use-package view
   :bind (("C-v" . View-scroll-half-page-forward)
@@ -119,7 +91,6 @@
   :custom (org-startup-indented t))
   
 (use-package oc
-  ;; NOTE: use M-j to exit fido when searching for citations
   :custom
   (org-cite-global-bibliography '("/home/sebbe/Zotero/library.bib")))
 
@@ -127,7 +98,6 @@
   :custom
   (org-latex-compiler "xelatex")
   :config
-  ; TODO: test whether we can write these as the one above/below
   (add-to-list 'org-latex-classes
                '("IEEEtran" "\\documentclass{IEEEtran}"
                  ("\\section{%s}" . "\\section*{%s}")
@@ -152,13 +122,6 @@
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
-
-;; (use-package markdown-mode
-;;   :load-path "~/.emacs.d/local/markdown-mode"
-;;   :mode "\\.md\\'"
-;;   :magic "\\.md\\'"
-;;   :hook ((markdown-mode . visual-line-mode)
-;; 	 (markdown-mode . flyspell-mode)))
 
 (use-package eldoc
   :init (global-eldoc-mode)
@@ -200,6 +163,7 @@
   (declare-function gdb-set-window-buffer "gdb-mi")
   (declare-function gdb-memory-buffer-name "gdb-mi")
   (declare-function gdb-locals-buffer-name "gdb-mi")
+  ;; TODO: add gdb-dissassembly-buffer as well
   (gdb-get-buffer-create 'gdb-locals-values-buffer)
   (gdb-get-buffer-create 'gdb-locals-buffer)
   (gdb-get-buffer-create 'gdb-memory-buffer)
@@ -237,13 +201,7 @@
   :bind (:map go-ts-mode-map
 	      ("C-c c" . compile)))
 
-;; (use-package go-mod-ts-mode
-;;   :mode "/go\\.mod\\'")
-
-;; (use-package php-mode
-;;   :load-path "~/.emacs.d/local/php-mode/lisp"
-;;   :mode "\\.php\\'")
-
+;; TODO: In general, test the mail setup more
 (defun set-personal-gnus-topics ()
   "Set custom topics for topic mode."
   (setq gnus-topic-topology '(("Gnus" visible)
