@@ -1,5 +1,5 @@
 (deftheme watson
-  "Inspired by Atom One Dark and Doom One")
+  "Inspired by Doom One / Atom One Dark.")
 
 (custom-theme-set-faces
  'watson
@@ -145,6 +145,7 @@
  '(ediff-odd-diff-A ((t (:inherit ediff-even-diff-A))))
  '(ediff-odd-diff-B ((t (:inherit ediff-odd-diff-A))))
  '(ediff-odd-diff-C ((t (:inherit ediff-odd-diff-A))))
+ '(eglot-highlight-symbol-face ((t :underline t)))
  '(erc-button ((t (:weight bold :underline t))))
  '(erc-default-face ((t (:inherit default))))
  '(erc-action-face ((t (:weight bold))))
@@ -209,11 +210,11 @@
  '(gnus-group-mail-low-empty ((t (:inherit gnus-group-mail-1-empty))))
  '(gnus-group-news-low ((((class color) (min-colors 257)) (:inherit gnus-group-mail-1 :foreground "#5B6268")) (((class color) (min-colors 256)) (:inherit gnus-group-mail-1 :foreground "#525252")) (((class color) (min-colors 16)) (:inherit gnus-group-mail-1 :foreground "brightblack"))))
  '(gnus-group-news-low-empty ((t (:inherit gnus-group-news-low :weight normal))))
- '(gnus-header-content ((t (:inherit message-header-other))))
- '(gnus-header-from ((t (:inherit message-header-other))))
- '(gnus-header-name ((t (:inherit message-header-name))))
- '(gnus-header-newsgroups ((t (:inherit message-header-other))))
- '(gnus-header-subject ((t (:inherit message-header-subject))))
+ '(gnus-header-content ((t (:inherit font-lock-constant-face))))
+ '(gnus-header-from ((t (:inherit error))))
+ '(gnus-header-name ((t (:inherit success))))
+ '(gnus-header-newsgroups ((t (:inherit success))))
+ '(gnus-header-subject ((t (:inherit font-lock-type-face))))
  '(gnus-summary-cancelled ((((class color) (min-colors 257)) (:foreground "#ff6c6b" :strike-through t)) (((class color) (min-colors 256)) (:foreground "#ff6655" :strike-through t)) (((class color) (min-colors 16)) (:foreground "red" :strike-through t))))
  '(gnus-summary-high-ancient ((((class color) (min-colors 257)) (:foreground "#7b8186" :inherit italic)) (((class color) (min-colors 256)) (:foreground "#747474" :inherit italic)) (((class color) (min-colors 16)) (:foreground "brightblack" :inherit italic))))
  '(gnus-summary-high-read ((((class color) (min-colors 257)) (:foreground "#c8ced8")) (((class color) (min-colors 256)) (:foreground "#cbcbcb")) (((class color) (min-colors 16)) (:foreground "brightwhite"))))
