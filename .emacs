@@ -24,7 +24,7 @@
 
 (use-package emacs
   :init
-  (set-face-attribute 'default nil :font "IBM Plex Mono Medium" :height 130)
+  (set-face-attribute 'default nil :font "IBM Plex Mono" :height 130 :weight 'medium)
   (load-theme 'watson t)
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
@@ -33,6 +33,9 @@
   (electric-pair-mode t)
   (global-hl-line-mode 1)
   (repeat-mode 1)
+  
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  
   (advice-add 'other-window :before
 	      (defun seb/other-window-split-if-single (&rest _)
 		"Split the frame first if there is a single window."
@@ -50,8 +53,7 @@
 	 ("M-O" . 'window-swap-states)
 	 ("C-;" . 'mark-sexp)
 	 ("C-x C-b" . 'ibuffer)
-	 ("C-x C-k" . 'kill-this-buffer)
-	 ("C-<return>" . 'switch-to-buffer)) ;; NOTE: maybe project- or find-file?
+	 ("C-x C-k" . 'kill-this-buffer))
   
   :custom
   (ring-bell-function 'ignore)
@@ -62,6 +64,10 @@
   (gdb-speedbar-auto-raise t)
   (backup-directory-alist '(("." . "~/.emacs.d/backup")))
   (auto-save-file-name-transforms '((".*" "~/.emacs.d/backup" t)))
+
+  (inhibit-splash-screen t)
+
+  ;; (initial-scratch-message nil)
   
   ;; Tree sitter setup
   (treesit-font-lock-level 4)
@@ -88,11 +94,14 @@
 (use-package org
   :hook ((org-mode . visual-line-mode)
 	 (org-mode . flyspell-mode))
-  :custom (org-startup-indented t))
+  :custom
+  (org-startup-indented t)
+  (org-hide-emphasis-markers t)
+  )
   
 (use-package oc
   :custom
-  (org-cite-global-bibliography '("/home/sebbe/Zotero/library.bib")))
+  (org-cite-global-bibliography '("~/Zotero/library.bib")))
 
 (use-package ox-latex
   :custom
@@ -130,6 +139,7 @@
 
 (defun seb/reactivate-flymake-backend ()
   "Allow more flymake backends simultaneously (e.g. ruff for python)."
+  (declare-function eglot-flymake-backend "eglot")
   (add-hook 'flymake-diagnostic-functions #'eglot-flymake-backend nil t)
   (flymake-mode 1))
 
@@ -141,21 +151,22 @@
 	      ("C-c f" . eglot-format))
   :config
   (add-to-list 'eglot-stay-out-of 'flymake)
-  (add-hook 'eglot-managed-mode-hook 'seb/reactivate-flymake-backend)
-  :custom-face
-  (eglot-highlight-symbol-face ((t :underline t))))
+  (add-to-list 'eglot-server-programs
+	       '(python-ts-mode . ("~/.cargo/bin/ruff" "server")))
+  (add-hook 'eglot-managed-mode-hook 'seb/reactivate-flymake-backend))
 
 (use-package flymake
   :hook (prog-mode . flymake-mode)
   :bind (:map flymake-mode-map
+	      ("C-c ! l" . flymake-show-buffer-diagnostics)
 	      ("M-n" . flymake-goto-next-error)
 	      ("M-p" . flymake-goto-prev-error))
   :custom
-  (python-flymake-command '("~/.local/bin/ruff" "check" "--quiet" "--stdin-filename" "stdin")))
+  ;; Python linter/formatter
+  (python-flymake-command '("~/.cargo/bin/ruff" "check" "--quiet" "--stdin-filename" "stdin")))
 
 (defun seb/gdb-setup-windows ()
   "Custom GDB many windows setup."
-  ;; ignore compiler warnings
   (defvar gud-comint-buffer)
   (defvar gdb-source-window-list)
   (declare-function gdb-get-buffer-create "gdb-mi")
@@ -201,39 +212,11 @@
   :bind (:map go-ts-mode-map
 	      ("C-c c" . compile)))
 
-;; TODO: In general, test the mail setup more
-(defun set-personal-gnus-topics ()
-  "Set custom topics for topic mode."
-  (setq gnus-topic-topology '(("Gnus" visible)
-			      (("protonmail" visible nil nil))
-			      (("doris" visible nil nil))))
-  (setq gnus-topic-alist '(("protonmail"
-                            "nnimap+protonmail:INBOX"
-                            "nnimap+protonmail:Sent"
-                            "nnimap+protonmail:Archive"
-                            "nnimap+protonmail:Trash"
-                            "nnimap+protonmail:All Mail"
-			    "nnimap+protonmail:Drafts"
-			    "nnimap+protonmail:Starred"
-			    "nnimap+protonmail:Spam")
-			   ("doris"
-                            "nnimap+doris:INBOX"
-                            "nnimap+doris:INBOX.Sent"
-                            "nnimap+doris:INBOX.Archive"
-                            "nnimap+doris:INBOX.Trash"
-			    "nnimap+doris:INBOX.Drafts"
-			    "nnimap+doris:INBOX.spam")
-                           ("Gnus")))
-  (gnus-topic-set-parameters "protonmail" '((display . 100)))
-  (gnus-topic-set-parameters "doris" '((display . 100)))
-  ;; (gnus-summary-toggle-threads -1)
-  )
+(use-package pyvenv
+  :load-path "~/.emacs.d/local/pyvenv/"
+  :hook (python-ts-mode . pyvenv-mode))
 
 (use-package gnus
-  ;; :hook (
-	 ;; (gnus-group-mode . gnus-topic-mode)
-	 ;; (gnus-topic-mode . set-personal-gnus-topics)
-  ;; 	 )
   :custom
   (user-full-name "Sebastian Bengtegård")
   (user-mail-address "sebastianbengtegard@protonmail.com")
@@ -245,21 +228,21 @@
              (nnimap-server-port 1143)
              (nnimap-stream starttls)
 	     (nnimap-inbox "INBOX")
-	     (nnimap-expiry-wait never))
+	     (nnimap-split-methods default))
      (nnimap "doris"
 	     (nnimap-address "csrv11.aname.net")
 	     (nnimap-server-port 993)
 	     (nnimap-stream ssl)
 	     (nnimap-inbox "INBOX")
-	     (nnimap-expiry-wait never))))
+	     (nnimap-split-methods default))))
   
   (message-send-mail-function 'smtpmail-send-it)
+  ;; TODO: Add support for sending mails from the 'doris' mail as well
   (smtpmail-smtp-server "127.0.0.1")
   (smtpmail-smtp-service 1025)
   
   (gnus-use-dribble-file nil)
   (gnus-use-cache t)
   (gnus-summary-line-format "%U  %~(max-right 4)o-%~(cut-left 4)~(max-right 2)o-%~(cut-left 6)~(max-right 2)o   %-25,25n   %B%s\n")
-  ;; (gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject)
-  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date (not gnus-thread-sort-by-number)))
+  (gnus-thread-sort-functions 'gnus-thread-sort-by-most-recent-date)
   (mm-text-html-renderer 'gnus-w3m))
