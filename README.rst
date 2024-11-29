@@ -14,12 +14,11 @@ Custom colorscheme named "Sherlock"::
   green   = 71  #5faf5f 0x47
   magenta =     #C374B4
   cyan    =     #45B8B1
-
-  gray0   = 234 #1c1c1c 0xea
-  gray1   = 235 #262626 0xeb
-  gray2   = 243 #767676 0xf3
+  gray1   = 234 #1c1c1c 0xea
+  gray2   = 235 #262626 0xeb
   gray3   = 236 #303030 0xec
-  gray4   = 240
+  gray4   = 240 #585858
+  gray5   = 243 #767676 0xf3
 
 Local configuration for ``zsh`` and ``vim`` are loaded from ``$HOME/.zshrc.local`` and ``$HOME/.vimrc.local`` respectively.
 
@@ -29,23 +28,15 @@ For example, ``.zshrc.local`` with zsh syntax and fzf::
   source /usr/share/doc/fzf/examples/completion.zsh
   source /usr/share/doc/fzf/examples/key-bindings.zsh
 
-=====
-MacOS
-=====
-
-Dragable windows by ``ctrl + cmd``::
-
-  $ defaults write -g NSWindowShouldDragOnGesture -bool yes
-
-=======
-Install
-=======
+========
+Packages
+========
 
 Braindump of stuff that I might install.
 
 aria2, ffmpeg, fzf, git, imagemagick, lftp, nnn, pass, ripgrep, vim,
-zsh, zsh-syntax-highlighting, emacs, qalculate, ghex/okteta, zathura,
-wireshark, zotero, vlc, discord, papirus-icon-theme, IBM Plex font
+shellcheck, zsh, zsh-syntax-highlighting, emacs, wireshark, zotero,
+vlc, discord, IBM Plex font, imhex
 
 =====
 Setup
