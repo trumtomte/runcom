@@ -27,7 +27,6 @@ let mapleader = "\<Space>"
 inoremap jj <ESC>
 
 nmap <leader>w :w<CR>
-nmap <leader>bs :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>n :noh <CR>
 nmap <leader>e :set rnu!<CR>
