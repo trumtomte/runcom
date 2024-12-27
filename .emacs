@@ -124,6 +124,8 @@ This includes aligning RIGHT to the right side of the mode line."
      (css "https://github.com/tree-sitter/tree-sitter-css")
      (go "https://github.com/tree-sitter/tree-sitter-go")
      (js "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
      (json "https://github.com/tree-sitter/tree-sitter-json")
      (python "https://github.com/tree-sitter/tree-sitter-python")))
   (major-mode-remap-alist
@@ -198,7 +200,7 @@ To disable supression of numbering set NUMBERING to true."
   (flymake-mode 1))
 
 (use-package eglot
-  :hook ((c-ts-mode cpp-ts-mode go-ts-mode python-ts-mode js-ts-mode) . eglot-ensure)
+  :hook ((c-ts-mode cpp-ts-mode go-ts-mode python-ts-mode js-ts-mode typescript-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
 	      ("C-c a" . eglot-code-actions)
 	      ("C-c r" . eglot-rename)
@@ -206,8 +208,11 @@ To disable supression of numbering set NUMBERING to true."
   :config
   (add-to-list 'eglot-stay-out-of 'flymake)
   (add-to-list 'eglot-server-programs
-	       '(python-ts-mode . ("~/.local/bin/ruff" "server")))
+               '(python-ts-mode . ("~/.local/bin/ruff" "server")))
+  (add-to-list 'eglot-server-programs
+	       '((js-ts-mode typescript-ts-mode) . ("~/.deno/bin/deno" "lsp" :initializationOptions (:enable t :lint t))))
   (add-hook 'eglot-managed-mode-hook 'seb/reactivate-flymake-backend))
+
 
 (use-package flymake
   :hook (prog-mode . flymake-mode)
@@ -268,6 +273,9 @@ To disable supression of numbering set NUMBERING to true."
   (c-ts-mode-indent-style 'bsd)
   (c-ts-mode-indent-offset 4))
 
+(use-package typescript-ts-mode
+  :mode "\\.ts\\'")
+
 (use-package go-ts-mode
   :mode "\\.go\\'"
   :bind (:map go-ts-mode-map
@@ -276,6 +284,10 @@ To disable supression of numbering set NUMBERING to true."
 (use-package pyvenv
   :load-path "~/.emacs.d/local/pyvenv/"
   :hook (python-ts-mode . pyvenv-mode))
+
+(use-package web-mode
+  :load-path "~/.emacs.d/local/web-mode/"
+  :mode "\\.html\\'")
 
 (use-package gptel
   :load-path "~/.emacs.d/local/gptel/"

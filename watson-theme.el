@@ -201,8 +201,8 @@
    `(TeX-error-description-warning ((t (:inherit warning :weight bold))))
    `(TeX-error-description-tex-said ((t (:inherit success :weight bold))))
 
-   `(outline-1 ((t (:foreground ,blue :weight bold :extend t :height 1.05))))
-   `(outline-2 ((t (:foreground ,magenta :weight bold :extend t :height 1.02))))
+   `(outline-1 ((t (:foreground ,blue :weight bold :extend t))))
+   `(outline-2 ((t (:foreground ,magenta :weight bold :extend t))))
    `(outline-3 ((t (:foreground ,violet :weight bold :extend t))))
    `(outline-4 ((t (:foreground ,pink :weight bold :extend t))))
    `(outline-5 ((t (:foreground ,yellow :weight bold :extend t))))
