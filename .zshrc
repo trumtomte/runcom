@@ -17,7 +17,7 @@ autoload -Uz compinit colors edit-command-line
 compinit && colors
 zle -N edit-command-line
 
-PROMPT="%{$fg[blue]%}%n%{$fg[yellow]%}:%{$fg[blue]%}%m %{$fg[yellow]%}%3~ %{$fg[yellow]%}λ%{$reset_color%} "
+PROMPT="%F{blue}%n%F{yellow}:%F{blue}%m %F{yellow}%3~ %F{yellow}λ%F{reset} "
 # Show nnn's current depth (level)
 [ -n "$NNNLVL" ] && PROMPT="nnn($NNNLVL) $PROMPT"
 
