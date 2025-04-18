@@ -1,4 +1,15 @@
-;;; Emacs config
+;;; .emacs --- Personal Emacs configuration -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;
+;; A simple, and mainly standalone, Emacs configuration file.  It begins
+;; with variables followed by functions and then the actual configuration.
+;;
+;;; Code:
+
+(defvar seb/selected-window (selected-window)
+  "Track the selected window for mode line states.")
+
 (defun seb/open-config ()
   "Open the Emacs configuration file."
   (interactive)
@@ -14,143 +25,47 @@
   (interactive "sString to surround region with: ")
   (insert-pair nil str str))
 
-(defun seb/keyword-highlight ()
-  "Highlight the keywords FIXME, TODO and NOTE."
-  (font-lock-add-keywords nil
-			  '(("\\<\\(FIXME\\)" 0 'seb/fixme-face t)
-			    ("\\<\\(TODO\\)" 0 'seb/todo-face t)
-			    ("\\<\\(NOTE\\)" 0 'seb/note-face t))))
+(defun seb/other-window-split-if-single (&rest _)
+  "Split the frame first if there is a single window."
+  (when (one-window-p) (split-window-sensibly)))
 
-(defvar seb/selected-window nil
-  "Track the selected window for mode line states.")
+(defun seb/is-selected-window ()
+  "Check if this is the selected window or not."
+  (eq (get-buffer-window (current-buffer)) seb/selected-window))
 
-(defun seb/render-mode-line (left right)
-  "Return a template LIST for `mode-line-format' based on LEFT and RIGHT.
-This includes aligning RIGHT to the right side of the mode line."
-  (let* ((right-column (- (window-width)
-			 (length (format-mode-line right))))
-	 (padding `((:propertize " " display (space . (:align-to ,right-column)))))
-	 (mode-line (append left padding right))
-	 (current-window (get-buffer-window (current-buffer))))
-    (if (eq current-window seb/selected-window)
-	mode-line
-      (propertize (format-mode-line mode-line) 'face 'shadow))))
+(defun seb/propertize-mode-line (string face)
+  "Propertize STRING with FACE if the current window is selected."
+  (if (seb/is-selected-window)
+      (propertize string 'face face)
+    (propertize string 'face 'mode-line-inactive)))
 
-(defun seb/compose-mode-line (left right)
-  "Set the `mode-line-format' according to LEFT and RIGHT."
-  (setq seb/selected-window (selected-window))
-  (add-hook 'post-command-hook (lambda () (setq seb/selected-window (selected-window))))
-  (setq-default mode-line-format `((:eval (seb/render-mode-line ',left ',right)))))
+(defun seb/mode-line-buffer-state ()
+  "Return the current buffer state."
+   (cond ((and buffer-file-name (buffer-modified-p))
+	  (seb/propertize-mode-line " * " 'warning))
+	 (buffer-read-only
+	  (seb/propertize-mode-line " RO " 'error))
+	 (t "   ")))
 
-(use-package emacs
-  :init
-  (set-face-attribute 'default nil :font "IBM Plex Mono" :height 130 :weight 'medium)
-  (load-theme 'watson t)
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (fido-vertical-mode t)
-  (electric-pair-mode t)
-  (global-hl-line-mode 1)
-  (repeat-mode 1)
-  (defalias 'yes-or-no-p 'y-or-n-p)
-  (advice-add 'other-window :before
-	      (defun seb/other-window-split-if-single (&rest _)
-		"Split the frame first if there is a single window."
-		(when (one-window-p) (split-window-sensibly))))
+(defun seb/mode-line-git-branch ()
+  "Return the current Git branch name."
+  (declare-function vc-git-branches "vc-git")
+  (when (string= (vc-backend buffer-file-name) "Git")
+    (let ((current-branch (concat (car (vc-git-branches)) " ")))
+      (seb/propertize-mode-line current-branch '(:inherit success :slant italic)))))
 
-  :config
-  (seb/compose-mode-line
-   '(;; Buffer state
-     (:eval (cond ((and buffer-file-name (buffer-modified-p))
-		   (propertize " * " 'face 'warning))
-		  (buffer-read-only
-		   (propertize " RO " 'face 'error))
-		  (t "   ")))
-     ;; Buffer name
-     (:propertize "%b  " face (:weight bold))
-     ;; Position
-     (:propertize "%l,%c  " face (:inherit font-lock-comment-face))
-     ;; Errors
-     (:eval (when (bound-and-true-p flymake-mode)
-	      flymake-mode-line-counters)))
-   ;; RIGHT
-   '(;; Git branch
-     (:eval (when (string= (vc-backend buffer-file-name) "Git")
-	      (let ((current-branch (car (vc-git-branches))))
-		(propertize (concat current-branch " ") 'face '(:inherit 'success :slant italic)))))
-     ;; Major mode
-     mode-name
-     mode-line-process
-     " "
-     ;; LSP status
-     (:eval (when (bound-and-true-p eglot--managed-mode)
-	      (propertize "ℓ " 'face 'mode-line-emphasis)))))
-  
-  :hook ((prog-mode . subword-mode)
-	 (prog-mode . seb/keyword-highlight)
-	 (prog-mode . (lambda ()
-			(setq-default truncate-lines t))))
+(defun seb/mode-line-lsp-state ()
+  "Return an indicator for whether LSP is active or not."
+  (when (bound-and-true-p eglot--managed-mode)
+    (seb/propertize-mode-line "ℓ " 'mode-line-emphasis)))
 
-  :bind (([f8] . 'seb/open-config)
-	 ([f9] . 'seb/open-wiki)
-	 ("M-\"" . 'seb/surround-region)
-	 ("M-o" . 'other-window)
-	 ("M-O" . 'window-swap-states)
-	 ("M-S" . speedbar)
-	 ("C-;" . 'mark-sexp)
-	 ("C-x C-b" . 'ibuffer)
-	 ("C-x C-k" . 'kill-this-buffer))
-  
-  :custom
-  (inhibit-splash-screen t)
-  (ring-bell-function 'ignore)
-  (shift-select-mode nil)
-  (show-paren-context-when-offscreen 'overlay)
-  (speedbar-use-images nil)
-  (speedbar-show-unknown-files t)
-  (speedbar-directory-unshown-regexp "^\(\.\.\)$")
-  (isearch-wrap-pause 'no)
-  (gdb-many-windows t)
-  (gdb-speedbar-auto-raise t)
-  (backup-directory-alist '(("." . "~/.emacs.d/backup")))
-  (auto-save-file-name-transforms '((".*" "~/.emacs.d/backup" t)))
-  
-  ;; Tree sitter setup
-  (treesit-font-lock-level 4)
-  (treesit-language-source-alist
-   '((c "https://github.com/tree-sitter/tree-sitter-c")
-     (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (js "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (python "https://github.com/tree-sitter/tree-sitter-python")))
-  (major-mode-remap-alist
-   '((c-mode . c-ts-mode)
-     (cpp-mode . cpp-ts-mode)
-     (python-mode . python-ts-mode)
-     (css-mode . css-ts-mode)
-     (js-json-mode . json-ts-mode)
-     (javascript-mode . js-ts-mode))))
-
-(use-package view
-  :bind (("C-v" . View-scroll-half-page-forward)
-	 ("M-v" . View-scroll-half-page-backward)))
-
-(use-package org
-  :hook ((org-mode . visual-line-mode)
-	 (org-mode . flyspell-mode))
-  :custom
-  (org-startup-indented t)
-  (org-hide-emphasis-markers t)
-  (org-ellipsis " ... ")
-  (org-fontify-whole-heading-line t))
-  
-(use-package oc
-  :custom (org-cite-global-bibliography '("~/Zotero/library.bib")))
+(defun seb/mode-line-flymake-counters ()
+  "Return flymake counters, propertized for the mode line."
+  (defvar flymake-mode-line-counters)
+  (when (bound-and-true-p flymake-mode)
+    (if (seb/is-selected-window)
+	flymake-mode-line-counters
+      (propertize (format-mode-line flymake-mode-line-counters) 'face 'mode-line-inactive))))
 
 (defun seb/add-org-latex-class (name &optional &key numbering)
   "Append document class NAME to `org-latex-classes'.
@@ -164,65 +79,11 @@ To disable supression of numbering set NUMBERING to true."
 		       (cons "\\subsubsection{%s}" (format "\\subsubsection%s{%%s}" supress-mark))
 		       (cons "\\paragraph{%s}" (format "\\paragraph%s{%%s}" supress-mark))))))
 
-(use-package ox-latex
-  :custom (org-latex-compiler "xelatex")
-  :config
-  (seb/add-org-latex-class "IEEEtran")
-  (seb/add-org-latex-class "acmart")
-  (seb/add-org-latex-class "apa7")
-  (seb/add-org-latex-class "llncs" :numbering t))
-
-(use-package eldoc
-  :init (global-eldoc-mode)
-  :custom (eldoc-echo-area-use-multiline-p nil))
-
-(use-package rmail
-  :custom
-  (user-full-name "Sebastian Bengtegård")
-  (user-mail-address "sebastianbengtegard@pm.me")
-  
-  (rmail-primary-inbox-list '("imap://sebastianbengtegard%40pm.me@127.0.0.1:1143"))
-  (rmail-remote-password-required t)
-  (rmail-preserve-inbox t)
-  (rmail-file-name "~/rmail.mbox")
-  (rmail-mime-prefer-html nil)
-  (rmail-mime-render-html-function 'rmail-mime-render-html-lynx)
-  (rmail-display-summary t)
-   
-  (send-mail-function 'smtpmail-send-it)
-  (smtpmail-smtp-server "127.0.0.1")
-  (smtpmail-smtp-service 1025))
-
-(defun seb/reactivate-flymake-backend ()
-  "Allow more flymake backends simultaneously (e.g. ruff for python)."
-  (declare-function eglot-flymake-backend "eglot")
-  (add-hook 'flymake-diagnostic-functions #'eglot-flymake-backend nil t)
-  (flymake-mode 1))
-
-(use-package eglot
-  :hook ((c-ts-mode cpp-ts-mode go-ts-mode python-ts-mode js-ts-mode typescript-ts-mode) . eglot-ensure)
-  :bind (:map eglot-mode-map
-	      ("C-c a" . eglot-code-actions)
-	      ("C-c r" . eglot-rename)
-	      ("C-c f" . eglot-format))
-  :config
-  (add-to-list 'eglot-stay-out-of 'flymake)
-  (add-to-list 'eglot-server-programs
-               '(python-ts-mode . ("~/.local/bin/ruff" "server")))
-  (add-to-list 'eglot-server-programs
-	       '((js-ts-mode typescript-ts-mode) . ("~/.deno/bin/deno" "lsp" :initializationOptions (:enable t :lint t))))
-  (add-hook 'eglot-managed-mode-hook 'seb/reactivate-flymake-backend))
-
-
-(use-package flymake
-  :hook (prog-mode . flymake-mode)
-  :bind (:map flymake-mode-map
-	      ("M-L" . flymake-show-buffer-diagnostics)
-	      ("M-n" . flymake-goto-next-error)
-	      ("M-p" . flymake-goto-prev-error))
-  :custom
-  ;; Python linter/formatter
-  (python-flymake-command '("~/.local/bin/ruff" "check" "--quiet" "--stdin-filename" "stdin")))
+;; (defun seb/reactivate-flymake-backend ()
+;;   "Allow more flymake backends simultaneously."
+;;   (declare-function eglot-flymake-backend "eglot")
+;;   (add-hook 'flymake-diagnostic-functions 'eglot-flymake-backend nil t)
+;;   (flymake-mode 1))
 
 (defun seb/gdb-setup-windows ()
   "Custom GDB many windows setup."
@@ -233,11 +94,11 @@ To disable supression of numbering set NUMBERING to true."
   (declare-function gdb-set-window-buffer "gdb-mi")
   (declare-function gdb-memory-buffer-name "gdb-mi")
   (declare-function gdb-locals-buffer-name "gdb-mi")
-  ;; TODO: add gdb-dissassembly-buffer as well
+
   (gdb-get-buffer-create 'gdb-locals-values-buffer)
   (gdb-get-buffer-create 'gdb-locals-buffer)
   (gdb-get-buffer-create 'gdb-memory-buffer)
-  (gdb-get-buffer-create 'gdb-breakpoints-buffer)
+  ;; (gdb-get-buffer-create 'gdb-dissassembly-buffer)
   (set-window-dedicated-p (selected-window) nil)
   (switch-to-buffer gud-comint-buffer)
   (delete-other-windows)
@@ -258,7 +119,150 @@ To disable supression of numbering set NUMBERING to true."
     (select-window win0)
     (delete-window win2)))
 
+;;; Configuration:
+
+(use-package emacs
+  :init
+  (set-face-attribute 'default nil :font "IBM Plex Mono" :height 150 :weight 'medium)
+  (load-theme 'watson t)
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (fringe-mode 10)
+  (fido-vertical-mode t)
+  (electric-pair-mode t)
+  (global-hl-line-mode 1)
+  (repeat-mode 1)
+  (which-key-mode 1)
+  (advice-add 'other-window :before #'seb/other-window-split-if-single)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  
+  :hook ((post-command . (lambda () (setq seb/selected-window (selected-window))))
+	 (prog-mode . subword-mode)
+	 (prog-mode . (lambda () (setq-default truncate-lines t)))
+	 ;; FIXME: these are temporary until library makers add them
+	 (python-ts-mode . (lambda() (setq-local treesit-thing-settings '((python (sexp-list ""))))))
+	 (go-ts-mode . (lambda() (setq-local treesit-thing-settings '((go (sexp-list ""))))))
+	 (rust-ts-mode . (lambda() (setq-local treesit-thing-settings '((rust (sexp-list ""))))))
+	 (css-ts-mode . (lambda() (setq-local treesit-thing-settings '((css (sexp-list "")))))))
+
+  :bind (([f8] . 'seb/open-config)
+	 ([f9] . 'seb/open-wiki)
+	 ("M-\"" . 'seb/surround-region)
+	 ("M-o" . 'other-window)
+	 ("M-O" . 'window-swap-states)
+	 ("M-S" . speedbar)
+	 ("M-T" . eshell)
+	 ("M-<up>" . 'View-scroll-half-page-backward)
+	 ("M-<down>" . 'View-scroll-half-page-forward)
+	 ("M-[ M-s" . 'save-buffer)
+	 ("M-[ M-f" . 'find-file)
+	 ("M-[ M-d" . 'dired)
+	 ("M-[ M-b" . 'ibuffer)
+	 ("M-[ M-g" . 'imenu)
+	 ("M-[ M-<SPC>" . 'switch-to-buffer)
+	 ("C-;" . 'mark-sexp)
+	 ("C-x C-b" . 'ibuffer))
+
+  :custom
+  (mode-line-format
+   '((:eval (seb/mode-line-buffer-state))
+     (:propertize "%b  " face bold)
+     (:propertize "%l,%c  " face shadow)
+     (:eval (seb/mode-line-flymake-counters))
+     mode-line-format-right-align
+     (:eval (seb/mode-line-git-branch))
+     mode-name
+     mode-line-process
+     " "
+     (:eval (seb/mode-line-lsp-state))))
+  
+  (backup-directory-alist '(("." . "~/.emacs.d/backup")))
+  (auto-save-file-name-transforms '((".*" "~/.emacs.d/backup" t)))
+  (inhibit-splash-screen t)
+  (ring-bell-function 'ignore)
+  (shift-select-mode nil)
+  (show-paren-context-when-offscreen 'overlay)
+  (isearch-wrap-pause 'no)
+  (imenu-auto-rescan t)
+  (speedbar-use-images nil)
+  (speedbar-show-unknown-files t)
+  (speedbar-directory-unshown-regexp "^\(\.\.\)$")
+  
+  ;; NOTE: remap major mode to treesitter equivalents
+  (major-mode-remap-alist
+   '((c-mode . c-ts-mode)
+     (cpp-mode . cpp-ts-mode)
+     (python-mode . python-ts-mode)
+     (css-mode . css-ts-mode)
+     (js-json-mode . json-ts-mode)
+     (javascript-mode . js-ts-mode))))
+
+(use-package view
+  :bind (("C-v" . View-scroll-half-page-forward)
+	 ("M-v" . View-scroll-half-page-backward))
+  :custom (scroll-preserve-screen-position 'always))
+
+(use-package org
+  :hook ((org-mode . visual-line-mode)
+	 (org-mode . flyspell-mode))
+  :bind (("M-[ M-2" . org-cite-insert))
+  :custom
+  (org-startup-indented t)
+  (org-ellipsis " ... "))
+  
+(use-package oc
+  :custom (org-cite-global-bibliography '("~/Zotero/library.bib")))
+
+(use-package ox-latex
+  :custom (org-latex-compiler "xelatex")
+  :config
+  (seb/add-org-latex-class "IEEEtran")
+  (seb/add-org-latex-class "acmart")
+  (seb/add-org-latex-class "apa7")
+  (seb/add-org-latex-class "llncs" :numbering t)
+  (add-to-list 'org-latex-classes
+	       '("thesis" "\\documentclass[11pt]{report}"
+		 ("\\chapter{%s}" . "\\chapter*{%s}")
+		 ("\\section{%s}" . "\\section*{%s}")
+		 ("\\subsection{%s}" . "\\subsection*{%s}")
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
+(use-package eldoc
+  :custom
+  (echo-area-display-truncation-message nil)
+  (eldoc-echo-area-use-multiline-p nil)
+  (eldoc-echo-area-prefer-doc-buffer 'maybe))
+
+(use-package eglot
+  :hook ((c-ts-mode . eglot-ensure)
+	 (cpp-ts-mode . eglot-ensure)
+	 (go-ts-mode . eglot-ensure)
+	 (python-ts-mode . eglot-ensure)
+	 (js-ts-mode . eglot-ensure)
+	 (typescript-ts-mode . eglot-ensure)
+	 (rust-ts-mode . eglot-ensure))
+  :bind (:map eglot-mode-map
+	      ("C-c a" . eglot-code-actions)
+	      ("C-c r" . eglot-rename)
+	      ("C-c f" . eglot-format))
+  :config
+  ;; (add-to-list 'eglot-stay-out-of 'flymake)
+  ;; (add-hook 'eglot-managed-mode-hook 'seb/reactivate-flymake-backend)
+  (add-to-list 'eglot-server-programs
+	       '(python-ts-mode . ("~/.local/bin/ruff" "server")))
+  (add-to-list 'eglot-server-programs
+	       '((js-ts-mode typescript-ts-mode) . ("~/.deno/bin/deno" "lsp"))))
+
+(use-package flymake
+  :hook (prog-mode . flymake-mode)
+  :bind (:map flymake-mode-map
+	      ("M-n" . flymake-goto-next-error)
+	      ("M-p" . flymake-goto-prev-error)
+	      ("M-D" . flymake-show-buffer-diagnostics)))
+
 (use-package c-ts-mode
+  :functions (c-ts-mode-toggle-comment-style)
   :init (advice-add 'gdb-setup-windows :override #'seb/gdb-setup-windows)
   :bind (:map c-ts-mode-map
 	      ("C-c C-g" . gdb)
@@ -267,36 +271,49 @@ To disable supression of numbering set NUMBERING to true."
 	      ("C-c C-b" . gud-break)
 	      ("C-c C-w" . gud-watch)
 	      ("C-c C-v" . gdb-restore-windows)
-	      ("C-c c" . compile))
-  :hook (gud-mode . gud-tooltip-mode)
+	      ("M-[ M-c" . compile))
+  :hook ((gud-mode . gud-tooltip-mode)
+	 (c-ts-mode . (lambda () (c-ts-mode-toggle-comment-style -1))))
   :custom
   (c-ts-mode-indent-style 'bsd)
-  (c-ts-mode-indent-offset 4))
-
-(use-package typescript-ts-mode
-  :mode "\\.ts\\'")
+  (c-ts-mode-indent-offset 4)
+  (gdb-many-windows t)
+  (gdb-speedbar-auto-raise t))
 
 (use-package go-ts-mode
   :mode "\\.go\\'"
   :bind (:map go-ts-mode-map
-	      ("C-c c" . compile)))
+	      ("M-[ M-c" . compile)))
 
 (use-package pyvenv
   :load-path "~/.emacs.d/local/pyvenv/"
   :hook (python-ts-mode . pyvenv-mode))
 
+(use-package typescript-ts-mode
+  :mode "\\.ts\\'"
+  :custom (js-indent-level 2))
+
+(use-package js-ts-mode
+  :mode "\\.js\\'"
+  :custom (js-indent-level 2))
+
 (use-package web-mode
   :load-path "~/.emacs.d/local/web-mode/"
   :mode "\\.html\\'")
 
-(use-package gptel
-  :load-path "~/.emacs.d/local/gptel/"
+(use-package rmail
   :custom
-  (gptel-model 'llamafile)
-  (gptel-use-curl nil)
-  (gptel-default-mode 'org-mode)
-  (gptel-backend (gptel-make-openai "llamafile"
-		     :stream t
-		     :protocol "http"
-		     :host "127.0.0.1:8080"
-		     :models '(llamafile))))
+  (user-full-name "Sebastian Bengtegård")
+  (user-mail-address "sebastianbengtegard@pm.me")
+  (rmail-primary-inbox-list '("imap://sebastianbengtegard%40pm.me@127.0.0.1:1143"))
+  (rmail-remote-password-required t)
+  (rmail-preserve-inbox t)
+  (rmail-file-name "~/rmail.mbox")
+  (rmail-mime-prefer-html nil)
+  (rmail-mime-render-html-function 'rmail-mime-render-html-lynx)
+  (rmail-display-summary t)
+  (send-mail-function 'smtpmail-send-it)
+  (smtpmail-smtp-server "127.0.0.1")
+  (smtpmail-smtp-service 1025))
+
+;;; .emacs ends here
