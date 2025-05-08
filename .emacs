@@ -52,7 +52,7 @@
   (declare-function vc-git-branches "vc-git")
   (when (string= (vc-backend buffer-file-name) "Git")
     (let ((current-branch (concat (car (vc-git-branches)) " ")))
-      (seb/propertize-mode-line current-branch '(:inherit success :slant italic)))))
+      (seb/propertize-mode-line current-branch '(:inherit warning :slant italic)))))
 
 (defun seb/mode-line-lsp-state ()
   "Return an indicator for whether LSP is active or not."
@@ -124,7 +124,7 @@ To disable supression of numbering set NUMBERING to true."
 (use-package emacs
   :init
   (set-face-attribute 'default nil :font "IBM Plex Mono" :height 150 :weight 'medium)
-  (load-theme 'watson t)
+  (load-theme 'sherlock t)
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
@@ -185,6 +185,7 @@ To disable supression of numbering set NUMBERING to true."
   (show-paren-context-when-offscreen 'overlay)
   (isearch-wrap-pause 'no)
   (imenu-auto-rescan t)
+  (diff-font-lock-syntax nil)
   (speedbar-use-images nil)
   (speedbar-show-unknown-files t)
   (speedbar-directory-unshown-regexp "^\(\.\.\)$")
@@ -206,9 +207,11 @@ To disable supression of numbering set NUMBERING to true."
 (use-package org
   :hook ((org-mode . visual-line-mode)
 	 (org-mode . flyspell-mode))
-  :bind (("M-[ M-2" . org-cite-insert))
+  :bind (("M-[ M-2" . org-cite-insert)
+	 ("M-[ M-1" . org-emphasize))
   :custom
   (org-startup-indented t)
+  (org-hide-emphasis-markers t)
   (org-ellipsis " ... "))
   
 (use-package oc
